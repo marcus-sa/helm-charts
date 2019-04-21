@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/openfaas-openfaas",
+  "version": "1.0.20-0.1.0",
+  "description": "Enable Kubernetes as a backend for OpenFaaS (Functions as a Service)",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
