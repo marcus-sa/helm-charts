@@ -1,0 +1,15 @@
+apiVersion: v1
+description: IBM WebSphere Application Server VM Quickstarter
+icon: https://raw.githubusercontent.com/IBM/charts/master/logo/was-logo.png
+keywords:
+- Liberty
+- WebSphere
+- OpenSource
+- amd64
+- ICP
+- Limited
+- runtime
+kubeVersion: '>=1.11.1'
+name: ibm-was-vm-quickstarter-dev
+tillerVersion: '>=2.9.1'
+version: 2.0.3

@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-was-vm-quickstarter-dev",
+  "version": "2.0.4-0.1.0",
+  "description": "IBM WebSphere Application Server VM Quickstarter",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
