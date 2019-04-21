@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-nginx-logging-es-demo",
+  "version": "0.1.0-0.1.0",
+  "description": "A Demo application for the logging-operator",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
