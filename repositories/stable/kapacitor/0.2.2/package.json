@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-kapacitor",
+  "version": "0.2.2-0.1.0",
+  "description": "InfluxDB's native data processing engine. It can process both stream and batch data from InfluxDB.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
