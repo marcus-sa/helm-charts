@@ -1,0 +1,14 @@
+appVersion: 1.4.0
+description: Highly available and distributed service discovery and key-value store
+  designed with support for the modern data center to make distributed systems and
+  configuration easy.
+engine: gotpl
+home: https://www.consul.io/
+icon: https://bitnami.com/assets/stacks/consul/img/consul-stack-220x234.png
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: consul
+sources:
+- https://github.com/bitnami/bitnami-docker-consul
+version: 4.0.0
