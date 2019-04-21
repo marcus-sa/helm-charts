@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-seq",
+  "version": "0.1.1-0.1.0",
+  "description": "Seq is the easiest way for development teams to capture, search and visualize structured log events! This page will walk you through the very quick setup process.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
