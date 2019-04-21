@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-owncloud",
+  "version": "0.6.0-0.1.0",
+  "description": "A file sharing server that puts the control and security of your own data back into your hands.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
