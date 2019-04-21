@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dsx-ux
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    run: dsx-ux-server-svc
+    component: dsx-ux-server
+spec:
+  type: NodePort
+  ports:
+    - name: dsx-ux-https-port
+      protocol: TCP
+      port: 443
+      targetPort: 443
+      nodePort: {{ .Values.dsxservice.externalPort }}
+    - name: dsx-ux-http-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    run: dsx-ux-server-deployment-pod
+    component: dsx-ux-server

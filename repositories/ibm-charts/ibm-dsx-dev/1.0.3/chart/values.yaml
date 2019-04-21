@@ -1,0 +1,130 @@
+###############################################################################
+######################## IBM DSX Developer Edition. ###########################
+###############################################################################
+
+
+###############################################################################
+## Common image variables
+###############################################################################
+image:
+  pullPolicy: "IfNotPresent"
+
+## global persistence settings
+persistence:
+  useDynamicProvisioning: false
+  
+dsxservice:
+  externalPort: 32443
+
+###############################################################################
+## Persistence Storage
+###############################################################################
+
+## Persistence is enabled by default, set Enabled: true to use
+userHomePvc:
+  name: "user-home-pvc"
+  persistence:
+    ## DSX Desktop Edition requires persistence be enabled
+    # enabled: true
+    #  info: "DSX requires persistence is enabled and requires that a PV exists"
+
+    ## To use an existing claim, set useExistingClaim: true
+    ## Specify the name of the Existing Claim to be used by your application
+    existingClaimName:
+
+    ## To use an existing StorageClass, set useStorageClass: true
+    ## Specify the name of the StorageClass
+    ## Setting StorageClass: "" will use whatever storageClass is currently
+    ## setup as the Default
+    storageClassName:
+
+    ## DSX Desktop Edition requires a ReadWriteMany accessMode
+    # accessMode: 'ReadWriteMany'
+    #  info: "DSX requires a PV with accessMode = 'ReadWriteMany'"
+
+    ## DSX Desktop Edition requires a Persistence Storage volume size minimum of 1Gi
+    size: "1Gi"
+
+
+###############################################################################
+## DSX Desktop Edition UX Server Continer
+###############################################################################
+
+dsxUxServerContainer:
+
+  ## UX Container Image regestry/endpoint and version (tag)
+  image:
+    repository: "hybridcloudibm/dsx-dev-icp-dsx-core"
+    tag: "v1.015"
+
+  ## UX Container resources, a minimum cpu request of "1000m" is required
+  resources:
+    requests:
+      cpu: "1000m"
+      memory: "256Mi"
+    limits:
+      cpu: "2000m"
+      memory: "512Mi"
+
+
+###############################################################################
+## DSX Desktop Edition Zeppelin Continer
+###############################################################################
+
+zeppelinServerContainer:
+
+  ## Zeppelin Container Image regestry/endpoint and version (tag)
+  image:
+    repository: "hybridcloudibm/dsx-dev-icp-zeppelin"
+    tag: "v1.015"
+
+  ## Zeppelin Container resources, a minimum cpu request of "500m" and memory request of 2Gi is required
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "2048Mi"
+    limits:
+      cpu: "1000m"
+      memory: "4096Mi"
+
+###############################################################################
+## DSX Desktop Edition Jupyter Continer
+###############################################################################
+
+notebookServerContainer:
+
+  ## Jupyter Container Image regestry/endpoint and version (tag)
+  image:
+    repository: "hybridcloudibm/dsx-dev-icp-jupyter"
+    tag: "v1.015"
+
+  ## Jupyter Container resources, a minimum cpu request of "500m" and memory request of 1Gi is required
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1024Mi"
+    limits:
+      cpu: "1000m"
+      memory: "2048Mi"
+
+
+###############################################################################
+## DSX Desktop Edition RStudio Continer
+###############################################################################
+
+rstudioServerContainer:
+
+  ## RStudio Container Image regestry/endpoint and version (tag)
+  image:
+    repository: "hybridcloudibm/dsx-dev-icp-rstudio"
+    tag: "v1.015"
+
+
+  ## RStudio Container resources, a minimum cpu request of "500m" and memory request of 2Gi is required
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "2Gi"
+    limits:
+      cpu: "1000m"
+      memory: "3Gi"

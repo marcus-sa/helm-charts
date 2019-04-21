@@ -1,0 +1,20 @@
+{{ if (not .Values.userHomePvc.persistence.existingClaimName) -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "fullname" . }}-{{ .Values.userHomePvc.name }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  {{- if .Values.userHomePvc.persistence.storageClassName }}
+  storageClassName: {{ default "default" .Values.userHomePvc.persistence.storageClassName | quote }}
+  {{- end }}
+  accessModes:
+    - "ReadWriteMany"
+  resources:
+    requests:
+      storage: {{ default "1Gi" .Values.userHomePvc.persistence.size | quote }}
+{{- end }}

@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jupyter
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    run: notebook-server-svc
+    component: notebook-server
+spec:
+  type: ClusterIP
+  ports:
+    - name: jupyter-http-port
+      protocol: TCP
+      port: 8888
+      targetPort: 8888
+  selector:
+    run: notebook-server-deployment-pod
+    component: notebook-server

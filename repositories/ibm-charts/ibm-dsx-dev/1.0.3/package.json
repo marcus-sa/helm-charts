@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-dsx-dev",
+  "version": "1.0.3-0.1.0",
+  "description": "IBM Data Science Experience (DSX) Developer Edition brings together best of breed open source tooling such as Jupyter, Zeppelin, RStudio, with Spark and Python,R and Scala runtimes to create a platform for Data Scientists to learn, create and collaborate.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

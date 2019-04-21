@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rstudio
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    run: rstudio-server-svc
+    component: rstudio-server
+spec:
+  type: ClusterIP
+  ports:
+    - name: rstudio-http-port
+      protocol: TCP
+      port: 8787
+      targetPort: 8787
+  selector:
+    run: rstudio-server-deployment-pod
+    component: rstudio-server
