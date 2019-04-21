@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "rss.fullname" . }}
+  labels:
+    app: {{ template "rss.name" . }}
+    chart: {{ template "rss.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: {{ template "rss.fullname" . }}
+  selector:
+    app: {{ template "rss.name" . }}
+    release: {{ .Release.Name }}
