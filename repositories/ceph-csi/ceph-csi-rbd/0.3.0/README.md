@@ -1,0 +1,106 @@
+# `@helm-charts/ceph-csi-ceph-csi-rbd`
+
+Container Storage Interface (CSI) driver, provisioner, and attacher for Ceph RBD
+
+| Field               | Value        |
+| ------------------- | ------------ |
+| Repository Name     | ceph-csi     |
+| Chart Name          | ceph-csi-rbd |
+| Chart Version       | 0.3.0        |
+| NPM Package Version | 0.1.0        |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+rbac:
+  create: true
+
+serviceAccounts:
+  attacher:
+    create: true
+    name:
+  nodeplugin:
+    create: true
+    name:
+  provisioner:
+    create: true
+    name:
+
+socketDir: /var/lib/kubelet/plugins/csi-rbdplugin
+socketFile: csi.sock
+registrationDir: /var/lib/kubelet/plugins_registry
+volumeDevicesDir: /var/lib/kubelet/plugins/kubernetes.io/csi/volumeDevices
+
+attacher:
+  name: attacher
+
+  replicaCount: 1
+
+  image:
+    repository: quay.io/k8scsi/csi-attacher
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+nodeplugin:
+  name: nodeplugin
+
+  registrar:
+    image:
+      repository: quay.io/k8scsi/csi-node-driver-registrar
+      tag: v1.0.2
+      pullPolicy: IfNotPresent
+
+    resources: {}
+
+  plugin:
+    image:
+      repository: quay.io/cephcsi/rbdplugin
+      tag: v1.0.0
+      pullPolicy: IfNotPresent
+
+    resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+provisioner:
+  name: provisioner
+
+  replicaCount: 1
+
+  image:
+    repository: quay.io/k8scsi/csi-provisioner
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+snapshotter:
+  image:
+    repository: quay.io/k8scsi/csi-snapshotter
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  resources: {}
+```
+
+</details>
