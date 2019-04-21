@@ -1,0 +1,15 @@
+apiVersion: v1
+description: The leading open source automation server, Jenkins provides hundreds
+  of plugins to support building, deploying and automating any project.
+engine: gotpl
+home: https://jenkins.io/
+icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
+maintainers:
+- name: IBM Cloud Private
+name: ibm-jenkins-dev
+sources:
+- https://github.com/jenkinsci/jenkins
+- https://github.com/jenkinsci/docker-jnlp-slave
+- https://github.com/jenkinsci/kubernetes-plugin
+tillerVersion: '>=2.6.0'
+version: 1.0.0
