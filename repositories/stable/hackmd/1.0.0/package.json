@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-hackmd",
+  "version": "1.0.0-0.1.0",
+  "description": "Realtime collaborative markdown notes on all platforms.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
