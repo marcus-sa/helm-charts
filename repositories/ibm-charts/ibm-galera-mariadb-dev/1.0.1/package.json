@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-galera-mariadb-dev",
+  "version": "1.0.1-0.1.0",
+  "description": "Galera Cluster is a multi-master solution for MariaDB which provides an easy-to-use, high-availability solution for MariaDB based databases.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

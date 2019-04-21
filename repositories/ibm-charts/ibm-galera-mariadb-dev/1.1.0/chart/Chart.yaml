@@ -1,0 +1,25 @@
+apiVersion: v1
+description: Galera Cluster is a multi-master solution for MariaDB which provides
+  an easy-to-use, high-availability solution for MariaDB based databases.
+engine: gotpl
+home: http://galeracluster.com/
+icon: http://galeracluster.com/wp-content/uploads/2013/11/Mariadb-Galera.png
+keywords:
+- mariadb
+- mysql
+- database
+- sql
+- galera
+- cluster
+- ICP
+- IKS
+- OpenSource
+- amd64
+- ppc64le
+maintainers:
+- name: IBM Cloud Private
+name: ibm-galera-mariadb-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.6.0'
+version: 1.1.0
