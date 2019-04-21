@@ -1,0 +1,21 @@
+apiVersion: v1
+appVersion: 0.6.0
+description: Flagger is a Kubernetes operator that automates the promotion of canary
+  deployments using Istio routing for traffic shifting and Prometheus metrics for
+  canary analysis.
+engine: gotpl
+home: https://docs.flagger.app
+icon: https://raw.githubusercontent.com/stefanprodan/flagger/master/docs/logo/flagger-icon.png
+keywords:
+- canary
+- istio
+- gitops
+kubeVersion: '>=1.11.0-0'
+maintainers:
+- email: stefanprodan@users.noreply.github.com
+  name: stefanprodan
+  url: https://github.com/stefanprodan
+name: flagger
+sources:
+- https://github.com/stefanprodan/flagger
+version: 0.6.0
