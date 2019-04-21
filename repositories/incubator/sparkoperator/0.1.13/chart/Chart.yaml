@@ -1,0 +1,11 @@
+appVersion: v1beta1-0.8.1-2.4.0
+description: A Helm chart for Spark on Kubernetes operator
+home: https://github.com/GoogleCloudPlatform/spark-on-k8s-operator
+keywords:
+- spark
+kubeVersion: '>=1.8.0-0'
+maintainers:
+- email: yuchaoran2011@gmail.com
+  name: yuchaoran2011
+name: sparkoperator
+version: 0.1.13
