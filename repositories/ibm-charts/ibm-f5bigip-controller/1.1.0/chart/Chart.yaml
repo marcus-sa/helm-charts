@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for integrating f5-bigip controller with ICP
+icon: https://cdn.f5.com/websites/support/assets/images/logo.svg
+keywords:
+- ICP
+- amd64
+- OpenSource
+- Network
+name: ibm-f5bigip-controller
+tillerVersion: '>=2.7.2'
+version: 1.1.0
