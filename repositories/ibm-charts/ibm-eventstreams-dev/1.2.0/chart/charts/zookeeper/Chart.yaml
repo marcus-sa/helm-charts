@@ -1,0 +1,6 @@
+description: Apache ZooKeeper is a distributed configuration service used by Kafka.
+icon: https://developer.ibm.com/messaging/wp-content/uploads/sites/18/2018/09/icon_dev_32_24x24.png
+kubeVersion: '>=1.11.0'
+name: zookeeper
+tillerVersion: '>=2.9.1'
+version: 1.2.0
