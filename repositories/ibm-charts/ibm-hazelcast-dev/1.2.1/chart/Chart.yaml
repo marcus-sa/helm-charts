@@ -1,0 +1,15 @@
+description: Hazelcast Open Source In-Memory Data Grid
+icon: http://hazelcast.com/images/logos/Hazelcast-IMDG-Logo-Orange_Dark_Icon_200px.png
+keywords:
+- amd64
+- Limited
+- OpenSource
+- ICP
+- IKS
+- database
+kubeVersion: '>=1.11.1'
+maintainers:
+- name: IBM WebSphere
+name: ibm-hazelcast-dev
+tillerVersion: '>=2.9.1'
+version: 1.2.1
