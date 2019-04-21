@@ -1,0 +1,150 @@
+# GKE returns Major:"1", Minor:"10+"
+{{- $major := default "0" .Capabilities.KubeVersion.Major | trimSuffix "+" | int64 }}
+{{- $minor := default "0" .Capabilities.KubeVersion.Minor | trimSuffix "+" | int64 }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "voyager.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ template "voyager.name" . }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+{{- if .Values.annotations }}
+  annotations:
+{{ toYaml .Values.annotations | indent 4 }}
+{{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ template "voyager.name" . }}"
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ template "voyager.name" . }}"
+        release: "{{ .Release.Name }}"
+{{- if or .Values.annotations (and .Values.criticalAddon (eq .Release.Namespace "kube-system")) }}
+      annotations:
+{{- if and .Values.criticalAddon (eq .Release.Namespace "kube-system") }}
+        scheduler.alpha.kubernetes.io/critical-pod: ''
+{{- end }}
+{{- if .Values.annotations }}
+{{ toYaml .Values.annotations | indent 8 }}
+{{- end }}
+{{- end }}
+    spec:
+      serviceAccountName: {{ template "voyager.serviceAccountName" . }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 6 }}
+      {{- end }}
+      containers:
+      - name: voyager
+        image: {{ .Values.voyager.registry }}/{{ .Values.voyager.repository }}:{{ .Values.voyager.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy  }}
+        args:
+        - run
+        - --cloud-provider={{ .Values.cloudProvider }}
+        - --cloud-config={{ .Values.cloudConfig }}
+        - --v={{ .Values.logLevel }}
+        - --rbac={{ .Values.rbac.create }}
+        - --ingress-class={{ .Values.ingressClass }}
+        - --operator-service={{ template "voyager.fullname" . }}
+        - --docker-registry={{ .Values.haproxy.registry }}
+        - --haproxy-image-tag={{ .Values.haproxy.tag }}
+        - --exporter-image-tag={{ .Values.voyager.tag }}
+        - --secure-port=8443
+        - --audit-log-path=-
+        - --tls-cert-file=/var/serving-cert/tls.crt
+        - --tls-private-key-file=/var/serving-cert/tls.key
+        - --enable-validating-webhook={{ .Values.apiserver.enableValidatingWebhook }}
+{{- if and (not .Values.apiserver.disableStatusSubresource) (ge $major 1) (ge $minor 11) }}
+        - --enable-status-subresource=true
+{{- end }}
+        - --bypass-validating-webhook-xray={{ .Values.apiserver.bypassValidatingWebhookXray }}
+        - --use-kubeapiserver-fqdn-for-aks={{ .Values.apiserver.useKubeapiserverFqdnForAks }}
+        - --enable-analytics={{ .Values.enableAnalytics }}
+        {{- if .Values.templates.cfgmap }}
+        - --custom-templates=/srv/voyager/custom/*.cfg
+        {{- end }}
+        ports:
+        - containerPort: 8443
+        - containerPort: 56791
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+{{- if .Values.apiserver.healthcheck.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+{{- end }}
+        resources:
+          requests:
+            cpu: "100m"
+        volumeMounts:
+        - mountPath: /var/serving-cert
+          name: serving-cert
+{{- if .Values.persistence.enabled }}
+        - mountPath: {{ dir .Values.cloudConfig | quote }}
+          name: cloudconfig
+          readOnly: true
+{{- end }}
+{{- if .Values.templates.cfgmap }}
+        - mountPath: /srv/voyager/custom
+          name: templates
+          readOnly: true
+{{- end }}
+      volumes:
+      - name: serving-cert
+        secret:
+          defaultMode: 420
+          secretName: {{ template "voyager.fullname" . }}-apiserver-cert
+{{- if .Values.persistence.enabled }}
+      - hostPath:
+          path: {{ .Values.persistence.hostPath | quote }}
+        name: cloudconfig
+{{- end -}}
+{{- if .Values.templates.cfgmap }}
+      - configMap:
+          name: {{ .Values.templates.cfgmap }}
+        name: templates
+{{- end -}}
+{{- if or .Values.tolerations (and .Values.criticalAddon (eq .Release.Namespace "kube-system")) }}
+      tolerations:
+{{- if .Values.tolerations }}
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- end -}}
+{{- if and .Values.criticalAddon (eq .Release.Namespace "kube-system") }}
+      - key: CriticalAddonsOnly
+        operator: Exists
+{{- end -}}
+{{- end -}}
+{{- if .Values.affinity }}
+      affinity:
+{{ toYaml .Values.affinity | indent 8 }}
+{{- end -}}
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end -}}
+{{- if and .Values.criticalAddon (eq .Release.Namespace "kube-system") }}
+      priorityClassName: system-cluster-critical
+{{- end -}}

@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/appscode-voyager",
+  "version": "2.2.0-0.1.0",
+  "description": "Voyager by AppsCode - Secure Ingress Controller for Kubernetes",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
