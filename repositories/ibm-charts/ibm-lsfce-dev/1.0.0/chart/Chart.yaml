@@ -1,0 +1,17 @@
+apiVersion: v1
+appVersion: 10.1.0
+description: IBM LSF Community Edition cluster with Application Center GUI
+home: https://www.ibm.com/support/knowledgecenter/en/SS4RPL_4.2.2/docs_shared/bundled_lsfce.html
+icon: http://platform.csdn.net/images/pro_02.gif
+keywords:
+- lsf
+- cluster
+- job
+- distributed
+maintainers:
+- name: IBM Spectrum Computing
+name: ibm-lsfce-dev
+sources:
+- https://github.com/ibm/charts
+tillerVersion: '>=2.4.0'
+version: 1.0.0

@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 10.1.0
+description: A Helm chart for deploying LSF-CE worker nodes
+maintainers:
+- name: IBM Spectrum Computing
+name: lsfce-worker
+tillerVersion: '>=2.4.0'
+version: 1.0.0
