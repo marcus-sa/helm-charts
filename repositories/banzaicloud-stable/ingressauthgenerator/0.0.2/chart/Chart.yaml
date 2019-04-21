@@ -1,0 +1,11 @@
+description: Ingressauthgenerator Helm chart for Kubernetes
+home: https://banzaicloud.com
+keywords:
+- basicauth
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: ingressauthgenerator
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 0.0.2
