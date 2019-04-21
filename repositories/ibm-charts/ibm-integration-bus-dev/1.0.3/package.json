@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-integration-bus-dev",
+  "version": "1.0.3-0.1.0",
+  "description": "IBM Integration Bus for application integration, routing and transformation",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
