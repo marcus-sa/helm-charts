@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-kubeapps",
+  "version": "0.4.4-0.1.0",
+  "description": "Kubeapps is a dashboard for your Kubernetes cluster that makes it easy to deploy and manage applications in your cluster using Helm",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
