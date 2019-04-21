@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-spartakus",
+  "version": "1.1.3-0.1.0",
+  "description": "Collect information about Kubernetes clusters to help improve the project.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
