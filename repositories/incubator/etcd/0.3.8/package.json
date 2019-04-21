@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-etcd",
+  "version": "0.3.8-0.1.0",
+  "description": "Distributed reliable key-value store for the most critical data of a distributed system.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
