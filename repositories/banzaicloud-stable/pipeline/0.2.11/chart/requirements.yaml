@@ -1,0 +1,5 @@
+dependencies:
+- name: mysql
+  version: 0.7.2
+  repository: alias:banzaicloud-stable
+  condition: mysql.enabled

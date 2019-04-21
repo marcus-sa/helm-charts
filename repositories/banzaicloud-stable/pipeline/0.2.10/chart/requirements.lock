@@ -1,0 +1,6 @@
+dependencies:
+- name: mysql
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master
+  version: 0.7.2
+digest: sha256:aed1147cc99ef35cab85b2e93f5dbdf4c0fd57fa5f3d14634c6785720dab76df
+generated: 2019-03-26T10:04:57.351663124Z
