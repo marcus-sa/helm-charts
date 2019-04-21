@@ -1,0 +1,6 @@
+dependencies:
+- name: etcd-operator
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.1.1
+digest: sha256:d3aa0c6078501d44fda763b1eeec33738058d178049b5b254c161b5029a99e5d
+generated: 2019-03-26T11:36:15.377838788Z
