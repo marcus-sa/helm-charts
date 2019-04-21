@@ -1,0 +1,14 @@
+description: A Reactive Platform Application sample.
+icon: https://raw.githubusercontent.com/IBM/charts/master/logo/lagom-logo.png
+keywords:
+- sample
+- ICP
+- Reactive
+- Chirper
+- OpenSource
+- amd64
+- runtime
+kubeVersion: '>=1.11'
+name: ibm-reactive-platform-lagom-sample
+tillerVersion: '>=2.9.1'
+version: 1.0.1
