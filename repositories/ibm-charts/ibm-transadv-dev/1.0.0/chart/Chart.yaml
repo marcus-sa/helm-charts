@@ -1,0 +1,13 @@
+description: IBM Cloud Product Insights Transformation Advisor
+home: https://github.ibm.com/C2C-HybridConnect/liftandshift
+icon: https://developer.ibm.com/product-insights/wp-content/uploads/sites/125/2017/10/TAicon.png
+keywords:
+- Transformation Advisor
+- liftandshift
+maintainers:
+- name: HybridCloud
+name: ibm-transadv-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.4.1'
+version: 1.0.0

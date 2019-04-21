@@ -1,0 +1,20 @@
+description: IBM Cloud Transformation Advisor
+home: https://developer.ibm.com/recipes/tutorials/deploying-transformation-advisor-into-ibm-cloud-private/
+icon: https://developer.ibm.com/product-insights/wp-content/uploads/sites/125/2017/10/TAicon.png
+keywords:
+- Transformation Advisor
+- amd64
+- ppc64le
+- s390x
+- Limited
+- ICP
+- DevOps
+- Tools
+kubeVersion: '>= 1.10.0'
+maintainers:
+- name: HybridCloud
+name: ibm-transadv-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.7.2'
+version: 1.9.1
