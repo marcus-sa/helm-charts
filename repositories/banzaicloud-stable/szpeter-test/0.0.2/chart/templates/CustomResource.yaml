@@ -1,0 +1,31 @@
+apiVersion: "logging.banzaicloud.com/v1alpha1"
+kind: "Plugin"
+metadata:
+  name: "{{ .Release.Name }}-s3-output"
+spec:
+  input:
+    label:
+      app: "*"
+      app.kubernetes.io/name: {{ include "s3-output.name" . }}
+      helm.sh/chart: {{ include "s3-output.chart" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+
+  output:
+    - type: s3
+      name: outputS3
+      parameters:
+        - name: aws_key_id
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.secretName | default (printf "%s" (include "s3-output.fullname" .)) }}
+              key: "{{ .Values.secret.awsAccessKey }}"
+        - name: aws_sec_key
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.secretName | default (printf "%s" (include "s3-output.fullname" .)) }}
+              key: "{{ .Values.secret.awsSecretKey }}"
+        - name: s3_bucket
+          value: "{{ .Values.bucketName }}"
+        - name: s3_region
+          value: "{{ .Values.region }}"

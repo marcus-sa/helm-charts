@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 0.0.1
+description: SzPeter's test chart
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: szpeter-test
+version: 0.0.4
