@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-anchore-policy-validator",
+  "version": "0.3.5-0.1.0",
+  "description": "A Helm chart for anchore-policy-validator admission controller",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
