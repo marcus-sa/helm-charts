@@ -1,5 +1,14 @@
 {
-  "cSpell.words": ["execa", "interop", "kube", "repo", "repos", "tslib", "workspaces"],
+  "cSpell.words": [
+    "execa",
+    "interop",
+    "kube",
+    "kubernetes",
+    "repo",
+    "repos",
+    "tslib",
+    "workspaces"
+  ],
   "files.exclude": {
     "scripts/**/*.js": true
   }
