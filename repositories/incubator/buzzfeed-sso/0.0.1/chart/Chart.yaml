@@ -1,0 +1,16 @@
+apiVersion: v1
+appVersion: 1.1.0
+description: Single sign-on for your Kubernetes services using Google OAuth
+home: https://github.com/buzzfeed/sso
+icon: https://user-images.githubusercontent.com/10510566/44476420-a64e5980-a605-11e8-8ad9-2820109deb75.png
+keywords:
+- sso
+- octoboi
+- ssoctopus
+maintainers:
+- email: dblanco@minddoc.de
+  name: darioblanco
+name: buzzfeed-sso
+sources:
+- https://hub.docker.com/r/buzzfeed/sso/
+version: 0.0.1

@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-buzzfeed-sso",
+  "version": "0.0.1-0.1.0",
+  "description": "Single sign-on for your Kubernetes services using Google OAuth",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
