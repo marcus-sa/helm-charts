@@ -1,0 +1,21 @@
+apiVersion: v1
+description: Helm chart for all istio components
+engine: gotpl
+icon: https://raw.githubusercontent.com/IBM/charts/master/logo/istio-logo.png
+keywords:
+- istio
+- security
+- sidecarInjectorWebhook
+- mixer
+- pilot
+- amd64
+- ppc64le
+- OpenSource
+- Operations
+- ICP
+- IKS
+name: ibm-istio
+sources:
+- http://github.com/istio/istio
+tillerVersion: '>=2.7.2'
+version: 0.8.0

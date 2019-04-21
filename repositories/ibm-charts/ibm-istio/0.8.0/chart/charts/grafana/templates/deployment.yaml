@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: grafana
+    chart: {{ template "grafana.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: grafana
+        chart: {{ template "grafana.chart" . }}
+        heritage: {{ .Release.Service }}
+        release: {{ .Release.Name }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+    spec:
+{{- if .Values.global.priorityClassName }}
+      priorityClassName: "{{ .Values.global.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: grafana
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+          - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          env:
+          - name: GRAFANA_PORT
+            value: "3000"
+          - name: GF_AUTH_BASIC_ENABLED
+            value: "false"
+          - name: GF_AUTH_ANONYMOUS_ENABLED
+            value: "true"
+          - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+            value: Admin
+          - name: GF_PATHS_DATA
+            value: /data/grafana
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+          - name: data
+            mountPath: /data/grafana
+      volumes:
+      - name: data
+        emptyDir: {}
+      nodeSelector:
+      {{- include "nodeselector" . | indent 6 }}
+      tolerations:
+      {{- include "tolerations" . | indent 6 }}
+      affinity:
+      {{- include "nodeaffinity" . | indent 6 }}

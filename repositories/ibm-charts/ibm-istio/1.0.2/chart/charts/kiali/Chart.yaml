@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 0.5.1
+description: Helm chart for deploying kiali
+keywords:
+- kiali
+name: kiali
+sources:
+- https://github.com/kiali/kiali
+tillerVersion: '>=2.7.2'
+version: 0.5.1
