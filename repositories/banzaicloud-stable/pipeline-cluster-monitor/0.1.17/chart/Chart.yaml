@@ -1,0 +1,15 @@
+apiVersion: v1
+description: Monitoring chart to deploy on clusters managed by Banzai Cloud Pipeline
+home: https://banzaicloud.com
+keywords:
+- pipeline
+- cluster
+- prometheus
+- monitor
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: pipeline-cluster-monitor
+sources:
+- https://github.com/banzaicloud/banzai-charts/
+version: 0.1.17
