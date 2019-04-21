@@ -1,0 +1,17 @@
+appVersion: "2.2"
+description: A reverse proxy that provides authentication with Google, Github or other
+  providers
+engine: gotpl
+keywords:
+- kubernetes
+- oauth
+- authentication
+- google
+- github
+maintainers:
+- email: casey@monax.io
+  name: compleatang
+name: oauth-proxy
+sources:
+- https://github.com/bitly/oauth2_proxy
+version: 0.1.0

@@ -1,0 +1,15 @@
+appVersion: "2.2"
+deprecated: true
+description: A reverse proxy that provides authentication with Google, Github or other
+  providers
+engine: gotpl
+keywords:
+- kubernetes
+- oauth
+- authentication
+- google
+- github
+name: oauth-proxy
+sources:
+- https://github.com/bitly/oauth2_proxy
+version: 0.1.8
