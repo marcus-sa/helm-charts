@@ -1,0 +1,42 @@
+dependencies:
+- name: sidecarInjectorWebhook
+  repository: file://./deps/sidecarInjectorWebhook
+  version: 1.0.5
+- name: security
+  repository: file://./deps/security
+  version: 1.0.5
+- name: ingress
+  repository: file://./deps/ingress
+  version: 1.0.5
+- name: gateways
+  repository: file://./deps/gateways
+  version: 1.0.5
+- name: mixer
+  repository: file://./deps/mixer
+  version: 1.0.5
+- name: pilot
+  repository: file://./deps/pilot
+  version: 1.0.5
+- name: grafana
+  repository: file://./deps/grafana
+  version: 1.0.5
+- name: prometheus
+  repository: file://./deps/prometheus
+  version: 1.0.5
+- name: servicegraph
+  repository: file://./deps/servicegraph
+  version: 1.0.5
+- name: tracing
+  repository: file://./deps/tracing
+  version: 1.0.5
+- name: galley
+  repository: file://./deps/galley
+  version: 1.0.5
+- name: kiali
+  repository: file://./deps/kiali
+  version: 1.0.5
+- name: certmanager
+  repository: file://./deps/certmanager
+  version: 1.0.5
+digest: sha256:8ac4716f9f21a73751a4e28cd00a38c6df39ba36f701e94d622cfe34df391f8f
+generated: 2019-03-25T20:41:51.721674842Z
