@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-metallb",
+  "version": "0.9.5-0.1.0",
+  "description": "MetalLB is a load-balancer implementation for bare metal Kubernetes clusters",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
