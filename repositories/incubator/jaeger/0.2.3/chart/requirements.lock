@@ -1,0 +1,9 @@
+dependencies:
+- name: elasticsearch
+  repository: https://kubernetes-charts-incubator.storage.googleapis.com/
+  version: 0.3.0
+- name: cassandra
+  repository: https://kubernetes-charts-incubator.storage.googleapis.com/
+  version: 0.1.5
+digest: sha256:47cb99a39577b0f330749a9bf35eef4eb71fce52fc56717c9ac3bf9e7dc43017
+generated: 2018-01-11T19:49:59.47641073Z
