@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-haproxy-ingress",
+  "version": "0.0.10-0.1.0",
+  "description": "Ingress controller implementation for haproxy loadbalancer.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
