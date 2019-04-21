@@ -1,0 +1,15 @@
+description: Hollowtrees action plugin Helm chart for Kubernetes
+home: https://banzaicloud.com
+keywords:
+- autoscaling
+- aws
+- exporter
+- lifecycle
+- hollowtrees
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: ht-k8s-action-plugin
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 0.0.3

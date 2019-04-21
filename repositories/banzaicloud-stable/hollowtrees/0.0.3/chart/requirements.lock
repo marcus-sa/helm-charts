@@ -1,0 +1,9 @@
+dependencies:
+- name: ht-aws-asg-action-plugin
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.0.3
+- name: ht-k8s-action-plugin
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.0.3
+digest: sha256:e21f95a79fe4c8c0eb38492196794b5e5f473456a31f8cc55d17408ca24f257b
+generated: 2019-03-26T10:06:51.234595932Z
