@@ -1,0 +1,13 @@
+appVersion: 1.4-p7
+description: 'Highly available elephant herd: HA PostgreSQL cluster.'
+home: https://github.com/zalando/patroni
+maintainers:
+- email: team-acid@zalando.de
+  name: alexeyklyukin
+- email: team-teapot@zalando.de
+  name: linki
+name: patroni
+sources:
+- https://github.com/zalando/patroni
+- https://github.com/zalando/spilo
+version: 0.9.0
