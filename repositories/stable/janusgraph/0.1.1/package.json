@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-janusgraph",
+  "version": "0.1.1-0.1.0",
+  "description": "Open source, scalable graph database.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
