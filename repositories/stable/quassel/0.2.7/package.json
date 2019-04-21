@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-quassel",
+  "version": "0.2.7-0.1.0",
+  "description": "Quassel IRC is a modern, cross-platform, distributed IRC client.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
