@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: KubeCI Engine by AppsCode - Kubernetes Native Workflow Engine
+home: https://github.com/kube-ci/engine
+icon: https://cdn.appscode.com/images/icon/kubeci.png
+maintainers:
+- email: support@appscode.com
+  name: appscode
+name: kubeci-engine
+sources:
+- https://github.com/kube-ci/engine
+version: 0.1.0
