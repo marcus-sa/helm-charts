@@ -1,0 +1,163 @@
+openstack:
+  __metadata:
+    label: "PowerVC configuration"
+    description: "Configuration details of PowerVC."
+  ipOrHostname:
+    __metadata:
+      name: "ipOrHostname"
+      label: "IP or Hostname"
+      description: "IP address or host name of the PowerVC management server. It will be used to construct the PowerVC authentication URL."
+      type: "string"
+      immutable: false
+      required: true
+      validation: "^[a-zA-Z0-9-.]+$"
+  credSecretName:
+    __metadata:
+      name: "credSecretName"
+      label: "Credentials secret name"
+      description: "Name of the pre-created Secret object that contains the PowerVC admin username and password."
+      type: "string"
+      immutable: false
+      required: true
+  authURL:
+    __metadata:
+      name: "authURL"
+      label: "PowerVC Authentication URL"
+      description: "The PowerVC authentication URL format. Keep the default value unless the OS_AUTH_URL variable has a different format."
+      type: "string"
+      immutable: false
+      required: true
+      validation: "^(http|https)://(POWERVC_ADDR|[a-zA-Z0-9-.]+)(:[0-9]{3,5})?/.*/$"
+  certData:
+    __metadata:
+      name: "certData"
+      label: "Certificate contents"
+      description: "Paste the contents (in PEM) from the /etc/pki/tls/certs/powervc.crt file. If left blank, certificate verification is not done, which is insecure."
+      type: "string"
+      immutable: false
+      required: false
+      validation: "^(-+-BEGIN CERTIFICATE-+)(.|\n)+(-+-END CERTIFICATE-+)\n?$"
+  projectName:
+    __metadata:
+      name: "projectName"
+      label: "Project name"
+      description: "The project to use. The specified PowerVC user must have the administrator role in this project."
+      type: "string"
+      immutable: false
+      required: true
+  domainName:
+    __metadata:
+      name: "domainName"
+      label: "Domain name"
+      description: "The name of the project domain for the PowerVC user."
+      type: "string"
+      immutable: false
+      required: true
+
+driver:
+  __metadata:
+    label: "Driver configuration"
+    description: "Configuration details of Driver."
+  flexPluginDir:
+    __metadata:
+      name: "flexPluginDir"
+      label: "Flex Plugin directory"
+      description: "The directory that Kubernetes uses for the FlexVolume driver. Keep the default value unless the --flex-volume-plugin-dir flag has been overridden."
+      type: "string"
+      immutable: false
+      required: true
+      validation: "^/.*/$"
+  volumeType:
+    __metadata:
+      name: "volumeType"
+      label: "Volume type to use in storage class"
+      description: "The name or ID of the default storage class's volume type (storage template). This can specify the default storage details for persistent volumes."
+      type: "string"
+      immutable: false
+      required: false
+  dfltStgClass:
+    __metadata:
+      name: "dfltStgClass"
+      label: "Make this the default storage class"
+      description: "The default storage class is used if no storage class is specified when creating a persistent volume claim."
+      type: "boolean"
+      immutable: false
+      required: true
+
+image:
+  __metadata:
+    label: "Docker images"
+    description: "Configuration details of Docker."
+  provisionerRepo:
+    __metadata:
+      name: "provisionerRepo"
+      label: "Provisioner image repository"
+      description: "Name and location of the provisioner docker image repository."
+      type: "string"
+      immutable: false
+      required: true
+  provisionerTag:
+    __metadata:
+      name: "provisionerTag"
+      label: "Provisioner image tag"
+      description: "Tag or label for the provisioner docker image. The default value is the only supported version."
+      type: "string"
+      immutable: false
+      required: true
+  flexVolumeRepo:
+    __metadata:
+      name: "flexVolumeRepo"
+      label: "FlexVolume image repository"
+      description: "Name and location of the flexvolume docker image repository."
+      type: "string"
+      immutable: false
+      required: true
+  flexVolumeTag:
+    __metadata:
+      name: "flexVolumeTag"
+      label: "FlexVolume image tag"
+      description: "Tag or label for the flexvolume docker image. The default value is the only supported version."
+      type: "string"
+      immutable: false
+      required: true
+  provisionerPull:
+    __metadata:
+      name: "provisionerPull"
+      label: "Provisioner image pull policy"
+      description: "Pull policy for the provisioner docker image."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
+  flexVolumePull:
+    __metadata:
+      name: "flexVolumePull"
+      label: "FlexVolume image pull policy"
+      description: "Pull policy for the flexvolume docker image."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
+
+security:
+  __metadata:
+    label: "Security settings"
+    description: "Configuration settings for security"
+  serviceAccountName:
+    __metadata:
+      label: "Service account name"
+      description: "Name of the service account to use"
+      type: "string"
+      required: true
