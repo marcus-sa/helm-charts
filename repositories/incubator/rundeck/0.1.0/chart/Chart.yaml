@@ -1,0 +1,16 @@
+apiVersion: v1
+appVersion: 3.0.16
+description: A Rundeck chart for Kubernetes
+home: https://github.com/rundeck/rundeck
+keywords:
+- rundeck
+- jobs
+- automation
+- operations
+maintainers:
+- email: hello@dwardu.com
+  name: dwardu89
+name: rundeck
+sources:
+- https://github.com/rundeck/rundeck
+version: 0.1.0
