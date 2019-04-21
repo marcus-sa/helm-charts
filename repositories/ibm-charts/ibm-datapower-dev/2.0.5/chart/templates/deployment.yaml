@@ -1,0 +1,150 @@
+# The values variable below picks the pattern-specific config options from
+# values.yaml. For example, if patternName is "webApplicationProxy" it will pick
+# the webApplicationProxy config options from the map structure in values.yaml.
+{{- $values := index .Values .Values.patternName }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: {{ .Chart.Name}}-{{ .Chart.Version | replace "+" "_" }}
+    app: {{ template "fullname" . }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.datapower.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+  template:
+    metadata:
+      labels:
+        chart: {{ .Chart.Name}}-{{ .Chart.Version | replace "+" "_" }}
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+        app: {{ template "fullname" . }}
+      annotations:
+        productName: 'IBM DataPower Gateway Virtual Edition for Developers'
+        productID: 'IBMDataPowerGatewayVirtualEdition_{{ .Values.datapower.image.tag }}_Developers'
+        productChargedContainers: ""
+        productFlexpointBundle: {{ quote .Values.datapower.flexpointBundle }}
+        productMetric: "PROCESSOR_VALUE_UNIT"
+        productVersion: "{{ .Values.datapower.image.tag }}"
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/snmp'
+        prometheus.io/port: '63512'
+        prometheus.io/target: '127.0.0.1:{{ .Values.datapower.snmpPort }}'
+        prometheus.io/module: 'dpStatusMIB'
+    spec:
+{{- if .Values.datapower.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.datapower.image.pullSecrets }}
+      - name: {{ .name }}
+      {{- end }}
+{{- end }}
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.datapower.image.repository }}:{{ .Values.datapower.image.tag }}"
+        imagePullPolicy: {{ .Values.datapower.image.pullPolicy }}
+        command:
+          - sh
+          - -c
+          - |
+            exec /start.sh --log-format {{ .Values.datapower.env.defaultLogFormat }}
+        stdin: true
+        tty: true
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 101
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          limits:
+            cpu: {{ .Values.datapower.resources.limits.cpu }}
+            memory: {{ .Values.datapower.resources.limits.memory | quote }}
+          requests:
+            cpu: {{ .Values.datapower.resources.requests.cpu}}
+            memory: {{ .Values.datapower.resources.requests.memory | quote }}
+        env:
+        - name: DATAPOWER_ACCEPT_LICENSE
+          value: "true"
+        - name: DATAPOWER_INTERACTIVE
+          value: "true"
+        - name: DATAPOWER_LOG_COLOR
+          value: "false"
+{{- if .Values.datapower.env.workerThreads }}
+{{- if gt .Values.datapower.env.workerThreads 0.0 }}
+        - name: DATAPOWER_WORKER_THREADS
+          value: {{ .Values.datapower.env.workerThreads | quote }}
+{{- end }}
+{{- end }}
+{{- if ne .Values.patternName "none"}}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: service
+{{- if .Values.crypto.frontsideSecret }}
+            scheme: HTTPS
+{{- else }}
+            scheme: HTTP
+{{- end }}
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: service
+{{- if .Values.crypto.frontsideSecret }}
+            scheme: HTTPS
+{{- else }}
+            scheme: HTTP
+{{- end }}
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+          periodSeconds: 10
+        ports:
+        - name: service
+          containerPort: {{ $values.containerPort }}
+        volumeMounts:
+            - mountPath: "/drouter/config"
+              name: {{ template "fullname" . }}-config-volume
+{{- if .Values.crypto.frontsideSecret }}
+            - mountPath: "/drouter/secure/usrcerts/{{ .Values.patternName }}"
+              name: {{ template "fullname" . }}-secret-volume
+{{- end }}
+      volumes:
+        - name: {{ template "fullname" . }}-config-volume
+          configMap:
+            name: {{ template "fullname" . }}-config
+            items:
+            - key: {{ .Values.patternName }}.cfg
+              path: "{{ .Values.patternName }}/{{ .Values.patternName }}.cfg"
+            - key: auto-user.cfg
+              path: "auto-user.cfg"
+            - key: auto-startup.cfg
+              path: "auto-startup.cfg"
+
+{{- if .Values.crypto.frontsideSecret }}
+        - name: {{ template "fullname" . }}-secret-volume
+          secret:
+            secretName: {{ .Values.crypto.frontsideSecret }}
+{{- end }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: "beta.kubernetes.io/arch"
+                  operator: In
+                  values: ["amd64"]
+{{- end }}

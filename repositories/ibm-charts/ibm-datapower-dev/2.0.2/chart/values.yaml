@@ -1,0 +1,67 @@
+# Default values for datapower.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+datapower:
+  image:
+    pullSecrets:
+# before final checkin remove this comment and make repo and tag be release values
+    repository: ibmcom/datapower
+    tag: 7.7.1.1.300826
+    pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: 8
+      memory: 64Gi
+    requests:
+      # cpu should agree with .Values.datapowerEnv.workerThreads
+      cpu: 4
+      memory: 8Gi
+  env:
+    # Should agree with .Values.requests.cpu if set. If not set or is 0 the env var will not be set.
+    workerThreads: 4
+  replicaCount: 1
+  # Gateway MGMT variables
+  # This value should either be 'enabled' or 'disabled'. Default is disabled
+  webGuiManagementState: "disabled"
+  webGuiManagementPort: 9090
+  webGuiManagementLocalAddress: 0.0.0.0
+  # This value should either be 'enabled' or 'disabled'. Default is disabled
+  gatewaySshState: "disabled"
+  gatewaySshPort: 9022
+  gatewaySshLocalAddress: 0.0.0.0
+  # This value should either be 'enabled' or 'disabled'. Default is disabled
+  restManagementState: "disabled"
+  restManagementPort: 5554
+  restManagementLocalAddress: 0.0.0.0
+  # This value should either be 'enabled' or 'disabled'. Default is disabled
+  xmlManagementState: "disabled"
+  xmlManagementLocalAddress: 0.0.0.0
+  xmlManagementPort: 5550
+  # This value should either be 'enabled' or 'disabled'. Default is enabled
+  snmpState: "enabled"
+  snmpLocalAddress: 0.0.0.0
+  snmpPort: 1161
+service:
+  name: datapower
+  type: NodePort
+
+# Patterns requires you to specify .Values.fronstsideKey
+# and .Values.frontsideCert for HTTPS to be enabled. If left blank HTTP is used.
+crypto:
+  frontsideKey:
+  frontsideCert:
+
+#-----------------------------------------------------------------------------
+# Pattern Section
+#
+# patternName selects the configuration options appropriate for the
+# pattern you want to select - Options are 'RESTProxy' or 'none'
+patternName: RESTProxy
+
+#none:
+# patternName "none" signifies no pattern was selected 
+# No config or services are set up when patternName is "none"
+
+RESTProxy:
+  backendURL: https://httpbin.org
+  containerPort: 8443
