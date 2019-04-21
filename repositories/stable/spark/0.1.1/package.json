@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-spark",
+  "version": "0.1.1-0.1.0",
+  "description": "A Apache Spark Helm chart for Kubernetes. Apache Spark is a fast and general-purpose cluster computing system",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
