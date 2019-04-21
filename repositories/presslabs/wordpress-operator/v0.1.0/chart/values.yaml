@@ -1,0 +1,14 @@
+replicaCount: 1
+image: quay.io/presslabs/wordpress-operator:v0.1.0
+imagePullPolicy: IfNotPresent
+nameOverride: ""
+fullnameOverride: ""
+rbac:
+  create: true
+serviceAccount:
+  create: true
+  name: ""
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

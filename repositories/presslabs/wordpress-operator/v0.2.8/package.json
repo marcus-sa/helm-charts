@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/presslabs-wordpress-operator",
+  "version": "v0.2.8-0.1.0",
+  "description": "Presslabs WordPress Operator Helm Chart",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
