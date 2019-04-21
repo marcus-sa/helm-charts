@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-lamp",
+  "version": "0.1.1-0.1.0",
+  "description": "Modular and transparent LAMP stack chart supporting PHP-FPM, Release Cloning, LoadBalancer, Ingress, SSL and lots more!",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
