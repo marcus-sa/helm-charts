@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-kong",
+  "version": "0.6.1-0.1.0",
+  "description": "Kong is open-source API Gateway and Microservices Management Layer, delivering high performance and reliability that can be used as Kubernetes Ingress.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

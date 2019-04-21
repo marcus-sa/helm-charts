@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-kong",
+  "version": "0.9.8-0.1.0",
+  "description": "The Cloud-Native Ingress and Service Mesh for APIs and Microservices",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
