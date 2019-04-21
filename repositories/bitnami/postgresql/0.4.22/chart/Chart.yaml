@@ -1,0 +1,16 @@
+appVersion: 10.3.0
+description: Chart for PostgreSQL
+engine: gotpl
+home: http://www.postgresql.org
+icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
+keywords:
+- postgresql
+- database
+- sql
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: postgresql
+sources:
+- https://github.com/bitnami/bitnami-docker-postgresql
+version: 0.4.22
