@@ -1,0 +1,69 @@
+apiVersion: wordpress.presslabs.org/v1alpha1
+kind: Wordpress
+metadata:
+  name: {{ include "wordpress-site.fullname" . }}
+  labels:
+    app.kubernetes.io/name: wordpress
+    app.kubernetes.io/part-of: wordpress
+    helm.sh/chart: {{ include "wordpress-site.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  {{- if .Values.image }}
+  image: {{ .Values.image.repository }}
+  tag: {{ .Values.image.tag }}
+  imagePullPolicy: {{ default "IfNotPresent" .Values.image.pullPolicy }}
+  {{- end }}
+  domains:
+    {{- toYaml .Values.site.domains | nindent 4 }}
+  {{- if .Values.code }}
+  code:
+    {{- if .Values.code.readOnly }}readOnly: true{{ end }}
+    {{- if .Values.code.contentSubPath }}contentSubPath: {{ .Values.code.contentSubPath }}{{ end }}
+    {{- if .Values.code.git }}
+    git:
+      repository: {{ required "A valid code.git.repository is required!" .Values.code.git.repository }}
+      reference: {{ default "master" .Values.code.git.reference }}
+      env:
+        - name: SSH_RSA_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "wordpress-site.fullname" . }}
+              key: id_rsa
+    {{- end }}
+  {{- end }}
+  {{- if and .Values.media .Values.media.gcs }}
+  media:
+    gcs:
+      bucket: {{ .Values.media.gcs.bucket }}
+      prefix: {{ default "" .Values.media.gcs.prefix }}
+      env:
+        - name: GOOGLE_CREDENTIALS
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "wordpress-site.fullname" . }}
+              key: google_application_credentials.json
+  {{- end }}
+  env:
+    - name: MEMCACHED_DISCOVERY_HOST
+      value: {{ include "wordpress-site.fullname" . }}-memcached
+    - name: DB_HOST
+      value: {{ include "wordpress-site.fullname" . }}-mysql-master
+    - name: DB_USER
+      valueFrom:
+        secretKeyRef:
+          name: {{ include "wordpress-site.fullname" . }}-db
+          key: USER
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: {{ include "wordpress-site.fullname" . }}-db
+          key: PASSWORD
+    - name: DB_NAME
+      valueFrom:
+        secretKeyRef:
+          name: {{ include "wordpress-site.fullname" . }}-db
+          key: DATABASE
+  ingressAnnotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"

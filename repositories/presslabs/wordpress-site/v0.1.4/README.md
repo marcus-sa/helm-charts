@@ -1,0 +1,73 @@
+# `@helm-charts/presslabs-wordpress-site`
+
+A Helm chart for deploying a WordPress site on Presslabs Stack
+
+| Field               | Value          |
+| ------------------- | -------------- |
+| Repository Name     | presslabs      |
+| Chart Name          | wordpress-site |
+| Chart Version       | v0.1.4         |
+| NPM Package Version | 0.1.0          |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+# Default values for wordpress-site.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+# Uncomment to use a custom image
+# image:
+#   repository: nginx
+#   tag: stable
+#   pullPolicy: IfNotPresent
+
+site:
+  domains: []
+  env: []
+  envFrom: []
+  resources: {}
+
+tls:
+  {}
+  # issuerKind: ClusterIssuer
+  # issuerName: stack-default
+  # acmeChallengeType: http01
+
+code:
+  # when true, the code is mounted read-only inside the runtime container
+  readOnly: false
+
+  # the path, within the code volume (git repo), where the 'wp-content' is
+  # available
+  contentSubPath: wp-content/
+
+  #  git:
+  #    repository: git@github.com/presslabs/wordpress-basic-demo
+  #    reference: "3df6701bd06d97a3954b18625926753f6246c266"
+  #    # it is not recommended to use a 'moving' target for deployment like a
+  #    # branch name. You should use a specific commit or a git tag.
+  #    # reference: master
+
+media:
+  {}
+  #  Store media library in a Google Cloud Storage bucket
+  #  gcs:
+  #    # bucket name
+  #    bucket: calins-wordpress-runtime-playground
+  #    # use a prefix inside the bucket to store the media files
+  #    prefix: mysite/
+
+mysql:
+  mysqlConf: {}
+  replicaCount: 1
+
+memcached:
+  replicaCount: 1
+```
+
+</details>
