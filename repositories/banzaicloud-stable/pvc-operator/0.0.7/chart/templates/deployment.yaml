@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "pvc-operator.fullname" . }}
+  labels:
+    app: {{ template "pvc-operator.name" . }}
+    chart: {{ template "pvc-operator.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "pvc-operator.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "pvc-operator.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        heritage: {{ .Release.Service }}
+        release: {{ .Release.Name }}
+    spec:
+{{- if .Values.rbac.enabled }}
+      serviceAccountName: {{ template "pvc-operator.fullname" . }}
+{{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - pvc-operator
+          env:
+            - name: WATCH_NAMESPACE
+              value: {{ .Values.operator.watchedNamespace }}
+            - name: OPERATOR_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: NFS_NAMESPACE
+              value: {{ default .Release.Namespace .Values.nfs.namespace }}
+            - name: OWNER_REFERENCE_NAME
+              value: {{ default (include "pvc-operator.fullname" . ) .Values.operator.ownerReferenceName }}
+            - name: RBAC_ENABLED
+              value: "{{ .Values.rbac.enabled }}"
+            - name: NFS_SERVICE_ACCOUNT_NAME
+              value: "{{ default (printf "%s-nfs" (include "pvc-operator.fullname" . )) .Values.nfs.serviceAccount.name  }}"
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.affinity }}
+      affinity:
+{{ toYaml .Values.affinity | indent 8 }}
+    {{- end }}
