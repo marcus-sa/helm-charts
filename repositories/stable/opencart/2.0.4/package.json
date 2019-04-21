@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-opencart",
+  "version": "2.0.4-0.1.0",
+  "description": "A free and open source e-commerce platform for online merchants. It provides a professional and reliable foundation for a successful online store.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
