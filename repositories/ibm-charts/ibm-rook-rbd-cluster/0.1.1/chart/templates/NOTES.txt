@@ -1,0 +1,21 @@
+{{- include "sch.config.init" (list . "ibm-rook-rbd-cluster.sch.chart.config.values") }}
+{{- $clusterName :=  .sch.chart.components.cluster.name }}
+{{- $poolName :=  .sch.chart.components.pool.name }}
+
+1. Installation of Rook RBD Cluster {{ include "sch.names.fullCompName" (list . $clusterName) }} successful.
+
+   kubectl get cluster {{ include "sch.names.fullCompName" (list . $clusterName) }} --namespace {{ .Release.Namespace }}
+
+2. A RBD pool {{ .Release.Namespace }}-pool is also created.
+
+   kubectl get pool {{- $poolName :=  .sch.chart.components.pool.name }} --namespace {{ .Release.Namespace }}
+
+
+{{- if .Values.storageClass.create }}
+
+3. Storage class {{ .Values.storageClass.name }} can be used to create RBD volumes.
+
+   kubectl get storageclasses {{ .Values.storageClass.name }}
+
+{{- end }}
+

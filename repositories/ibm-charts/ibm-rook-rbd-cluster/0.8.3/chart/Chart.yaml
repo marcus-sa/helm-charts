@@ -1,0 +1,19 @@
+apiVersion: v1
+appVersion: "1.0"
+description: This chart deploys Rook Ceph storage cluster.
+home: https://rook.io/
+icon: https://rook.io/images/logos/rook/rook-logo-color-on-transparent.png
+keywords:
+- Beta
+- storage
+- Tech
+- amd64
+- OpenSource
+- ICP
+- Storage
+kubeVersion: '>=1.11.0'
+maintainers:
+- name: IBM Cloud Private Storage Squad
+name: ibm-rook-rbd-cluster
+tillerVersion: '>=2.9.1'
+version: 0.8.3
