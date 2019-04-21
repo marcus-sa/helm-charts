@@ -1,0 +1,14 @@
+apiVersion: v1
+description: Monitoring chart to deploy on the control-plane of a Pipeline installation
+home: https://banzaicloud.com
+keywords:
+- pipeline
+- controlplane
+- monitoring
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: pipeline-cp-monitor
+sources:
+- https://github.com/banzaicloud/banzai-charts/
+version: 0.0.3
