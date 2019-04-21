@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-superset",
+  "version": "1.0.0-0.1.0",
+  "description": "Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
