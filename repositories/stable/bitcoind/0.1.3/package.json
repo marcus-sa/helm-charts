@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-bitcoind",
+  "version": "0.1.3-0.1.0",
+  "description": "Bitcoin is an innovative payment network and a new kind of money.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
