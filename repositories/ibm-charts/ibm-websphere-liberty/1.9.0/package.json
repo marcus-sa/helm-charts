@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-websphere-liberty",
+  "version": "1.9.0-0.1.0",
+  "description": "WebSphere Liberty is a fast, dynamic, and easy-to-use Java application server.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

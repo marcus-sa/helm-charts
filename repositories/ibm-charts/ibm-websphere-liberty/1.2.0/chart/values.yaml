@@ -1,0 +1,101 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2017. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation - initial API and implementation
+###############################################################################
+
+
+###############################################################################
+## Common image variables
+###############################################################################
+image:
+  repository: websphere-liberty
+  tag: latest
+  pullPolicy: IfNotPresent
+  license: ""
+
+service:
+  type: NodePort
+  name: liberty
+  port: 9443
+  targetPort: 9443
+
+###############################################################################
+## Persistence Storage
+###############################################################################
+
+## Persistence is disabled by default, set Enabled: true to use
+persistence:
+  useDynamicProvisioning: true
+  name: "liberty-pvc"
+
+  ## Specify the name of the StorageClass
+  ## Setting StorageClass: "" will use whatever storageClass is currently
+  ## setup as the Default
+  storageClassName: "" 
+
+  # if your not using dynamic provisioning, you can use selectors to 
+  # refine the binding process. You cannot specify a selector if your using dynamic provisioning!
+  selector:
+    label: ""
+    value: ""
+
+  ## Tranlog requires a Persistence Storage volume size minimum of 1Gi
+  size: "1Gi"
+
+###############################################################################
+## Transaction log
+###############################################################################
+tranlog:
+  persistLogs: false
+
+###############################################################################
+## Logs
+###############################################################################
+logs:
+  persistLogs: false
+
+###############################################################################
+## Auto scaling
+###############################################################################
+replicaCount: 1
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+  
+###############################################################################
+## Resource constraints
+###############################################################################
+resources:
+  constraints: 
+    enabled: false
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+ssl:
+  enabled: true
+  useClusterSSLConfiguration: false
+  createClusterSSLConfiguration: false
+
+ingress:
+  enabled: false
+  secureBackends: true
+  rewriteTarget: "/"
+  path: "/liberty"
+
+###############################################################################
+## MicroProfile
+###############################################################################
+microprofile:
+  health: 
+    enabled: false
