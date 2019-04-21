@@ -1,0 +1,24 @@
+###############################################################################
+# Licensed Materials - Property of IBM
+# 5737-E67
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+###############################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "minio.fullname" . }}-test-config
+  namespace: default
+  labels:
+    app: {{ template "minio.fullname" . }}-test
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  test-minio.sh: |
+    #!/bin/sh
+    mc config host add test http://{{ template "minio.fullname" . }}:{{ .Values.service.port }} admin admin1234  S3v4
+    mc mb test/testbucket
+    mc ls test/testbucket
+    mc rm test/testbucket

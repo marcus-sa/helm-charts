@@ -1,0 +1,53 @@
+###############################################################################
+# Licensed Materials - Property of IBM
+# 5737-E67
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+###############################################################################
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-minio-test"
+  # Note that the Pod does not need to be in the same namespace as the loader.
+  labels:
+    app: {{ template "minio.fullname" . }}-test
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  affinity:
+{{- include "nodeaffinity" . | indent 4 }}
+  restartPolicy: Never
+  containers:
+  - name: {{ template "minio.fullname" . }}-test
+    image: "{{ .Values.mcImage.repository }}:{{ .Values.mcImage.tag }}"
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command: ["/test/test-minio.sh"]
+    env:
+    - name: MINIO_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: {{ .Values.minioAccessSecret | quote }}
+          key: accesskey
+    - name: MINIO_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: {{ .Values.minioAccessSecret | quote }}
+          key: secretkey
+    - name: TLS_ENABLED
+{{- if .Values.tls.enabled }}
+      value: "true"
+{{ else }}
+      value: "false"
+{{- end }}
+    volumeMounts:
+      - name: {{ template "minio.fullname" . }}-test
+        mountPath: "/test"
+  volumes:
+    - name: {{ template "minio.fullname" . }}-test
+      configMap:
+        name: {{ template "minio.fullname" . }}-test-config
+        defaultMode: 0744

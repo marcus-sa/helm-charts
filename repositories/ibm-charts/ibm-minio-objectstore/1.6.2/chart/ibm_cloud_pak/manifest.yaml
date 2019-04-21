@@ -1,0 +1,32 @@
+charts:
+  - archive: file:repo/stable/ibm-minio-objectstore-1.6.2.tgz
+    repository-keys:
+      - image.repository
+      - mcImage.repository
+
+images:
+- image: ibmcom/minio:RELEASE.2018-11-30T03-56-59Z
+  references:
+  - repository: ibmcom/minio-amd64:RELEASE.2018-11-30T03-56-59Z
+    pull-repository: ibmcom/minio-amd64:RELEASE.2018-11-30T03-56-59Z
+    platform:
+      os: linux
+      architecture: amd64
+  - repository: ibmcom/minio-ppc64le:RELEASE.2018-11-30T03-56-59Z
+    pull-repository: ibmcom/minio-ppc64le:RELEASE.2018-11-30T03-56-59Z
+    platform:
+      os: linux
+      architecture: ppc64le
+
+- image: ibmcom/minio-mc:RELEASE.2018-11-30T01-52-08Z
+  references:
+  - repository: ibmcom/minio-mc-amd64:RELEASE.2018-11-30T01-52-08Z
+    pull-repository: ibmcom/minio-mc-amd64:RELEASE.2018-11-30T01-52-08Z
+    platform:
+      os: linux
+      architecture: amd64
+  - repository: ibmcom/minio-mc-ppc64le:RELEASE.2018-11-30T01-52-08Z
+    pull-repository: ibmcom/minio-mc-ppc64le:RELEASE.2018-11-30T01-52-08Z
+    platform:
+      os: linux
+      architecture: ppc64le
