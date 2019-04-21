@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-g2",
+  "version": "0.3.1-0.1.0",
+  "description": "G2 by AppsCode - Gearman in Golang",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
