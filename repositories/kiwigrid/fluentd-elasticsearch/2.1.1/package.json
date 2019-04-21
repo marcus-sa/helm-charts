@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kiwigrid-fluentd-elasticsearch",
+  "version": "2.1.1-0.1.0",
+  "description": "A Fluentd Helm chart for Kubernetes with Elasticsearch output",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
