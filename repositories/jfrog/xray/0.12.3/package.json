@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/jfrog-xray",
+  "version": "0.12.3-0.1.0",
+  "description": "Universal component scan for security and license inventory and impact analysis",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
