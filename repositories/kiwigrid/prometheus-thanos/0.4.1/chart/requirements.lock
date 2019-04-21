@@ -1,0 +1,9 @@
+dependencies:
+- name: minio
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 2.4.10
+- name: any-resource
+  repository: https://kiwigrid.github.io/
+  version: 0.1.0
+digest: sha256:5b83a4a5b8b06bd2388a6f8f601185a110272f9df9a89fe7310f81bd7305ba4a
+generated: 2019-04-12T14:32:39.849011251Z
