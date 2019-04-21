@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-phpmyadmin",
+  "version": "2.0.4-0.1.0",
+  "description": "phpMyAdmin is an mysql administration frontend",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
