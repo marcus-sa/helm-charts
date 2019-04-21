@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-express-gateway",
+  "version": "1.5.0-0.1.0",
+  "description": "Express Gateway is an API Gateway that sits at the heart of any microservices architecture",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
