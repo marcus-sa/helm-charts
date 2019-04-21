@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-vaultingkube",
+  "version": "0.1.1-0.1.0",
+  "description": "vaultingkube takes config maps and secrets stored inside Hashicorp Vault and syncs them to your Kubernetes cluster.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
