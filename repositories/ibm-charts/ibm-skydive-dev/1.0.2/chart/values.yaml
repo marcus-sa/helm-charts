@@ -1,0 +1,69 @@
+###############################################################################
+############################ Skydive ##########################################
+###############################################################################
+
+###################
+## Global variables
+global:
+  image:
+    secretName: ""
+    
+##################
+## Image variables
+arch: 
+  amd64: "3 - Most preferred"
+  
+image:
+  repository: ibmcom/skydive
+  tag: 0.18
+  imagePullPolicy: IfNotPresent
+
+##################
+## Resources
+##
+resources:
+  limits:
+    cpu: 2000m
+    memory: 8192Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+##################
+## Service variables
+service:
+  name: skydive
+  port: 8082
+  type: NodePort
+
+analyzer:
+  topology:
+    fabric: "TOR1->*[Type=host]/eth0"
+
+## env variables
+env: []
+
+
+##################
+## Data / Storage
+##
+## - Persistence disables by default
+persistence:
+  enabled: false
+  useDynamicProvisioning: false
+
+dataVolume:
+  name: "datavolume"
+  existingClaimName: ""
+  storageClassName: ""
+  size: 10Gi
+
+storage:
+  flows:
+    indicesToKeep: 10
+    indexEntriesLimit: 10000
+  topology:
+    indicesToKeep: 10
+    indexEntriesLimit: 10000
+  elasticsearch:
+    host: 127.0.0.1:9200
