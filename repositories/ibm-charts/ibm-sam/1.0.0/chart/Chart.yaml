@@ -1,0 +1,20 @@
+description: IBM Security Access Manager provides a simplified access management solution.
+engine: gotpl
+home: https://store.docker.com/images/ibm-security-access-manager
+icon: https://d1q6f0aelx0por.cloudfront.net/product-logos/32925feb-af2b-4b4c-8276-def2a031ed31-artwork2x.png
+keywords:
+- isam
+- amd64
+- Commercial
+- ICP
+- IKS
+- Security
+- Limited
+kubeVersion: '>=1.11.0'
+maintainers:
+- name: IBM Security Access Manager
+name: ibm-sam
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.9.1'
+version: 1.0.0

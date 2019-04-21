@@ -1,0 +1,17 @@
+description: The runtime for the federation and advanced access control capabilities.
+engine: gotpl
+home: https://store.docker.com/images/ibm-security-access-manager
+icon: https://d1q6f0aelx0por.cloudfront.net/product-logos/32925feb-af2b-4b4c-8276-def2a031ed31-artwork2x.png
+keywords:
+- isam
+- amd64
+- Commercial
+- ICP
+- Security
+maintainers:
+- name: IBM Security Access Manager
+name: ibm-sam-runtime
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.6.0'
+version: 1.0.0
