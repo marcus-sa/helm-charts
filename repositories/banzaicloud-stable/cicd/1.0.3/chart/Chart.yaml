@@ -1,0 +1,17 @@
+appVersion: 0.8.1
+description: Pipeline CI/CD
+home: https://banzaicloud.com/
+keywords:
+- continuous-delivery
+- continuous-deployment
+- continuous-integration
+- banzaicloud.com
+- pipeline
+- kubernetes
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: cicd
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 1.0.3
