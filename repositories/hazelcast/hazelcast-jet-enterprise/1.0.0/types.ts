@@ -1,0 +1,89 @@
+// Automatically generated
+
+export interface ChartValues {
+  cluster?: {
+    memberCount?: any
+  }
+  fullnameOverride?: any
+  image?: {
+    pullPolicy?: any
+    pullSecrets?: any
+    repository?: any
+    tag?: any
+  }
+  jet?: {
+    configurationFiles?: any
+    javaOpts?: any
+    licenseKey?: any
+    licenseKeySecretName?: any
+    rest?: any
+  }
+  livenessProbe?: {
+    enabled?: any
+    failureThreshold?: any
+    initialDelaySeconds?: any
+    periodSeconds?: any
+    successThreshold?: any
+    timeoutSeconds?: any
+  }
+  managementcenter?: {
+    configurationFiles?: any
+    enabled?: any
+    image?: {
+      pullPolicy?: any
+      pullSecrets?: any
+      repository?: any
+      tag?: any
+    }
+    javaOpts?: any
+    licenseKey?: any
+    licenseKeySecretName?: any
+    livenessProbe?: {
+      enabled?: any
+      failureThreshold?: any
+      initialDelaySeconds?: any
+      periodSeconds?: any
+      successThreshold?: any
+      timeoutSeconds?: any
+    }
+    nodeSelector?: any
+    readinessProbe?: {
+      enabled?: any
+      failureThreshold?: any
+      initialDelaySeconds?: any
+      periodSeconds?: any
+      successThreshold?: any
+      timeoutSeconds?: any
+    }
+    resources?: any
+    service?: {
+      clusterIP?: any
+      port?: any
+      type?: any
+    }
+  }
+  nameOverride?: any
+  nodeSelector?: any
+  rbac?: {
+    create?: any
+  }
+  readinessProbe?: {
+    enabled?: any
+    failureThreshold?: any
+    initialDelaySeconds?: any
+    periodSeconds?: any
+    successThreshold?: any
+    timeoutSeconds?: any
+  }
+  resources?: any
+  service?: {
+    clusterIP?: any
+    port?: any
+    type?: any
+  }
+  serviceAccount?: {
+    create?: any
+    name?: any
+  }
+}
+
