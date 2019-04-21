@@ -1,0 +1,9 @@
+description: Hollowtrees with Pipeline Scaler plugin
+home: https://banzaicloud.com
+keywords:
+- scaling
+- hollowtrees
+name: hollowtrees-with-ps
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 0.1.1
