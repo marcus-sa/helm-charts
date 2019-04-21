@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-sentry-kubernetes",
+  "version": "0.1.5-0.1.0",
+  "description": "A Helm chart for sentry-kubernetes (https://github.com/getsentry/sentry-kubernetes)",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
