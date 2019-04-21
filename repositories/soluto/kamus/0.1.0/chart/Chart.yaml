@@ -1,0 +1,15 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: An open source, git-ops, zero-trust secrets encryption and decryption
+  solution for Kubernetes applications
+home: https://github.com/Soluto/Kamus
+keywords:
+- gitops
+- secrets
+maintainers:
+- name: omerlh
+- name: shaikatz
+name: kamus
+sources:
+- https://github.com/Soluto/Kamus
+version: 0.1.0
