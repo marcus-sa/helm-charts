@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-sentry",
+  "version": "0.1.6-0.1.0",
+  "description": "Sentry is a cross-platform crash reporting and aggregation platform.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
