@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-nginx-ingress",
+  "version": "0.20.3-0.1.0",
+  "description": "An nginx Ingress controller that uses ConfigMap to store the nginx configuration.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
