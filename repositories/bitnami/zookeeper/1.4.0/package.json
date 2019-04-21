@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-zookeeper",
+  "version": "1.4.0-0.1.0",
+  "description": "A centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services for distributed applications.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
