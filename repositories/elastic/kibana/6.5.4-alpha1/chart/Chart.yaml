@@ -1,0 +1,10 @@
+appVersion: 6.5.4
+description: Kibana
+home: https://github.com/elastic/helm-charts
+maintainers:
+- email: helm-charts@elastic.co
+  name: Elastic
+name: kibana
+sources:
+- https://github.com/elastic/kibana
+version: 6.5.4-alpha1
