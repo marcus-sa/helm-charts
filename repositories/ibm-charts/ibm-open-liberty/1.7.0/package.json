@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-open-liberty",
+  "version": "1.7.0-0.1.0",
+  "description": "Open Liberty, an open source runtime for Java microservices & cloud-native apps.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
