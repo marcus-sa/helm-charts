@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-sumologic-fluentd",
+  "version": "0.1.1-0.1.0",
+  "description": "Sumologic Log Collector",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
