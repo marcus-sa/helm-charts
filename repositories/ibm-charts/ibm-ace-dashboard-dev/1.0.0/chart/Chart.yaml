@@ -1,0 +1,19 @@
+description: App Connect Enterprise Dashboard
+icon: https://raw.githubusercontent.com/ot4i/ace-helm/master/appconnect_enterprise_logo.svg?sanitize=true
+keywords:
+- Limited
+- amd64
+- ICP
+- ACE
+- Integration
+- IIB
+- WMB
+- MQSI
+- Websphere
+- Message
+- Broker
+- Bus
+kubeVersion: '>=1.11.1'
+name: ibm-ace-dashboard-dev
+tillerVersion: '>=2.9.1'
+version: 1.0.0
