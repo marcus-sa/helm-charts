@@ -1,0 +1,14 @@
+description: Instance Termination Handler Helm chart for Kubernetes
+home: https://banzaicloud.com
+keywords:
+- spot
+- aws
+- amazon
+- gke
+- google
+- lifecycle
+- drain
+name: instance-termination-handler
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 0.0.4

@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-instance-termination-handler",
+  "version": "0.0.4-0.1.0",
+  "description": "Instance Termination Handler Helm chart for Kubernetes",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
