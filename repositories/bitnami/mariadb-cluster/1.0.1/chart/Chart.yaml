@@ -1,0 +1,19 @@
+appVersion: 10.2.14
+description: Chart to create a Highly available MariaDB cluster
+engine: gotpl
+home: https://mariadb.org
+icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-110x117.png
+keywords:
+- mariadb
+- mysql
+- database
+- sql
+- cluster
+- high availablity
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: mariadb-cluster
+sources:
+- https://github.com/bitnami/bitnami-docker-mariadb
+version: 1.0.1
