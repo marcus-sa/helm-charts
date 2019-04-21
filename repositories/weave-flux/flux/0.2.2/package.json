@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/weave-flux-flux",
+  "version": "0.2.2-0.1.0",
+  "description": "Flux is a tool that automatically ensures that the state of a cluster matches what is specified in version control",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
