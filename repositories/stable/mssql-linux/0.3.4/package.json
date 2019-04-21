@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-mssql-linux",
+  "version": "0.3.4-0.1.0",
+  "description": "SQL Server 2017 Linux Helm Chart",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
