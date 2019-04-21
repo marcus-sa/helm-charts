@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-kubernetes-vault",
+  "version": "0.1.0-0.1.0",
+  "description": "The Kubernetes-Vault project allows pods to automatically receive a Vault token using Vaults AppRole auth backend.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
