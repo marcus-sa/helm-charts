@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-pachyderm",
+  "version": "0.1.5-0.1.0",
+  "description": "Pachyderm is a large-scale container-based workflow engine that offers complete version control for data and reproducible data processing\n",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

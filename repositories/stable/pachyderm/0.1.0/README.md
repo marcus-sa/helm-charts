@@ -1,0 +1,228 @@
+# `@helm-charts/stable-pachyderm`
+
+Pachyderm is a large-scale container-based workflow engine that offers complete version control for data and reproducible data processing
+
+| Field               | Value     |
+| ------------------- | --------- |
+| Repository Name     | stable    |
+| Chart Name          | pachyderm |
+| Chart Version       | 0.1.0     |
+| NPM Package Version | 0.1.0     |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+---
+## Set default credentials for object store
+credentials: 'local'
+
+## S3 endpoint (i.e: Minio server) credentials
+s3:
+  accessKey: ''
+  secretKey: ''
+  bucketName: ''
+  ## The endpoint should be something like: <mydomain>.<subdomain>:<port>
+  endpoint: ''
+  ## For 'true' set the value to 1
+  secure: '0'
+  ## For 'S3v2' signature, set the value to 1. For 'S3v4', set this value to 0
+  signature: '0'
+
+## Google Cloud credentials
+google:
+  bucketName: ''
+
+## Amazon Web Services credentials
+amazon:
+  bucketName: ''
+  ## The distribution parameter is often an empty string
+  distribution: ''
+  id: ''
+  region: ''
+  secret: ''
+  token: ''
+
+## Microsoft Azure credentials
+microsoft:
+  container: ''
+  id: ''
+  secret: ''
+
+## Set default image settings, resource requests and number of replicas of pachd
+pachd:
+  replicaCount: 1
+  ## For available images please check: https://hub.docker.com/r/pachyderm/pachd/tags/
+  image:
+    repository: pachyderm/pachd
+    tag: 1.6.6
+    pullPolicy: Always
+  worker:
+    repository: pachyderm/worker
+    tag: 1.6.6
+  resources:
+    ## For non-local deployments, 1 cpu and 2G of memory requests are recommended
+    requests:
+      cpu: 250m
+      memory: 512M
+
+## Set default image settings and persistence settings of etcd
+etcd:
+  ## For available images please check: https://hub.docker.com/r/pachyderm/etcd/tags
+  image:
+    repository: pachyderm/etcd
+    tag: v3.2.7
+    pullPolicy: IfNotPresent
+    ## Enable persistence using Persistent Volume Claims
+    ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  persistence:
+    enabled: false
+    ## etcd data Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ## set, choosing the default provisioner. (gp2 on AWS, standard on
+    ## GKE, AWS & OpenStack)
+    # storageClass: "-"
+    ## Set default PVC size
+    size: 20G
+    ## Set default PVC access mode: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
+    accessMode: ReadWriteOnce
+  resources:
+    ## For non-local deployments, 1 cpu and 2G of memory requests are recommended
+    requests:
+      cpu: 250m
+      memory: 256M
+```
+
+</details>
+
+---
+
+# Pachyderm Helm Chart
+
+Pachyderm is a language-agnostic and cloud infrastructure-agnostic large-scale data processing framework based on software containers. This chart can be used to deploy Pachyderm backed by object stores of different Cloud providers.
+
+- https://pachyderm.io
+- https://github.com/pachyderm/pachyderm
+
+## Prerequisites Details
+
+- Dynamic provisioning of PVs (for non-local deployments)
+
+## General chart settings
+
+The following table lists the configurable parameters of `pachd` and their default values:
+
+| Parameter                | Description            | Default            |
+| ------------------------ | ---------------------- | ------------------ |
+| `pachd.image.repository` | Container image name   | `pachyderm/pachd`  |
+| `*.image.tag`            | Container image tag    | `<latest version>` |
+| `*.image.pullPolicy`     | Image pull policy      | `Always`           |
+| `*.worker.repository`    | Worker image name      | `pachyderm/worker` |
+| `*.worker.tag`           | Worker image tag       | `<latest version>` |
+| `*.replicaCount`         | Number of pachds       | `1`                |
+| `*.resources.requests`   | Memory and cpu request | `{512M,250m}`      |
+
+Next table lists the configurable parameters of `etcd` and their default values:
+
+| Parameter                    | Description            | Default            |
+| ---------------------------- | ---------------------- | ------------------ |
+| `etcd.image.repository`      | Container image name   | `pachyderm/etcd`   |
+| `*.image.tag`                | Container image tag    | `<latest version>` |
+| `*.image.pullPolicy`         | Image pull policy      | `IfNotPresent`     |
+| `*.resources.requests`       | Memory and cpu request | `{250M,250m}`      |
+| `*.persistence.enabled`      | Enable persistence     | `false`            |
+| `*.persistence.size`         | Storage request        | `20G`              |
+| `*.persistence.accessMode`   | Access mode for PV     | `ReadWriteOnce`    |
+| `*.persistence.storageClass` | PVC storage class      | `nil`              |
+
+## Storage backend settings
+
+In order to set which object store credentials you want to use, please set the flag `credentials` with one of the following values: `local | s3 | google | amazon | microsoft`.
+
+| Parameter     | Description         | Default |
+| ------------- | ------------------- | ------- |
+| `credentials` | Backend credentials | ""      |
+
+Based on the storage credentials used, fill in the corresponding parameters for your object store.
+
+- The `local` installation will deploy Pachyderm on your local Kubernetes cluster (i.e: minikube) backed by your local storage unit.
+
+- With `S3 endpoint` credentials (such as Minio credentials), these are the configurable parameters:
+
+| Parameter       | Description    | Default |
+| --------------- | -------------- | ------- |
+| `s3.accessKey`  | S3 access key  | `""`    |
+| `s3.secretKey`  | S3 secret key  | `""`    |
+| `s3.bucketName` | S3 bucket name | `""`    |
+| `s3.endpoint`   | S3 endpoint    | `""`    |
+| `s3.secure`     | S3 secure      | `"0"`   |
+| `s3.signature`  | S3 signature   | `"0"`   |
+
+- With `Google Cloud` credentials, you must define your `GCS bucket name`:
+
+| Parameter           | Description     | Default |
+| ------------------- | --------------- | ------- |
+| `google.bucketName` | GCS bucket name | `""`    |
+
+- On `Amazon Web Services`, please set the next values:
+
+| Parameter             | Description         | Default |
+| --------------------- | ------------------- | ------- |
+| `amazon.bucketName`   | Amazon bucket name  | `""`    |
+| `amazon.distribution` | Amazon distribution | `""`    |
+| `amazon.id`           | Amazon id           | `""`    |
+| `amazon.region`       | Amazon region       | `""`    |
+| `amazon.secret`       | Amazon secret       | `""`    |
+| `amazon.token`        | Amazon token        | `""`    |
+
+- As for `Microsoft Azure`, you must specify the following parameters:
+
+| Parameter             | Description  | Default |
+| --------------------- | ------------ | ------- |
+| `microsoft.container` | Container    | `""`    |
+| `microsoft.id`        | Account name | `""`    |
+| `microsoft.secret`    | Account key  | `""`    |
+
+## How to install the chart
+
+We strongly suggest that the installation of Pachyderm should be performed in its own namespace. The default installation will deploy Pachyderm on your local Kubernetes cluster:
+
+```console
+$ helm install --namespace pachyderm --name my-release stable/pachyderm
+```
+
+You should install the chart specifying each parameter using the `--set key=value[,key=value]` argument to helm install. Please consult the `values.yaml` file for more information regarding the parameters. For example:
+
+```console
+$ helm install --namespace pachyderm --name my-release \
+--set credentials=s3,s3.accessKey=myaccesskey,s3.secretKey=mysecretkey,s3.bucketName=default_bucket,s3.endpoint=domain.subdomain:8080,etcd.persistence.enabled=true,etcd.persistence.accessMode=ReadWriteMany,"signature=\"1\"","secure=\"1\"" \
+stable/pachyderm
+```
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart:
+
+```console
+$ helm install --namespace pachyderm --name my-release -f values.yaml stable/pachyderm
+```
+
+## Accessing the pachd service
+
+In order to use Pachyderm, please login through ssh to the master node and install the Pachyderm client:
+
+```console
+$ curl -o /tmp/pachctl.deb -L https://github.com/pachyderm/pachyderm/releases/download/v1.6.6/pachctl_1.6.6_amd64.deb && sudo dpkg -i /tmp/pachctl.deb
+```
+
+Please note that the client version should correspond with the pachd service version. For more information please consult: http://pachyderm.readthedocs.io/en/latest/index.html. Also, if you have your kubernetes client properly configured to talk with your remote cluster, you can simply install `pachctl` on your local machine and execute: `pachctl -k '-n=<namespace>' port-forward &`.
+
+## Clean-up
+
+In order to remove the Pachyderm release, you can execute the following commands:
+
+```console
+$ helm list
+$ helm delete --purge <release-name>
+```
