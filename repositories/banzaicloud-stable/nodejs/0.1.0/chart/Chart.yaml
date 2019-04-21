@@ -1,0 +1,14 @@
+apiVersion: v1
+description: Universal helm chart for Node.js applications
+icon: https://banzaicloud.com/img/banzai-cloud-logo.png
+keywords:
+- nodejs
+- node
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: nodejs
+sources:
+- https://banzaicloud.com
+- https://github.com/banzaicloud
+version: 0.1.0
