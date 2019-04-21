@@ -1,0 +1,252 @@
+# `@helm-charts/appscode-csi-vault`
+
+HashiCorp Vault CSI Driver for Kubernetes
+
+| Field               | Value     |
+| ------------------- | --------- |
+| Repository Name     | appscode  |
+| Chart Name          | csi-vault |
+| Chart Version       | 0.2.0     |
+| NPM Package Version | 0.1.0     |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+attacher:
+  name: attacher
+  registry: quay.io/k8scsi
+  repository: csi-attacher
+  tag: v1.0.1
+  pullPolicy: IfNotPresent
+plugin:
+  name: plugin
+  registry: kubevault
+  repository: csi-vault
+  tag: 0.2.0
+  pullPolicy: Always
+provisioner:
+  name: provisioner
+  registry: quay.io/k8scsi
+  repository: csi-provisioner
+  tag: v1.0.1
+  pullPolicy: IfNotPresent
+clusterRegistrar:
+  name: cluster-registrar
+  registry: quay.io/k8scsi
+  repository: csi-cluster-driver-registrar
+  tag: v1.0.1
+  pullPolicy: IfNotPresent
+nodeRegistrar:
+  name: node-registrar
+  registry: quay.io/k8scsi
+  repository: csi-node-driver-registrar
+  tag: v1.0.1
+  pullPolicy: IfNotPresent
+
+controllerPlugin:
+  name: controller
+
+nodePlugin:
+  name: node
+
+logLevel: 3
+
+## Annotations passed to operator pod(s).
+##
+annotations: {}
+
+nameOverride: ''
+fullnameOverride: ''
+
+driverName: secrets.csi.kubevault.com
+pluginAddress: /var/lib/csi/sockets/pluginproxy/csi.sock
+pluginDir: /var/lib/csi/sockets/pluginproxy/
+
+attachRequired: false
+
+## Install AppBinding CRD
+appbinding:
+  # Specifies whether AppBinding CRD should be created
+  create: true
+
+## Installs pods as critical addon
+## https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
+criticalAddon: true
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+## Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: {}
+
+## Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+
+## Install Default RBAC roles and bindings
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+
+apiserver:
+  # If true, uses kube-apiserver FQDN for AKS cluster to workaround https://github.com/Azure/AKS/issues/522 (default true)
+  useKubeapiserverFqdnForAks: true
+  # healthcheck configures the readiness and liveliness probes for the operator pod.
+  healthcheck:
+    enabled: true
+
+# Send usage events to Google Analytics
+enableAnalytics: true
+
+monitoring:
+  # specify monitoring agent (either "prometheus.io/builtin" or "prometheus.io/coreos-operator")
+  agent: 'none'
+  # specify whether to monitor Vault CSI driver node plugin
+  node: false
+  # specify whether to monitor Vault CSI driver controller plugin
+  controller: false
+  # specify where ServiceMonitor crd will be created
+  prometheus:
+    namespace: ''
+  serviceMonitor:
+    labels: {}
+```
+
+</details>
+
+---
+
+# CSI Vault
+
+[CSI Driver for Vault by AppsCode](https://github.com/kubevault/csi-driver)
+
+## TL;DR;
+
+```console
+$ helm repo add appscode https://charts.appscode.com/stable/
+$ helm repo update
+$ helm install appscode/csi-vault --name csi-vault --namespace kube-system
+```
+
+## Introduction
+
+This chart bootstraps a [Vault CSI Driver](https://github.com/kubevault/csi-driver) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes v1.13+
+- `--allow-privileged` flag must be set to true for both the API server and the kubelet
+- (If you use Docker) The Docker daemon of the cluster nodes must allow shared mounts
+- Pre-installed HashiCorp Vault server.
+- Pass `--feature-gates=CSIDriverRegistry=true,CSINodeInfo=true` to kubelet and kube-apiserver
+
+## Installing the Chart
+
+To install the chart with the release name `csi-vault`
+
+```console
+$ helm install appscode/csi-vault --name csi-vault
+```
+
+This command deploys CSI Driver for Vault on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall/delete the `csi-vault`:
+
+```console
+$ helm delete csi-vault
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Configuration
+
+The following table lists the configurable parameters of the Stash chart and their default values.
+
+| Parameter                              | Description                                                                                                                                                                | Default                                                   |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `replicaCount`                         | Number of Vault operator replicas to create (only 1 is supported)                                                                                                          | `1`                                                       |
+| `attacher.name`                        | Name of the attacher component                                                                                                                                             | `attacher`                                                |
+| `attacher.registry`                    | Docker registry used to pull CSI attacher image                                                                                                                            | `quay.io/k8scsi`                                          |
+| `attacher.repository`                  | CSI attacher container image                                                                                                                                               | `csi-attacher`                                            |
+| `attacher.tag`                         | CSI attacher container image tag                                                                                                                                           | `v1.0.1`                                                  |
+| `attacher.pullPolicy`                  | CSI attacher container image pull policy                                                                                                                                   | `IfNotPresent`                                            |
+| `plugin.name`                          | Name of the plugin component                                                                                                                                               | `plugin`                                                  |
+| `plugin.registry`                      | Docker registry used to pull Vault CSI driver image                                                                                                                        | `kubevault`                                               |
+| `plugin.repository`                    | Vault CSI driver container image                                                                                                                                           | `csi-vault`                                               |
+| `plugin.tag`                           | Vault CSI driver container image tag                                                                                                                                       | `0.2.0`                                                   |
+| `plugin.pullPolicy`                    | Vault CSI driver container image pull policy                                                                                                                               | `IfNotPresent`                                            |
+| `provisioner.name`                     | Name of the provisioner component                                                                                                                                          | `provisioner`                                             |
+| `provisioner.registry`                 | Docker registry used to pull CSI provisioner image                                                                                                                         | `quay.io/k8scsi`                                          |
+| `provisioner.repository`               | CSI provisioner container image                                                                                                                                            | `csi-provisioner`                                         |
+| `provisioner.tag`                      | CSI provisioner container image tag                                                                                                                                        | `v1.0.1`                                                  |
+| `provisioner.pullPolicy`               | CSI provisioner container image pull policy                                                                                                                                | `IfNotPresent`                                            |
+| `clusterRegistrar.registry`            | Docker registry used to pull CSI driver cluster registrar image                                                                                                            | `quay.io/k8scsi`                                          |
+| `clusterRregistrar.repository`         | CSI driver cluster registrar container image                                                                                                                               | `csi-cluster-driver-registrar`                            |
+| `clusterRregistrar.tag`                | CSI driver cluster registrar container image tag                                                                                                                           | `v1.0.1`                                                  |
+| `clusterRregistrar.pullPolicy`         | CSI driver cluster registrar container image pull policy                                                                                                                   | `IfNotPresent`                                            |
+| `nodeRegistrar.registry`               | Docker registry used to pull CSI driver node registrar image                                                                                                               | `quay.io/k8scsi`                                          |
+| `nodeRregistrar.repository`            | CSI driver node registrar container image                                                                                                                                  | `csi-node-driver-registrar`                               |
+| `nodeRregistrar.tag`                   | CSI driver node registrar container image tag                                                                                                                              | `v1.0.1`                                                  |
+| `nodeRregistrar.pullPolicy`            | CSI driver node registrar container image pull policy                                                                                                                      | `IfNotPresent`                                            |
+| `driverName`                           | Vault CSI driver name                                                                                                                                                      | `com.kubevault.csi.secrets`                               |
+| `pluginAddress`                        | Vault CSI driver endpoint address                                                                                                                                          | `/var/lib/csi/sockets/pluginproxy/csi.sock`               |
+| `pluginDir`                            | Vault CSI driver plugin directory                                                                                                                                          | `/var/lib/csi/sockets/pluginproxy/`                       |
+| `attachRequired`                       | Indicates CSI volume driver requires an attach operation                                                                                                                   | `false`                                                   |
+| `appbinding.create`                    | If true, AppBinding CRD will be created                                                                                                                                    | `true`                                                    |
+| `imagePullSecrets`                     | Specify image pull secrets                                                                                                                                                 | `nil` (does not add image pull secrets to deployed pods)  |
+| `criticalAddon`                        | If true, installs Vault CSI driver as critical addon                                                                                                                       | `false`                                                   |
+| `logLevel`                             | Log level for CSI driver                                                                                                                                                   | `3`                                                       |
+| `affinity`                             | Affinity rules for pod assignment                                                                                                                                          | `{}`                                                      |
+| `nodeSelector`                         | Node labels for pod assignment                                                                                                                                             | `{}`                                                      |
+| `tolerations`                          | Tolerations used pod assignment                                                                                                                                            | `{}`                                                      |
+| `apiserver.useKubeapiserverFqdnForAks` | If true, uses kube-apiserver FQDN for AKS cluster to workaround https://github.com/Azure/AKS/issues/522                                                                    | `true`                                                    |
+| `apiserver.healthcheck.enabled`        | Enable readiness and liveliness probes                                                                                                                                     | `true`                                                    |
+| `enableAnalytics`                      | Send usage events to Google Analytics                                                                                                                                      | `true`                                                    |
+| `monitoring.agent`                     | Specify which monitoring agent to use for monitoring Vault. It accepts either `prometheus.io/builtin` or `prometheus.io/coreos-operator`.                                  | `none`                                                    |
+| `monitoring.node`                      | Specify whether to monitor Vault CSI driver node plugin.                                                                                                                   | `false`                                                   |
+| `monitoring.controller`                | Specify whether to monitor Vault CSI driver controllerplugin.                                                                                                              | `false`                                                   |
+| `monitoring.prometheus.namespace`      | Specify the namespace where Prometheus server is running or will be deployed.                                                                                              | Release namespace                                         |
+| `monitoring.serviceMonitor.labels`     | Specify the labels for ServiceMonitor. Prometheus crd will select ServiceMonitor using these labels. Only usable when monitoring agent is `prometheus.io/coreos-operator`. | `app: <generated app name>` and `release: <release name>` |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
+
+```console
+$ helm install --name csi-vault --set plugin.tag=v0.2.0 appscode/csi-vault
+
+```
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example:
+
+```console
+$ helm install --name csi-vault --values values.yaml appscode/csi-vault
+```

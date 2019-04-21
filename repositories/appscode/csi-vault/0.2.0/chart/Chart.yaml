@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 0.2.0
+description: HashiCorp Vault CSI Driver for Kubernetes
+home: https://github.com/kubevault/csi-driver
+icon: https://cdn.appscode.com/images/icon/kubevault.png
+maintainers:
+- email: support@appscode.com
+  name: appscode
+name: csi-vault
+sources:
+- https://github.com/kubevault/csi-driver
+version: 0.2.0
