@@ -1,0 +1,79 @@
+# `@helm-charts/presslabs-mysql-operator`
+
+A Helm chart for mysql operator
+
+| Field               | Value          |
+| ------------------- | -------------- |
+| Repository Name     | presslabs      |
+| Chart Name          | mysql-operator |
+| Chart Version       | 0.1.3          |
+| NPM Package Version | 0.1.0          |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+# Default values for mysql-operator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+image: quay.io/presslabs/mysql-operator:v0.1.2
+imagePullPolicy: IfNotPresent
+
+resources:
+  {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+extraArgs: []
+
+installCRDs: true
+
+# helperImage: quay.io/presslabs/mysql-helper:latest
+
+orchestrator:
+  orchestratorConf:
+    # the operator is handling the registries, do not auto discover
+    DiscoverByShowSlaveHosts: false
+    # forget missing instances automatically
+    UnseenInstanceForgetHours: 1
+
+    InstancePollSeconds: 5
+    HostnameResolveMethod: 'none'
+    MySQLHostnameResolveMethod: '@@report_host'
+    RemoveTextFromHostnameDisplay: ':3306'
+    DetectClusterAliasQuery: "SELECT CONCAT(SUBSTRING(@@hostname, 1, LENGTH(@@hostname) - 1 - LENGTH(SUBSTRING_INDEX(@@hostname,'-',-2))),'.',SUBSTRING_INDEX(@@report_host,'.',-1))"
+    DetectInstanceAliasQuery: 'SELECT @@hostname'
+
+    # Automated recovery (this is opt-in, so we need to set these)
+    # Prevent recovery flip-flop, by disabling auto-recovery for 5 minutes per
+    # cluster
+    RecoveryPeriodBlockSeconds: 300
+    # Do not ignore any host for auto-recovery
+    RecoveryIgnoreHostnameFilters: []
+    # Recover both, masters and intermediate masters
+    RecoverMasterClusterFilters: ['.*']
+    RecoverIntermediateMasterClusterFilters: ['.*']
+    # `reset slave all` and `set read_only=0` on promoted master
+    ApplyMySQLPromotionAfterMasterFailover: true
+    # set downtime on the failed master
+    MasterFailoverLostInstancesDowntimeMinutes: 10
+    # https://github.com/github/orchestrator/blob/master/docs/configuration-recovery.md#promotion-actions
+    # Safety! do not disable unless you know what you are doing
+    FailMasterPromotionIfSQLThreadNotUpToDate: true
+    DetachLostReplicasAfterMasterFailover: true
+```
+
+</details>
