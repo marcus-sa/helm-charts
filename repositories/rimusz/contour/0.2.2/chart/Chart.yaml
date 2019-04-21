@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: v0.8.0
+description: A Helm chart for Heptio Contour
+home: https://github.com/heptio/contour
+keywords:
+- ingress
+- proxy
+maintainers:
+- email: rmocius@gmail.com
+  name: rimusz
+name: contour
+version: 0.2.2
