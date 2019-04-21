@@ -1,0 +1,17 @@
+apiVersion: v1
+appVersion: 1.7.2
+description: Your Own URL Shortener
+engine: gotpl
+home: https://yourls.org
+icon: https://yourls.org/images/yourls-logo.png
+keywords:
+- shortener
+- url
+- bitly
+maintainers:
+- email: yourls@yourls.org
+  name: YOURLS
+name: yourls
+sources:
+- https://github.com/YOURLS/YOURLS
+version: 1.0.0

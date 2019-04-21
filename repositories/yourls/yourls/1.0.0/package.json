@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/yourls-yourls",
+  "version": "1.0.0-0.1.0",
+  "description": "Your Own URL Shortener",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
