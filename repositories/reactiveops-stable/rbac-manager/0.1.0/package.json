@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/reactiveops-stable-rbac-manager",
+  "version": "0.1.0-0.1.0",
+  "description": "A Kubernetes operator that simplifies the management of Role Bindings and Service Accounts.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
