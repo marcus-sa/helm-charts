@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-pipeline-cluster-ingress",
+  "version": "0.0.8-0.1.0",
+  "description": "Ingress controller to deploy on clusters managed by Banzai Cloud Pipeline",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
