@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "dex.fullname" . }}
+  labels:
+    app: {{ template "dex.name" . }}
+    chart: {{ template "dex.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+data:
+  config.yaml: |-
+    issuer: {{ default "http://127.0.0.1:5556/dex" .Values.config.issuer }}
+    storage:
+      {{- if or .Values.postgresql.enabled .Values.cloudsql.enabled }}
+      type: postgres
+      {{- else }}
+      type: {{ .Values.config.storage.type }}
+      {{- end }}
+      config:
+        {{- if .Values.postgresql.enabled }}
+        host: {{ printf "%s-postgresql.%s.svc.cluster.local:5432" .Release.Name .Release.Namespace }}
+        database: {{ .Values.postgresql.postgresqlDatabase }}
+        user: {{ .Values.postgresql.postgresqlUsername }}
+        password: {{ .Values.postgresql.postgresqlPassword }}
+        {{- else if .Values.cloudsql.enabled }}
+        host: {{ default "localhost:5432" .Values.config.storage.config.host }}
+        database: {{ .Values.config.storage.config.database }}
+        user: {{ .Values.config.storage.config.user }}
+        password: {{ .Values.config.storage.config.password }}
+        {{- else }}
+{{ toYaml .Values.config.storage.config | indent 8 }}
+        {{- end }}
+        ssl:
+          mode: {{ default "disable" .Values.config.storage.config.ssl.mode }}
+    logger:
+      level: {{ default "debug" .Values.config.logger.level }}
+    web:
+      http: {{ default "0.0.0.0:5556" .Values.config.web.http }}
+    grpc:
+      addr: {{ default "0.0.0.0:5557" .Values.config.grpc.addr }}
+    frontend:
+      theme: {{ default "coreos" .Values.config.frontend.theme }}
+
+{{- with .Values.config.staticClients }}
+    staticClients:
+{{ toYaml . | indent 6 }}
+{{- end }}
+    connectors:
+{{- range $key, $value := .Values.config.connectors }}
+    - id: {{ $value.id }}
+      type: {{ $value.type }}
+      name: {{ $value.name }}
+      config:
+        {{ toYaml $value.config | nindent 8 }}
+{{- end }}
+    enablePasswordDB: {{ .Values.config.enablePasswordDB }}
+{{- with .Values.config.staticPasswords }}
+    staticPasswords:
+{{ toYaml . | indent 6 }}
+{{- end }}

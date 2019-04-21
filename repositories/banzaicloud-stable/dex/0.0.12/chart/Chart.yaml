@@ -1,0 +1,8 @@
+appVersion: 0.3.2
+description: dexidp Dex
+icon: https://raw.githubusercontent.com/dexidp/dex/master/Documentation/logos/dex-glyph-color.png
+keywords:
+- dex
+- oidc
+name: dex
+version: 0.0.12
