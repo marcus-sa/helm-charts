@@ -1,0 +1,475 @@
+###############################################################################
+# Licensed Materials - Property of IBM
+# 5737-E67
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+###############################################################################
+
+
+## Metadata for ibm-glusterfs configuration
+
+###############################################################################
+## Arch Metadata
+###############################################################################
+arch:
+  __metadata:
+    label: "Architecture Scheduling Preferences"
+#    description: "Architecture preference for target storage nodes."
+  amd64:
+    __metadata:
+      name: "amd64"
+      label: "amd64 scheduling preference"
+      description: "Architecture preference for target storage node."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "0 - Do not use"
+        value: "0 - Do not use"
+      - label: "1 - Least preferred"
+        value: "1 - Least preferred"
+      - label: "2 - No preference"
+        value: "2 - No preference"
+      - label: "3 - Most preferred"
+        value: "3 - Most preferred"
+
+  ppc64le:
+    __metadata:
+      name: "ppc64le"
+      label: "ppc64le scheduling preference"
+      description: "Architecture preference for target storage node."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "0 - Do not use"
+        value: "0 - Do not use"
+      - label: "1 - Least preferred"
+        value: "1 - Least preferred"
+      - label: "2 - No preference"
+        value: "2 - No preference"
+      - label: "3 - Most preferred"
+        value: "3 - Most preferred"
+
+  s390x:
+    __metadata:
+      name: "s390x"
+      label: "s390x scheduling preference"
+      description: "Architecture preference for target storage node."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "0 - Do not use"
+        value: "0 - Do not use"
+      - label: "1 - Least preferred"
+        value: "1 - Least preferred"
+      - label: "2 - No preference"
+        value: "2 - No preference"
+      - label: "3 - Most preferred"
+        value: "3 - Most preferred"
+
+###############################################################################
+## Pre Validation Configuration Parameters
+###############################################################################
+preValidation:
+  __metadata:
+    label: "Pre-Validation"
+#    description: "Pre-Validation related configurations"
+  skipDiskValidation:
+    __metadata:
+      name: "skipDiskValidation"
+      label: "Skip Disk Validation"
+      description: "Disk validation can be skipped by setting this parameter to true"
+      type: "boolean"
+      immutable: true
+      hidden: true
+  image:
+    repository:
+      __metadata:
+        name: "repository"
+        label: "Docker Repository"
+        description: "Docker registry to pull Hyperkube image from"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "tag"
+        label: "Docker Image Tag"
+        description: "Image Tag is used to choose Hyperkube release version"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "pullPolicy"
+        label: "Docker Image Pull Policy"
+        description: "Always, Never, or IfNotPresent. Defaults to IfNotPresent"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+
+###############################################################################
+## Gluster Configuration Parameters
+###############################################################################
+gluster:
+  __metadata:
+    name: "gluster"
+    label: "Gluster"
+#    description: "Gluster related configurations"
+  image:
+    repository:
+      __metadata:
+        name: "repository"
+        label: "Docker Repository"
+        description: "Docker registry to pull GlusterFS image from"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "tag"
+        label: "Docker Image Tag"
+        description: "Image Tag is used to choose GlusterFS release version"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "pullPolicy"
+        label: "Docker Image Pull Policy"
+        description: "Always, Never, or IfNotPresent. Defaults to IfNotPresent"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+  installType:
+    __metadata:
+      name: "installType"
+      label: "GlusterFS Install Type"
+      description: "Fresh or Upgrade. Defaults to Fresh"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "Fresh"
+        value: "Fresh"
+      - label: "Upgrade"
+        value: "Upgrade"
+  resources:
+    requests:
+      cpu:
+        __metadata:
+          label: "CPU Request"
+          description: "The requested CPU"
+          type: "string"
+          required: true
+      memory:
+        __metadata:
+          label: "Memory Request"
+          description: "The requested memory"
+          type: "string"
+          required: true
+    limits:
+      cpu:
+        __metadata:
+          label: "CPU Limit"
+          description: "The CPU limit"
+          type: "string"
+          required: true
+      memory:
+        __metadata:
+          label: "Memory Limit"
+          description: "The memory limit"
+          type: "string"
+          required: true
+
+###############################################################################
+## Heketi Configuration Parameters
+###############################################################################
+heketi:
+  __metadata:
+    name: "heketi"
+    label: "Heketi"
+#    description: "Heketi related configurations"
+  image:
+    repository:
+      __metadata:
+        name: "repository"
+        label: "Docker Repository"
+        description: "Docker registry to pull Heketi image from"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "tag"
+        label: "Docker Image Tag"
+        description: "Image Tag is used to choose Heketi release version"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "pullPolicy"
+        label: "Docker Image Pull Policy"
+        description: "Always, Never, or IfNotPresent. Defaults to IfNotPresent"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+  backupDbSecret:
+    __metadata:
+      name: "backupDbSecret"
+      label: "Backup Db Secret Name"
+      description: "Secret name to backup the heketi db data"
+      type: "string"
+      immutable: false
+      required: true
+  authSecret:
+    __metadata:
+      name: "authSecret"
+      label: "Authentication Secret"
+      description: "Secret object that holds the password of heketi user 'admin' for the Heketi authentication"
+      type: "string"
+      immutable: false
+      required: true
+  resources:
+    requests:
+      cpu:
+        __metadata:
+          label: "CPU Request"
+          description: "The requested CPU"
+          type: "string"
+          required: true
+      memory:
+        __metadata:
+          label: "Memory Request"
+          description: "The requested memory"
+          type: "string"
+          required: true
+    limits:
+      cpu:
+        __metadata:
+          label: "CPU Limit"
+          description: "The CPU limit"
+          type: "string"
+          required: true
+      memory:
+        __metadata:
+          label: "Memory Limit"
+          description: "The memory limit"
+          type: "string"
+          required: true
+
+###############################################################################
+## Heketi Topology Configuration Parameters
+###############################################################################
+heketiTopology:
+  __metadata:
+    name: "heketiTopology"
+    label: "Heketi Topology"
+    description: "Heketi Topology related configurations"
+    type: "string"
+    immutable: false
+    required: true
+
+###############################################################################
+## Storage Class Parameters
+###############################################################################
+storageClass:
+  __metadata:
+    name: "storageClass"
+    label: "Storage Class"
+#    description: "Storage Class related configurations"
+  create:
+    __metadata:
+      name: "create"
+      label: "Create Storage Class"
+      description: "To create storage Class"
+      type: "boolean"
+      immutable: false
+      required: true
+  name:
+    __metadata:
+      name: "name"
+      label: "Storage Class Name"
+      description: "Name of the storage class to be created"
+      type: "string"
+      immutable: false
+      required: true
+  isDefault:
+    __metadata:
+      name: "isDefault"
+      label: "Is Default"
+      description: "To make this storage class as default"
+      type: "boolean"
+      immutable: false
+      required: true
+  volumeType:
+    __metadata:
+      name: "volumeType"
+      label: "Volume Type"
+      description: "GlusterFS volume type to be created. Options are 1. none, 2. replicate:<replicate_count>, 3. disperse:<data>:<redundancy_count>"
+      type: "string"
+      immutable: false
+      required: false
+  reclaimPolicy:
+    __metadata:
+      name: "reclaimPolicy"
+      label: "Reclaim Policy"
+      description: "Reclaim policy of the volume being created. Defaults to Delete"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+        - label: "Delete"
+          value: "Delete"
+        - label: "Retain"
+          value: "Retain"
+  volumeBindingMode:
+    __metadata:
+      name: "volumeBindingMode"
+      label: "Volume Binding Mode"
+      description: "Indicates how volume should be bound. Defaults to Immediate"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+        - label: "Immediate"
+          value: "Immediate"
+        - label: "WaitForFirstConsumer"
+          value: "WaitForFirstConsumer"
+  volumeNamePrefix:
+    __metadata:
+      name: "volumeNamePrefix"
+      label: "Volume Name Prefix"
+      description: "Custom volume name for dynamically provisioned GlusterFS PVs"
+      type: "string"
+      immutable: false
+      required: true
+  additionalProvisionerParams:
+    __metadata:
+      name: "additionalProvisionerParams"
+      label: "Additional Provisioner Parameters"
+      description: "User can add additional provisoner parametes to storage class parameters. {\"key1\": \"val1\", \"key2\": \"val2\" }"
+      type: "string"
+      immutable: false
+      required: false
+  allowVolumeExpansion:
+    __metadata:
+      name: "allowVolumeExpansion"
+      label: "Allow Volume Expansion"
+      description: "Enabling expansion of Persistent Volume Claims"
+      type: "boolean"
+      immutable: false
+      required: true
+
+###############################################################################
+## Node Selector Parameters
+###############################################################################
+nodeSelector:
+  __metadata:
+    name: "nodeSelector"
+    label: "Node Selector"
+#    description: "Node selector for the GlusterFS Daemonsets. eg. storagenode: glusterfs"
+  key:
+    __metadata:
+      name: "key"
+      label: "Key"
+      description: "Node Selector Key"
+      type: "string"
+      immutable: false
+      required: true
+
+  value:
+    __metadata:
+      name: "value"
+      label: "Value"
+      description: "Node Selector Value"
+      type: "string"
+      immutable: false
+      required: true
+
+###############################################################################
+## Prometheus Configurations
+###############################################################################
+prometheus:
+  __metadata:
+    name: "prometheus"
+    label: "Prometheus"
+    description: "Configurations to enable prometheus to pull heketi metrics"
+  enabled:
+    __metadata:
+      name: "enabled"
+      label: "Enable Prometheus"
+      description: "Specifies whether prometheus is enabled"
+      type: "boolean"
+      immutable: false
+      required: true
+  port:
+    __metadata:
+      name: "port"
+      label: "Heketi Port"
+      description: "The port that the Heketi service is exposed"
+      type: "number"
+      immutable: false
+      required: true
+  path:
+    __metadata:
+      name: "path"
+      label: "Heketi Metrics Path"
+      description: "The path that used to pull Heketi metrics"
+      type: "string"
+      immutable: false
+      required: true
+
+###############################################################################
+## Pod Priority Settings
+###############################################################################
+podPriorityClass:
+  __metadata:
+    name: "podPriorityClass"
+    label: "Pod Priority Class"
+    description: "Priority class preference for storage pods"
+    type: "string"
+    immutable: false
+    required: true
+    options:
+    - label: "system-cluster-critical"
+      value: "system-cluster-critical"
+    - label: "system-node-critical"
+      value: "system-node-critical"
+
+###############################################################################
+## Tolerations
+###############################################################################
+tolerations:
+  __metadata:
+    name: "tolerations"
+    label: "Tolerations"
+    description: "Toleration labels for pod assignment, e.g. [{\"key\": \"key\", \"operator\":\"Equal\", \"value\": \"value\", \"effect\":\"NoSchedule\"}]"
+    type: "string"
+    immutable: false
+    required: false

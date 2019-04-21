@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart to create GlusterFS Storage Cluster
+keywords:
+- amd64
+- ppc64le
+- OpenSource
+- ICP
+- Storage
+name: ibm-glusterfs
+tillerVersion: '>=2.7.2'
+version: 1.0.0

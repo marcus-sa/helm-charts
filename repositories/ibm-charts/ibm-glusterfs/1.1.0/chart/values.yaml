@@ -1,0 +1,124 @@
+###############################################################################
+# Licensed Materials - Property of IBM
+# 5737-E67
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+###############################################################################
+
+# Default values for IBM GlusterFS chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+
+###############################################################################
+## Architecture Configuration Parameters
+###############################################################################
+# Specify architecture (amd64, ppc64le, s390x) and weight to be  used for scheduling as follows:
+#  0 - Do not use
+#  1 - Least preferred
+#  2 - No preference
+#  3 - Most preferred
+arch:
+  amd64: "2 - No preference"
+  ppc64le: "2 - No preference"
+  s390x: "0 - Do not use"
+
+###############################################################################
+## Pre Validation Configuration Parameters
+###############################################################################
+preValidation:
+  skipDiskValidation: false
+  image:
+    repository: "ibmcom/icp-storage-util"
+    tag: "3.1.0"
+    pullPolicy: "IfNotPresent"
+
+###############################################################################
+## Gluster Configuration Parameters
+###############################################################################
+gluster:
+  image:
+    repository: "ibmcom/gluster"
+    tag: "v4.0.2"
+    pullPolicy: "IfNotPresent"
+  installType: "Fresh"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+###############################################################################
+## Heketi Configuration Parameters
+###############################################################################
+heketi:
+  image:
+    repository: "ibmcom/heketi"
+    tag: "v7.0.0"
+    pullPolicy: "IfNotPresent"
+  backupDbSecret: "heketi-db-backup"
+  authSecret: ""
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1Gi"
+
+###############################################################################
+## Heketi Topology Configuration Parameters
+###############################################################################
+heketiTopology:
+  - k8sNodeName: ""
+    k8sNodeIp: ""
+    devices:
+      - "device-1"
+  - k8sNodeName: ""
+    k8sNodeIp: ""
+    devices:
+      - "device-1"
+  - k8sNodeName: ""
+    k8sNodeIp: ""
+    devices:
+      - "device-1"
+      - "device-2"
+
+###############################################################################
+## Storage Class Parameters
+###############################################################################
+storageClass:
+  create: true
+  name: "glusterfs"
+  isDefault: false
+  volumeType: "replicate:3"
+  reclaimPolicy: "Delete"
+  volumeBindingMode: "Immediate"
+  volumeNamePrefix: "icp"
+  additionalProvisionerParams: {}
+  allowVolumeExpansion: true
+
+###############################################################################
+## Prometheus Configurations
+###############################################################################
+prometheus:
+  enabled: false
+  path: "/metrics"
+  port: 8080
+
+###############################################################################
+## Node Selector Parameters
+###############################################################################
+nodeSelector:
+  key: "hostgroup"
+  value: "glusterfs"
+
+###############################################################################
+## Pod Priority Settings
+###############################################################################
+podPriorityClass: "system-cluster-critical"
+
+tolerations: []

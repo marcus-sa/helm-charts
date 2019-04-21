@@ -1,0 +1,54 @@
+###############################################################################
+# Licensed Materials - Property of IBM
+# 5737-E67
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+################################################################################
+
+{{- include "sch.config.init" (list . "glusterfs.sch.chart.config.values") }}
+{{- $sccmName :=  .sch.chart.components.sccm.name }}
+{{- $heketisvcName :=  .sch.chart.components.heketisvc.name }}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "sch.names.fullCompName" (list . $sccmName) }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "sch.metadata.labels.standard" (list . $sccmName) | indent 4 }}
+    glusterfs-sc: "sc-cm"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-3"
+    "helm.sh/hook-delete-policy": hook-succeeded, hook-failed, before-hook-creation
+data:
+
+  storage_class.sh: |
+    #!/bin/bash
+
+    heketi_ip_port=$(kubectl get service {{ include "sch.names.fullCompName" (list . $heketisvcName) | quote }} -o=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
+
+    cat <<EOF | kubectl create -f -
+
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+         name: {{ .Values.storageClass.name }}
+         annotations:
+            storageclass.beta.kubernetes.io/is-default-class: {{ .Values.storageClass.isDefault | quote }}
+      parameters:
+        resturl: "http://${heketi_ip_port}"
+        restuser: admin
+        secretName: {{ .Values.heketi.authSecret }}
+        secretNamespace: {{ .Release.Namespace }}
+        volumetype: {{ .Values.storageClass.volumeType }}
+        volumenameprefix: {{ .Values.storageClass.volumeNamePrefix }}
+{{- with .Values.storageClass.additionalProvisionerParams }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+      provisioner: kubernetes.io/glusterfs
+      reclaimPolicy: {{ .Values.storageClass.reclaimPolicy }}
+      volumeBindingMode: {{ .Values.storageClass.volumeBindingMode }}
+      allowVolumeExpansion: {{ .Values.storageClass.allowVolumeExpansion }}
+    EOF
