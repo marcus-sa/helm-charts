@@ -1,0 +1,14 @@
+apiVersion: v1
+appVersion: "1.2"
+description: A Helm chart for Kubernetes Policy Controller and the open policy agent
+  to manage your cluster policies
+home: https://github.com/kiwigrid/helm-charts
+icon: https://www.openpolicyagent.org/img/opa-logo.svg
+maintainers:
+- email: rico.pahlisch@kiwigrid.com
+  name: rpahli
+name: kubernetes-policy-controller
+sources:
+- https://github.com/open-policy-agent/kubernetes-policy-controller
+- https://github.com/open-policy-agent/opa
+version: 0.1.1

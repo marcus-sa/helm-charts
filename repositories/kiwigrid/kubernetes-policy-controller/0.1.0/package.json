@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kiwigrid-kubernetes-policy-controller",
+  "version": "0.1.0-0.1.0",
+  "description": "A Helm chart for Kubernetes Policy Controller and the open policy agent to manage your cluster policies",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
