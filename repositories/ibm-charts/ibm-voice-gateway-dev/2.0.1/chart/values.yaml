@@ -1,0 +1,99 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2018. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation
+###############################################################################
+
+arch:
+    amd64: "3 - Most preferred"
+
+productName: "IBM Voice Gateway"
+
+replicaCount: 1
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+nodeSelector: {}
+
+tenantConfigSecretName: "vgw-tenantconfig-secret"
+
+image:
+    sipOrchestrator:
+        repository: "ibmcom/voice-gateway-so"
+        containerName: "vgw-sip-orchestrator"
+        tag: "1.0.0.7a"
+    mediaRelay:
+        repository: "ibmcom/voice-gateway-mr"
+        containerName: "vgw-media-relay"
+        tag: "1.0.0.7a"
+    pullPolicy: "Always"
+    imagePullSecrets: ""
+
+persistence:
+    useDynamicProvisioning: false
+
+recordingsVolume:
+    name: "recordings"
+    storageClassName: ""
+    size: 2Gi
+
+mediaRelayEnvVariables:
+    mediaRelayWsHost: "0.0.0.0"
+    mediaRelayWsPort: 8080
+    rtpUdpPortRange: "16384-16394"
+    clusterWorkers: 1
+    maxSessions: "0"
+    enableRecording: false
+    stereoRecording: false
+
+    mediaRelayLogLevel: "INFO"
+    mediaRelayLogRotationFileCount: 10
+    mediaRelayLogRotationPeriod: "1d"
+    rtpPacketLossReportingThreshold: 1000
+
+    proxyType: "http"
+    proxyHost: 
+    proxyPort: 
+    proxyUsername: 
+    proxyPasswordSecret: 
+    watsonSttEnableProxy: true
+    watsonTtsEnableProxy: true
+    musicOnHoldEnableProxy: false
+
+sipOrchestratorEnvVariables:
+    mediaRelayHost: "localhost:8080"
+    sipPort: 5060
+    sipPortTcp: 5060
+    sipPortTls: 5061
+
+    logLevel: "audit"
+    logMaxFiles: 5
+    logMaxFileSize: 100
+    enableAuditMessages: true
+    enableTranscriptionAuditMessages: false
+    latencyReportingThreshold: 1000
+    relayLatencyReportingThreshold: 1000
+
+    proxyHost: 
+    proxyPort: 
+    proxyUsername: 
+    proxyPasswordSecret: 
+    trustedIpList: 
+    
+    cmrHealthCheckFailErrCode: 
+
+    consoleLogFormat: "json"
+    consoleLogLevel: "info"
+    consoleLogSource: "message,trace,accessLog,ffdc"
+    
+metering:
+    meteringServerURL: "https://mycluster.icp:8443/meteringapi"
+    meteringApiKey: ""
+    meteringEnabled: true
+    icpMasterNodeIP: "mycluster.icp"
+      
+

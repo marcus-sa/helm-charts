@@ -1,0 +1,716 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2018, 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation
+###############################################################################
+
+## Arch metadata
+arch:
+  __metadata:
+    label: "Architecture Scheduling Preferences"
+    description: "Architecture scheduling preferences."
+  amd64:
+    __metadata:
+      name: "amd64"
+      label: "amd64 scheduling preference"
+      description: "Architecture preference for the target worker node"
+      type: "string"
+      immutable: true
+      required: true
+        
+# Product Name
+productName:
+  __metadata:
+    name: "productName"
+    label: "Name of product"
+    description: "Name of the product"
+    type: "string"
+    immutable: true
+    required: true
+    hidden: true
+    
+# Replica Count
+replicaCount:
+  __metadata:
+    name: "replicaCount"
+    label: "Number of replicas"
+    description: "The number of desired replica pods that run simultaneously"
+    type: "string"
+    immutable: false
+    required: true
+        
+nodeSelector:
+  __metadata:
+    name: "nodeSelector"
+    label: "Node selector"
+    description: "Node labels for pod assignment"
+    type: "string"
+    immutable: false
+    required: false
+
+# Tenant configuration secret name
+tenantConfigSecretName:
+  __metadata:
+    name: "tenantConfigSecretName"
+    label: "Tenant Config secret name"
+    description: "Tenant config secret name for Voice Gateway deployment"
+    type: "string"
+    immutable: false
+    required: true
+
+image:
+  __metadata:
+    label: "Image"
+    description: "Docker image configuration for Voice Gateway images"
+  sipOrchestrator:
+    repository:
+      __metadata:
+        name: "sipOrchestrator.repository"
+        label: "Sip Orchestrator repository"
+        description: "Sip Orchestrator docker image repository"
+        type: "string"
+        immutable: false
+        required: true
+    containerName:
+      __metadata:
+        name: "sipOrchestrator.containerName"
+        label: "Sip Orchestrator container name"
+        description: "Name for the Sip Orchestrator container"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "sipOrchestrator.tag"
+        label: "Sip Orchestrator tag"
+        description: "Sip Orchestrator docker image tag"
+        type: "string"
+        immutable: false
+        required: true
+  mediaRelay:
+    repository:
+      __metadata:
+        name: "mediaRelay.repository"
+        label: "Media Relay repository"
+        description: "Media Relay docker image repository"
+        type: "string"
+        immutable: false
+        required: true
+    containerName:
+      __metadata:
+        name: "mediaRelay.containerName"
+        label: "Media Relay container name"
+        description: "Name for the Media Relay container"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "mediaRelay.tag"
+        label: "Media Relay tag"
+        description: "Media Relay docker image tag"
+        type: "string"
+        immutable: false
+        required: true
+  pullPolicy:
+    __metadata:
+      name: "pullPolicy"
+      label: "Image pull policy"
+      description: "Image pull policy for the docker images"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
+  imagePullSecrets:
+    __metadata:
+      name: "imagePullSecrets"
+      label: "Image pull secrets"
+      description: "Docker repository image pull secret"
+      type: "string"
+      immutable: false
+      required: false
+
+## Persistence options
+persistence:
+  __metadata:
+    label: "Persistent volume for recording and/or logs"
+    description: "Configuration for persistent volume for recording and/or logs"
+  useDynamicProvisioning:
+   __metadata:
+      name: "useDynamicProvisioning"
+      label: "Use dynamic provisioning for persistent volume"
+      description: "Automatically provision the requested volume if set to true. Defaults to false"
+      type: "boolean"
+      immutable: false
+      required: true
+  ## Recordings volume claim options
+  recordingsVolume:
+    enablePersistentRecordings:
+      __metadata:
+        name: "enablePersistentRecordings"
+        label: "Enable Persistent Recordings"
+        description: "Set to true to store recordings in a persistent volume"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name of the persistent volume claim"
+        description: "By default a persistent volume claim will be created with this name"
+        type: "string"
+        immutable: false
+        required: false
+    storageClassName:
+      __metadata:
+        name: "storageClassName"
+        label: "Existing storage class name"
+        description: "Choose a specific storage class name. Defaults to the default storage class in the cluster"
+        type: "string"
+        immutable: false
+        required: false
+    size:
+      __metadata:
+        name: "size"
+        label: "Size of the volume claim"
+        description: "Defaults to 2Gi of storage request. Choose a different size of disk if needed"
+        type: "string"
+        immutable: false
+        required: false
+  logsVolume:
+    enablePersistentLogs:
+      __metadata:
+        name: "enablePersistentLogs"
+        label: "Enable Persistent Logs"
+        description: "Set to true to store logs in a persistent volume"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name of the persistent volume claim"
+        description: "By default a persistent volume claim will be created with this name"
+        type: "string"
+        immutable: false
+        required: false
+    storageClassName:
+      __metadata:
+        name: "storageClassName"
+        label: "Existing storage class name"
+        description: "Choose a specific storage class name. Defaults to the default storage class in the cluster"
+        type: "string"
+        immutable: false
+        required: false
+    size:
+      __metadata:
+        name: "size"
+        label: "Size of the volume claim"
+        description: "Defaults to 2Gi of storage request. Choose a different size of disk if needed"
+        type: "string"
+        immutable: false
+        required: false
+
+
+# Media Relay Environment Variables
+mediaRelayEnvVariables:
+  __metadata:
+    name: "mediaRelayEnvVariables"
+    label: "Media Relay Environment Variables"
+    description: "Environment Variables for the Media Relay container"
+  mediaRelayWsHost:
+    __metadata:
+      name: "mediaRelayWsHost"
+      label: "Media Relay WS Host"
+      description: "The IP address or host name that the Media Relay listens to requests from the SIP Orchestrator on"
+      type: "string"
+      immutable: false
+      required: true
+  mediaRelayWsPort:
+    __metadata:
+      name: "mediaRelayWsPort"
+      label: "Media Relay WS Port"
+      description: "The port that the SIP Orchestrator uses to open a WebSocket session"
+      type: "string"
+      immutable: false
+      required: true
+  rtpUdpPortRange:
+    __metadata:
+      name: "rtpUdpPortRange"
+      label: "RTP UDP Port Range"
+      description: "Port range for UDP, set as a String"
+      type: "string"
+      immutable: false
+      required: true
+  clusterWorkers:
+    __metadata:
+      name: "clusterWorkers"
+      label: "Cluster Workers"
+      description: "Number of cluster workers to spawn. When set to 0, a number of workers equal to one less than the number of CPUs is spawned"
+      type: "string"
+      immutable: false
+      required: true
+  maxSessions:
+    __metadata:
+      name: "maxSessions"
+      label: "Max Sessions"
+      description: "The maximum number of simultaneous media sessions that the Media Relay handles before it stops the creation of new media sessions"
+      type: "string"
+      immutable: false
+      required: true
+  enableRecording:
+    __metadata:
+      name: "enableRecording"
+      label: "Enable Recording"
+      description: "Set to true to enable call audio recording on the Media Relay"
+      type: "boolean"
+      immutable: false
+      required: true
+  stereoRecording:
+    __metadata:
+      name: "stereoRecording"
+      label: "Stereo Recording"
+      description: "Set to true to record the call audio"
+      type: "boolean"
+      immutable: false
+      required: true
+
+
+
+  mediaRelayLogLevel:
+    __metadata:
+      name: "mediaRelayLogLevel"
+      label: "Media Relay Log Level"
+      description: "The log level. Set the log level to INFO, DEBUG, or TRACE"
+      type: "string"
+      immutable: false
+      required: true
+  mediaRelayLogRotationFileCount:
+    __metadata:
+      name: "mediaRelayLogRotationFileCount"
+      label: "Media Relay Log Rotation File Count"
+      description: "The number of Media Relay log files to keep in rotation for the Bunyan logging module"
+      type: "string"
+      immutable: false
+      required: true
+  mediaRelayLogRotationPeriod:
+    __metadata:
+      name: "mediaRelayLogRotationPeriod"
+      label: "Media Relay Log Rotation Period"
+      description: "The period at which the Bunyan logging module rotates the log files. By default, log files are rotated on a 24-hour basis"
+      type: "string"
+      immutable: false
+      required: true
+  rtpPacketLossReportingThreshold:
+    __metadata:
+      name: "rtpPacketLossReportingThreshold"
+      label: "RTP Packet Loss Reporting Threshold"
+      description: "The number of lost packets that are detected before the Media Relay logs a warning message"
+      type: "string"
+      immutable: false
+      required: true
+
+  proxyType:
+    __metadata:
+      name: "proxyType"
+      label: "Media Relay Proxy Type"
+      description: "Defines the protocol to use for the proxy connection, either http or https"
+      type: "string"
+      immutable: false
+      required: false
+  proxyHost:
+    __metadata:
+      name: "proxyHost"
+      label: "Media Relay Proxy Host"
+      description: "Host of the forward proxy server"
+      type: "string"
+      immutable: false
+      required: false
+  proxyPort:
+    __metadata:
+      name: "proxyPort"
+      label: "Media Relay Proxy Port"
+      description: "Port of the forward proxy server"
+      type: "string"
+      immutable: false
+      required: false
+  proxyUsername:
+    __metadata:
+      name: "proxyUsername"
+      label: "Media Relay Proxy Username"
+      description: "User name for proxy authentication"
+      type: "string"
+      immutable: false
+      required: false
+  proxyPasswordSecret:
+    __metadata:
+      name: "proxyPasswordSecret"
+      label: "Proxy Password secret name"
+      description: "Media Relay Proxy Password for proxy authentication"
+      type: "string"
+      immutable: false
+      required: false
+  watsonSttEnableProxy:
+    __metadata:
+      name: "watsonSttEnableProxy"
+      label: "Watson STT Enable Proxy"
+      description: "Indicates whether connections to the Watson Speech to Text service are routed through the configured proxy"
+      type: "boolean"
+      immutable: false
+      required: true
+  watsonTtsEnableProxy:
+    __metadata:
+      name: "watsonTtsEnableProxy"
+      label: "Watson TTS Enable Proxy"
+      description: "Indicates whether connections to the Watson Text to Speech service are routed through the configured proxy"
+      type: "boolean"
+      immutable: false
+      required: true
+  musicOnHoldEnableProxy:
+    __metadata:
+      name: "musicOnHoldEnableProxy"
+      label: "Music On Hold Enable Proxy"
+      description: "Indicates whether connections to any music on hold or one-time audio URLs are routed through the configured proxy"
+      type: "boolean"
+      immutable: false
+      required: true
+
+  enableMrcp:
+    __metadata:
+      name: "enableMrcp"
+      label: "Enable MRCPv2"
+      description: "Enable MRCPv2 connections"
+      type: "boolean"
+      immutable: false
+      required: true
+  unimrcpConfigSecretName:
+    __metadata:
+      name: "unimrcpConfigSecretName"
+      label: "unimrcpConfig secret name"
+      description: "Name of secret created for unimrcpConfig"
+      type: "string"
+      immutable: false
+      required: false
+  mrcpv2SipPort:
+    __metadata:
+      name: "mrcpv2SipPort"
+      label: "MRCPv2 SIP Port"
+      description: "SIP port to use for MRCPv2 connections"
+      type: "string"
+      immutable: false
+      required: false
+
+  enableSsl:
+    __metadata:
+      name: "enableSsl"
+      label: "Enable SSL"
+      description: "Secure connections using SSL"
+      type: "boolean"
+      immutable: false
+      required: true
+  sslClientCACertSecret:
+    __metadata:
+      name: "sslClientCACertSecret"
+      label: "SSL client CA certificate secret"
+      description: "Name of the SSL client CA certificate secret"
+      type: "string"
+      immutable: false
+      required: false
+
+  enableMutualAuth:
+    __metadata:
+      name: "enableMutualAuth"
+      label: "Enable Mutual Authentication"
+      description: "Secure connections using Mutual Authentication"
+      type: "boolean"
+      immutable: false
+      required: true
+  sslClientPkcs12FileSecret:
+    __metadata:
+      name: "sslClientPkcs12FileSecret"
+      label: "SSL client PKCS12 file secret"
+      description: "Kubernetes secret for the SSL client PKCS12 file"
+      type: "string"
+      immutable: false
+      required: false
+  sslClientPassphraseSecret:
+    __metadata:
+      name: "sslClientPassphraseSecret"
+      label: "SSL client passphrase secret name"
+      description: "Kubernetes secret for the SSL client passphrase"
+      type: "string"
+      immutable: false
+      required: false
+
+
+sipOrchestratorEnvVariables:
+  __metadata:
+    name: "sipOrchestratorEnvVariables"
+    label: "Sip Orchestrator Environment Variables"
+    description: "Environment Variables for the Sip Orchestrator container"
+
+  mediaRelayHost:
+    __metadata:
+      name: "mediaRelayHost"
+      label: "Media Relay Host"
+      description: "Host name of the Media Relay, which the WebSocket server and UDP socket are bound to"
+      type: "string"
+      immutable: false
+      required: true
+  sipPort:
+    __metadata:
+      name: "sipPort"
+      label: "SIP Port"
+      description: "External SIP port for User Datagram Protocol (UDP). Must be same as SIP Port for TCP"
+      type: "string"
+      immutable: false
+      required: true
+  sipPortTcp:
+    __metadata:
+      name: "sipPortTcp"
+      label: "SIP Port for TCP"
+      description: "External SIP port for Transmission Control Protocol (TCP). Must be same as SIP Port"
+      type: "string"
+      immutable: false
+      required: true
+  sipPortTls:
+    __metadata:
+      name: "sipPortTls"
+      label: "SIP Port for TLS"
+      description: "External SIP port for Transport Layer Security (TLS)"
+      type: "string"
+      immutable: false
+      required: true
+
+
+
+
+  logLevel:
+    __metadata:
+      name: "logLevel"
+      label: "Log Level"
+      description: "This is the log level for the SIP Orchestrator"
+      type: "string"
+      immutable: false
+      required: true
+  logMaxFiles:
+    __metadata:
+      name: "logMaxFiles"
+      label: "Log Max Files"
+      description: "The maximum number of log files, trace files, and exception summary log files"
+      type: "string"
+      immutable: false
+      required: true
+  logMaxFileSize:
+    __metadata:
+      name: "logMaxFileSize"
+      label: "Log Max File Size"
+      description: "The maximum size in megabytes (MB) that a log file can reach before a new file is created"
+      type: "string"
+      immutable: false
+      required: true
+  enableAuditMessages:
+    __metadata:
+      name: "enableAuditMessages"
+      label: "Enable Audit Messages"
+      description: "Set to false to disable audit messages"
+      type: "boolean"
+      immutable: false
+      required: true
+  enableTranscriptionAuditMessages:
+    __metadata:
+      name: "enableTranscriptionAuditMessages"
+      label: "Enable Transcription Audit Messages"
+      description: "Set to true to enable audit transcription messages"
+      type: "boolean"
+      immutable: false
+      required: true
+  latencyReportingThreshold:
+    __metadata:
+      name: "latencyReportingThreshold"
+      label: "Latency Reporting Threshold"
+      description: "Threshold in milliseconds for reporting round-trip Conversation latency"
+      type: "string"
+      immutable: false
+      required: true
+  relayLatencyReportingThreshold:
+    __metadata:
+      name: "relayLatencyReportingThreshold"
+      label: "Relay Latency Reporting Threshold"
+      description: "Threshold in milliseconds for reporting Media Relay related latencies"
+      type: "string"
+      immutable: false
+      required: true
+
+  proxyHost:
+    __metadata:
+      name: "proxyHost"
+      label: "Sip Orchestrator Proxy Host"
+      description: "Defines the host of the forward proxy server"
+      type: "string"
+      immutable: false
+      required: false
+  proxyPort:
+    __metadata:
+      name: "proxyPort"
+      label: "Sip Orchestrator Proxy Port"
+      description: "Defines the port of the forward proxy server"
+      type: "string"
+      immutable: false
+      required: false
+  proxyUsername:
+    __metadata:
+      name: "proxyUsername"
+      label: "Sip Orchestrator Proxy Username"
+      description: "User name for proxy authentication"
+      type: "string"
+      immutable: false
+      required: false
+  proxyPasswordSecret:
+    __metadata:
+      name: "proxyPasswordSecret"
+      label: "Proxy Password secret name"
+      description: "Sip Orchestrator Proxy Password for proxy authentication"
+      type: "string"
+      immutable: false
+      required: false
+  trustedIpList:
+    __metadata:
+      name: "trustedIpList"
+      label: "Trusted IP List"
+      description: "A comma-separated list of IP addresses"
+      type: "string"
+      immutable: false
+      required: false
+
+  cmrHealthCheckFailErrCode:
+    __metadata:
+      name: "cmrHealthCheckFailErrCode"
+      label: "CMR Health Check Fail Err Code"
+      description: "The error code to send in a SIP OPTIONS response when the voice gateway is temporarily unavailable"
+      type: "string"
+      immutable: false
+      required: false
+      
+  consoleLogFormat:      
+    __metadata:
+      name: "consoleLogFormat"
+      label: "Console logging format"
+      description: "Specifies container log output format"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "json"
+        value: "json"
+      - label: "basic"
+        value: "basic"
+  consoleLogLevel:      
+    __metadata:
+      name: "consoleLogLevel"
+      label: "Console logging level"
+      description: "Controls the granularity of messages that go to the container log"
+      type: "string"
+      immutable: false
+      required: true
+  consoleLogSource:      
+    __metadata:
+      name: "consoleLogSource"
+      label: "Console logging sources"
+      description: "Specify sources that are written to the container log. Use a comma separated list for multiple sources"
+      type: "string"
+      immutable: false
+      required: true
+
+
+  enableSslorMutualAuth:
+    __metadata:
+      name: "enableSslorMutualAuth"
+      label: "Enable SSL or Mutual Authentication"
+      description: "Secure connections using SSL or Mutual Authentication"
+      type: "boolean"
+      immutable: false
+      required: true
+  sslKeyTrustStoreSecret:
+    __metadata:
+      name: "sslKeyTrustStoreSecret"
+      label: "SSL key trust store secret"
+      description: "SSL keystore file secret name"
+      type: "string"
+      immutable: false
+      required: false
+  sslFileType:
+    __metadata:
+      name: "sslFileType"
+      label: "SSL file type"
+      description: "The file type of the keystore file. Valid values are JKS, JCEKS, and PKCS12"
+      type: "string"
+      immutable: false
+      required: false
+      options:
+      - label: "JKS"
+        value: "JKS"
+      - label: "JCEKS"
+        value: "JCEKS"
+      - label: "PKCS12"
+        value: "PKCS12"
+  sslPassphraseSecret:
+    __metadata:
+      name: "sslPassphraseSecret"
+      label: "SSL passphrase secret name"
+      description: "Kubernetes secret for the keystore file passphrase"
+      type: "string"
+      immutable: false
+      required: false
+
+
+
+      
+metering:
+  __metadata:
+    name: "metering"
+    label: "Metering Environment Variables"
+    description: "Environment Variables for Voice Gateway Metering"
+  meteringApiKeySecret:
+     __metadata:
+      name: "meteringApiKeySecret"
+      label: "Metering API Key Secret"
+      description: "The kubernetes secret name for the metering service API key credential"
+      type: "string"
+      immutable: false
+      required: true
+  meteringEnabled:
+     __metadata:
+      name: "meteringEnabled"
+      label: "Metering Enabled"
+      description: "Enable Metering for Voice Gateway"
+      type: "boolean"
+      immutable: true
+      required: true
+      hidden: true
+  icpMasterNodeIP:
+     __metadata:
+      name: "icpMasterNodeIP"
+      label: "ICP Master Node Domain/IP"
+      description: "ICP Master Node Domain name or IP address"
+      type: "string"
+      immutable: false
+      required: true
+  meteringServerURL:
+     __metadata:
+      name: "meteringServerURL"
+      label: "Metering Server URL"
+      description: "The metering service URL"
+      type: "string"
+      immutable: false
+      required: true

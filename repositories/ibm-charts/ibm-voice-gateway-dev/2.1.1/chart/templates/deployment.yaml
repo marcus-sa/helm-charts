@@ -1,0 +1,388 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2018, 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure 
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation
+###############################################################################
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ template "fullname" . }} 
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        app: {{ template "fullname" . }} 
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+      annotations:
+        productName: IBM Voice Gateway
+        productID: IBMVoiceGateway_5737D52_1010_IL_0000
+        productVersion: 1.0.1.0
+        com.ibm.cloud.metering.selfmeter: "true"
+    spec:
+      {{ if .Values.image.imagePullSecrets }}
+      imagePullSecrets:
+      - name: {{ .Values.image.imagePullSecrets }}
+      {{ end }}
+      affinity:
+{{- include "nodeaffinity" . | indent 8 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      volumes:
+      {{- if eq .Values.persistence.recordingsVolume.enablePersistentRecordings true }}
+      - persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-{{ .Values.persistence.recordingsVolume.name }}
+        name: {{ template "fullname" . }}-{{ .Values.persistence.recordingsVolume.name }}
+      {{- end}}
+      {{- if eq .Values.persistence.logsVolume.enablePersistentLogs true }}
+      - persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-{{ .Values.persistence.logsVolume.name }}
+        name: {{ template "fullname" . }}-{{ .Values.persistence.logsVolume.name }}
+      {{- end}}
+      {{- if eq .Values.sipOrchestratorEnvVariables.enableSslorMutualAuth true }}
+      - name: ssl-so
+        secret:
+          secretName: {{ .Values.sipOrchestratorEnvVariables.sslKeyTrustStoreSecret }}
+          items:
+          - key: "trustStoreFile"
+            path: "trustStoreFile"
+      {{- end}}
+      {{- if eq .Values.mediaRelayEnvVariables.enableMutualAuth true }}
+      - name: ssl-mr-ma
+        secret:
+          secretName: {{ .Values.mediaRelayEnvVariables.sslClientPkcs12FileSecret }}
+          items:
+          - key: "clientPkcs12File"
+            path: "clientPkcs12File"
+      {{- end}}
+      {{- if eq .Values.mediaRelayEnvVariables.enableSsl true }}
+      - name: ssl-mr
+        secret:
+          secretName: {{ .Values.mediaRelayEnvVariables.sslClientCACertSecret }}
+          items:
+          - key: "clientCaCertFile"
+            path: "clientCaCertFile"
+      {{- end}}
+      - name: tenantconfig
+        secret:
+          secretName: {{ .Values.tenantConfigSecretName }}
+          items:
+          - key: tenantConfig
+            path: tenantConfig.json
+      {{- if eq .Values.mediaRelayEnvVariables.enableMrcp true }}
+      - name: unimrcpconfig
+        secret:
+          secretName: {{ .Values.mediaRelayEnvVariables.unimrcpConfigSecretName }}
+          items:
+          - key: unimrcpConfig
+            path: unimrcpclient.xml
+      {{- end}}
+      hostNetwork: true
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+      - name: {{ .Values.image.mediaRelay.containerName }}
+        image: "{{ .Values.image.mediaRelay.repository }}:{{ .Values.image.mediaRelay.tag }}"
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - containerPort: {{ .Values.mediaRelayEnvVariables.mediaRelayWsPort }}
+          hostPort: {{ .Values.mediaRelayEnvVariables.mediaRelayWsPort }}
+          protocol: TCP
+        {{- if eq .Values.mediaRelayEnvVariables.enableMrcp true }}
+        - containerPort: {{ .Values.mediaRelayEnvVariables.mrcpv2SipPort }}
+          hostPort: {{ .Values.mediaRelayEnvVariables.mrcpv2SipPort }}
+          protocol: UDP
+        {{- end}}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.mediaRelayEnvVariables.mediaRelayWsPort }}
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.mediaRelayEnvVariables.mediaRelayWsPort }}
+          initialDelaySeconds: 20
+          periodSeconds: 35
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - "/opt/quiesce.sh"
+
+        env:
+        - name: SDP_ADDRESS
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: MEDIA_RELAY_WS_HOST
+          value: "{{ .Values.mediaRelayEnvVariables.mediaRelayWsHost }}"
+        - name: MEDIA_RELAY_WS_PORT
+          value: "{{ .Values.mediaRelayEnvVariables.mediaRelayWsPort }}"
+        - name: RTP_UDP_PORT_RANGE
+          value: {{ .Values.mediaRelayEnvVariables.rtpUdpPortRange }}
+        - name: CLUSTER_WORKERS
+          value: "{{ .Values.mediaRelayEnvVariables.clusterWorkers }}"
+        - name: MAX_SESSIONS
+          value: "{{ .Values.mediaRelayEnvVariables.maxSessions }}"
+        - name: ENABLE_RECORDING
+          value: "{{ .Values.mediaRelayEnvVariables.enableRecording }}"
+        - name: STEREO_RECORDING
+          value: "{{ .Values.mediaRelayEnvVariables.stereoRecording }}"
+          
+        - name: TRACE_TYPE
+          value: "both"
+          
+        - name: MEDIA_RELAY_LOG_LEVEL
+          value: "{{ .Values.mediaRelayEnvVariables.mediaRelayLogLevel }}"
+        - name: MEDIA_RELAY_LOG_ROTATION_FILE_COUNT
+          value: "{{ .Values.mediaRelayEnvVariables.mediaRelayLogRotationFileCount }}"
+        - name: MEDIA_RELAY_LOG_ROTATION_PERIOD
+          value: "{{ .Values.mediaRelayEnvVariables.mediaRelayLogRotationPeriod }}"
+        - name: RTP_PACKET_LOSS_REPORTING_THRESHOLD
+          value: "{{ .Values.mediaRelayEnvVariables.rtpPacketLossReportingThreshold }}"
+          
+        - name: PROXY_TYPE
+          value: "{{ .Values.mediaRelayEnvVariables.proxyType }}"
+        {{ if .Values.mediaRelayEnvVariables.proxyHost }}
+        - name: PROXY_HOST
+          value: "{{ .Values.mediaRelayEnvVariables.proxyHost }}"
+        {{ end }}
+        {{ if .Values.mediaRelayEnvVariables.proxyPort }}
+        - name: PROXY_PORT
+          value: "{{ .Values.mediaRelayEnvVariables.proxyPort }}"
+        {{ end }}
+        {{ if .Values.mediaRelayEnvVariables.proxyUsername }}
+        - name: PROXY_USERNAME
+          value: "{{ .Values.mediaRelayEnvVariables.proxyUsername }}"
+        {{ end }}
+        {{ if .Values.mediaRelayEnvVariables.proxyPasswordSecret }}
+        - name: PROXY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.mediaRelayEnvVariables.proxyPasswordSecret }}
+              key: mrProxyPassword
+        {{ end }}
+        - name: WATSON_STT_ENABLE_PROXY
+          value: "{{ .Values.mediaRelayEnvVariables.watsonSttEnableProxy }}"
+        - name: WATSON_TTS_ENABLE_PROXY
+          value: "{{ .Values.mediaRelayEnvVariables.watsonTtsEnableProxy }}"
+        - name: MUSIC_ON_HOLD_ENABLE_PROXY
+          value: "{{ .Values.mediaRelayEnvVariables.musicOnHoldEnableProxy }}"
+
+        {{ if eq .Values.mediaRelayEnvVariables.enableSsl true}}
+        - name: SSL_CLIENT_CA_CERTIFICATE_FILE
+          value: "/sslConf/clientCaCertFile"
+        {{ end }}
+
+        {{ if eq .Values.mediaRelayEnvVariables.enableMutualAuth true}}
+        - name: SSL_CLIENT_PKCS12_FILE
+          value: "/sslConf/clientPkcs12File"
+        - name: SSL_CLIENT_PASSPHRASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.mediaRelayEnvVariables.sslClientPassphraseSecret }}
+              key: sslClientPassphrase
+        {{ end }}
+        
+
+        volumeMounts:
+        {{- if eq .Values.persistence.recordingsVolume.enablePersistentRecordings true }}
+        - name: {{ template "fullname" . }}-{{ .Values.persistence.recordingsVolume.name }}
+          mountPath: "/vgw-media-relay/recordings"
+        {{- end}}
+        {{- if eq .Values.persistence.logsVolume.enablePersistentLogs true }}
+        - name: {{ template "fullname" . }}-{{ .Values.persistence.logsVolume.name }}
+          mountPath: "/vgw-media-relay/logs"
+        {{- end}}
+        {{- if eq .Values.mediaRelayEnvVariables.enableMrcp true }}
+        - name: unimrcpconfig
+          mountPath: "/vgw-media-relay/config/unimrcpclient.xml"
+          subPath: "unimrcpclient.xml"
+        {{- end}}
+        {{- if eq .Values.mediaRelayEnvVariables.enableSsl true }}
+        - name: ssl-mr
+          mountPath: "/sslConf/clientCaCertFile"
+          subPath: "clientCaCertFile"
+        {{- end}}
+        {{- if eq .Values.mediaRelayEnvVariables.enableMutualAuth true }}
+        - name: ssl-mr-ma
+          mountPath: "/sslConf/clientPkcs12File"
+          subPath: "clientPkcs12File"
+        {{- end}}
+        terminationMessagePath: "/dev/termination-log"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+      - name: "{{ .Values.image.sipOrchestrator.containerName }}"
+        image: "{{ .Values.image.sipOrchestrator.repository }}:{{ .Values.image.sipOrchestrator.tag }}"
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          capabilities:
+            drop:
+            - ALL
+
+        ports:
+        - containerPort: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          hostPort: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          protocol: TCP
+        - containerPort: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          hostPort: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          protocol: UDP
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.sipOrchestratorEnvVariables.sipPort }}
+          initialDelaySeconds: 20
+          periodSeconds: 35
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - "/opt/quiesce.sh"
+        env:
+        - name: SIP_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: MEDIA_RELAY_HOST
+          value: "{{ .Values.sipOrchestratorEnvVariables.mediaRelayHost }}"
+        - name: SIP_PORT
+          value: "{{ .Values.sipOrchestratorEnvVariables.sipPort }}"
+        - name: SIP_PORT_TCP
+          value: "{{ .Values.sipOrchestratorEnvVariables.sipPortTcp }}"
+        - name: SIP_PORT_TLS
+          value: "{{ .Values.sipOrchestratorEnvVariables.sipPortTls }}"
+
+        - name: LOG_LEVEL
+          value: "{{ .Values.sipOrchestratorEnvVariables.logLevel }}"
+        - name: LOG_MAX_FILES
+          value: "{{ .Values.sipOrchestratorEnvVariables.logMaxFiles }}"
+        - name: LOG_MAX_FILE_SIZE
+          value: "{{ .Values.sipOrchestratorEnvVariables.logMaxFileSize }}"
+        - name: ENABLE_AUDIT_MESSAGES
+          value: "{{ .Values.sipOrchestratorEnvVariables.enableAuditMessages }}"
+        - name: ENABLE_TRANSCRIPTION_AUDIT_MESSAGES
+          value: "{{ .Values.sipOrchestratorEnvVariables.enableTranscriptionAuditMessages }}"
+        - name: LATENCY_REPORTING_THRESHOLD
+          value: "{{ .Values.sipOrchestratorEnvVariables.latencyReportingThreshold }}"
+        - name: RELAY_LATENCY_REPORTING_THRESHOLD
+          value: "{{ .Values.sipOrchestratorEnvVariables.relayLatencyReportingThreshold }}"
+        - name: VGW_PRODUCT_NAME
+          value: "{{ .Values.productName }}"
+
+        {{ if .Values.sipOrchestratorEnvVariables.proxyHost }}
+        - name: PROXY_HOST
+          value: "{{ .Values.sipOrchestratorEnvVariables.proxyHost }}"
+        {{ end }}
+        {{ if .Values.sipOrchestratorEnvVariables.proxyPort }}
+        - name: PROXY_PORT
+          value: "{{ .Values.sipOrchestratorEnvVariables.proxyPort }}"
+        {{ end }}
+        {{ if .Values.sipOrchestratorEnvVariables.proxyUsername }}
+        - name: PROXY_USERNAME
+          value: "{{ .Values.sipOrchestratorEnvVariables.proxyUsername }}"
+        {{ end }}
+        {{ if .Values.sipOrchestratorEnvVariables.proxyPasswordSecret }}
+        - name: PROXY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.sipOrchestratorEnvVariables.proxyPasswordSecret }}
+              key: soProxyPassword
+        {{ end }}
+        
+        - name: TRUSTED_IP_LIST
+          value: "{{ .Values.sipOrchestratorEnvVariables.trustedIpList }}"
+
+        - name: METERING_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.metering.meteringApiKeySecret }}
+              key: meteringApiKey          
+        - name: PRODUCT_METERING_ENABLED
+          value: "{{ .Values.metering.meteringEnabled }}"  
+        - name: ICP_MASTER_NODE_IP
+          value: "{{ .Values.metering.icpMasterNodeIP }}"
+        - name: METERING_SERVER_SERVICE_URL
+          value: "{{ .Values.metering.meteringServerURL }}"
+       
+        {{ if .Values.sipOrchestratorEnvVariables.cmrHealthCheckFailErrCode }}  
+        - name: CMR_HEALTH_CHECK_FAIL_ERR_CODE
+          value: {{ .Values.sipOrchestratorEnvVariables.cmrHealthCheckFailErrCode }}
+        {{ end }}
+          
+        - name: MULTI_TENANT_CONFIG_FILE
+          value: "/tenantconfig/tenantConfig.json"
+        
+        - name: WLP_LOGGING_CONSOLE_FORMAT
+          value: "{{ .Values.sipOrchestratorEnvVariables.consoleLogFormat }}"
+        - name: WLP_LOGGING_CONSOLE_LOGLEVEL
+          value: "{{ .Values.sipOrchestratorEnvVariables.consoleLogLevel }}"
+        - name: WLP_LOGGING_CONSOLE_SOURCE
+          value: "{{ .Values.sipOrchestratorEnvVariables.consoleLogSource }}"
+
+        {{ if eq .Values.sipOrchestratorEnvVariables.enableSslorMutualAuth true}}
+        - name: SSL_KEY_TRUST_STORE_FILE
+          value: "/sslConf/trustStoreFile"
+        - name: SSL_FILE_TYPE
+          value: "{{ .Values.sipOrchestratorEnvVariables.sslFileType }}"
+        - name: SSL_PASSPHRASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.sipOrchestratorEnvVariables.sslPassphraseSecret }}
+              key: sslPassphrase
+        {{ end }}
+          
+        volumeMounts:
+        {{- if eq .Values.persistence.logsVolume.enablePersistentLogs true }}
+        - name: {{ template "fullname" . }}-{{ .Values.persistence.logsVolume.name }}
+          mountPath: "/logs"
+        {{- end}}
+        {{- if eq .Values.sipOrchestratorEnvVariables.enableSslorMutualAuth true }}
+        - name: ssl-so
+          mountPath: "/sslConf/trustStoreFile"
+          subPath: "trustStoreFile"
+        {{- end}}
+        - name: tenantconfig
+          mountPath: "/tenantconfig/tenantConfig.json"
+          subPath: "tenantConfig.json"
+        terminationMessagePath: "/dev/termination-log"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 600
+      dnsPolicy: ClusterFirstWithHostNet

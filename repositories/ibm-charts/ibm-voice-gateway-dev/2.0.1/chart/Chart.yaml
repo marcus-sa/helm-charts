@@ -1,0 +1,12 @@
+description: IBM Voice Gateway Helm chart (Developer Trial).
+icon: https://raw.githubusercontent.com/WASdev/sample.voice.gateway/master/images/VoiceGateway_WebLogo_Color.png
+keywords:
+- voice gateway
+- message queue
+- Limited
+- amd64
+- ICP
+kubeVersion: '>=1.11'
+name: ibm-voice-gateway-dev
+tillerVersion: '>=2.9.1'
+version: 2.0.1

@@ -1,0 +1,8 @@
+description: IBM Voice Gateway Helm chart (Developer Trial)
+icon: https://raw.githubusercontent.com/WASdev/sample.voice.gateway/master/images/VoiceGateway_WebLogo_Color.png
+keywords:
+- Limited
+- amd64
+name: ibm-voice-gateway-dev
+tillerVersion: '>=2.6.0'
+version: 1.1.0

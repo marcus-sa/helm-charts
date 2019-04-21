@@ -1,0 +1,119 @@
+###############################################################################
+# Licensed Materials - Property of IBM.
+# Copyright IBM Corporation 2018, 2019. All Rights Reserved.
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Contributors:
+#  IBM Corporation
+###############################################################################
+
+arch:
+    amd64: "3 - Most preferred"
+
+productName: "IBM Voice Gateway"
+
+replicaCount: 1
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+nodeSelector: {}
+
+tenantConfigSecretName: "vgw-tenantconfig-secret"
+
+image:
+    sipOrchestrator:
+        repository: "ibmcom/voice-gateway-so"
+        containerName: "vgw-sip-orchestrator"
+        tag: "1.0.1.0"
+    mediaRelay:
+        repository: "ibmcom/voice-gateway-mr"
+        containerName: "vgw-media-relay"
+        tag: "1.0.1.0"
+    pullPolicy: "Always"
+    imagePullSecrets: ""
+
+persistence:
+    useDynamicProvisioning: false
+    recordingsVolume:
+        enablePersistentRecordings: false
+        name: "recordings"
+        storageClassName: ""
+        size: 2Gi
+    logsVolume:
+        enablePersistentLogs: false
+        name: "persistent-logs"
+        storageClassName: ""
+        size: 2Gi
+
+mediaRelayEnvVariables:
+    mediaRelayWsHost: "0.0.0.0"
+    mediaRelayWsPort: 8080
+    rtpUdpPortRange: "16384-16394"
+    clusterWorkers: 1
+    maxSessions: "0"
+    enableRecording: false
+    stereoRecording: false
+
+    mediaRelayLogLevel: "INFO"
+    mediaRelayLogRotationFileCount: 10
+    mediaRelayLogRotationPeriod: "1d"
+    rtpPacketLossReportingThreshold: 1000
+
+    proxyType: "http"
+    proxyHost: 
+    proxyPort: 
+    proxyUsername: 
+    proxyPasswordSecret:
+    watsonSttEnableProxy: true
+    watsonTtsEnableProxy: true
+    musicOnHoldEnableProxy: false
+
+    enableMrcp: false
+    unimrcpConfigSecretName: unimrcp-config-secret
+    mrcpv2SipPort: 5555
+
+    enableSsl: false
+    sslClientCACertSecret: client-ca-cert-secret
+
+    enableMutualAuth: false
+    sslClientPkcs12FileSecret: ssl-client-pkcs12-file-secret
+    sslClientPassphraseSecret: ssl-client-passphrase-secret
+
+sipOrchestratorEnvVariables:
+    mediaRelayHost: "localhost:8080"
+    sipPort: 5060
+    sipPortTcp: 5060
+    sipPortTls: 5061
+
+    logLevel: "audit"
+    logMaxFiles: 5
+    logMaxFileSize: 100
+    enableAuditMessages: true
+    enableTranscriptionAuditMessages: false
+    latencyReportingThreshold: 1000
+    relayLatencyReportingThreshold: 1000
+
+    proxyHost: 
+    proxyPort: 
+    proxyUsername: 
+    proxyPasswordSecret:
+    trustedIpList: 
+    
+    cmrHealthCheckFailErrCode: 
+
+    consoleLogFormat: "json"
+    consoleLogLevel: "info"
+    consoleLogSource: "message,trace,accessLog,ffdc"
+
+    enableSslorMutualAuth: false
+    sslKeyTrustStoreSecret: trust-store-file-secret
+    sslFileType: "JKS"
+    sslPassphraseSecret: ssl-passphrase-secret
+    
+metering:
+    meteringApiKeySecret: metering-api-key-secret
+    meteringEnabled: true
+    icpMasterNodeIP: "mycluster.icp"
+    meteringServerURL: "https://mycluster.icp:8443/meteringapi"
+
