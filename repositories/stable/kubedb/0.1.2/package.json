@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-kubedb",
+  "version": "0.1.2-0.1.0",
+  "description": "KubeDB by AppsCode - Making running production-grade databases easy on Kubernetes",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
