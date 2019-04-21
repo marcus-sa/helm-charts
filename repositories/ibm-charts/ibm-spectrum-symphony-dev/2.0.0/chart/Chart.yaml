@@ -1,0 +1,23 @@
+appVersion: 7.2.1.1
+description: IBM Spectrum Symphony CE
+home: https://www.ibm.com/support/knowledgecenter/SSZUMP/product_welcome_spectrum_symphony.html
+icon: https://www.ibm.com/developerworks/community/groups/service/html/image?communityUuid=46ecec34-bd69-43f7-a627-7c469c1eddf8&lastMod=1465707087133&showDefaultForNoPermissions=true
+keywords:
+- Limited
+- Data Science
+- Analytics
+- amd64
+- ppc64le
+- ICP
+- spectrum
+- symphony
+- cluster
+- grid
+- parallel
+- distributed
+- compute
+- workload
+kubeVersion: '>=1.9.1'
+name: ibm-spectrum-symphony-dev
+tillerVersion: '>=2.7.2'
+version: 2.0.0
