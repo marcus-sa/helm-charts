@@ -1,0 +1,19 @@
+appVersion: 14.0.1
+description: Chart for Wildfly
+engine: gotpl
+home: http://wildfly.org
+icon: https://bitnami.com/assets/stacks/wildfly/img/wildfly-stack-110x117.png
+keywords:
+- wildfly
+- java
+- http
+- web
+- application server
+- jsp
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: wildfly
+sources:
+- https://github.com/bitnami/bitnami-docker-wildfly
+version: 1.0.1
