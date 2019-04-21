@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-vault-secrets-webhook",
+  "version": "0.3.7-0.1.0",
+  "description": "A Helm chart that deploys a mutating admission webhook that configures applications to request env vars from Vault Secrets",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
