@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/rimusz-nfs-client-provisioner",
+  "version": "0.1.4-0.1.0",
+  "description": "nfs-client-provisioner is an automatic provisioner creating Persistent Volumes from the NFS",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
