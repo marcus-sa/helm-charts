@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-etcd",
+  "version": "1.4.3-0.1.0",
+  "description": "etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
