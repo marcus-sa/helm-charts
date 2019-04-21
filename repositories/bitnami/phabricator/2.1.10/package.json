@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-phabricator",
+  "version": "2.1.10-0.1.0",
+  "description": "Collection of open source web applications that help software companies build better software.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
