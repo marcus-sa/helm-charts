@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-prometheus-operator",
+  "version": "0.1.19-0.1.0",
+  "description": "Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
