@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-percona",
+  "version": "0.3.4-0.1.0",
+  "description": "free, fully compatible, enhanced, open source drop-in replacement for MySQL",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
