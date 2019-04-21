@@ -1,0 +1,13 @@
+appVersion: v0.0.3
+description: Kubewatch notifies your slack rooms when changes to your cluster occur
+engine: gotpl
+keywords:
+- kubernetes
+- slack
+maintainers:
+- email: casey@monax.io
+  name: compleatang
+name: kubewatch
+sources:
+- https://github.com/skippbox/kubewatch
+version: 0.2.1
