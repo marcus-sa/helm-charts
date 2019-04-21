@@ -1,0 +1,29 @@
+####################################################################
+# Licensed Materials - Property of IBM                             #
+# 5737-E67                                                         #
+# (C) Copyright IBM Corporation 2016, 2018 All Rights Reserved     #
+# US Government Users Restricted Rights - Use, duplication or      #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.#
+####################################################################
+
+{{- include "sch.config.init" (list . "calicoBgpPeer.sch.chart.config.values") }}
+{{- $compName :=  .sch.chart.components.configmap.name }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "sch.names.fullCompName" (list . $compName) }}
+  namespace: kube-system
+  labels:
+{{ include "sch.metadata.labels.standard" (list . $compName) | indent 4 }}
+data:
+  bgp-peer.yaml: |
+    apiVersion: projectcalico.org/v3
+    kind: BGPPeer
+    metadata:
+      name: peer-{{ .Values.peerIp }}
+    spec:
+{{- if .Values.node }}
+      node: {{ .Values.node }}
+{{- end }}
+      peerIP: {{ .Values.peerIp }}
+      asNumber: {{ .Values.asNumber }}

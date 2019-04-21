@@ -1,0 +1,13 @@
+apiVersion: v1
+description: A Helm chart for configuring a bgp peer to your ICP Calico cluster
+icon: https://www.projectcalico.org/images/felix_hero_cmp.png
+keywords:
+- ICP
+- OpenSource
+- amd64
+- ppc64le
+- s390x
+- Network
+name: ibm-calico-bgp-peer
+tillerVersion: '>=2.7.3'
+version: 1.1.0
