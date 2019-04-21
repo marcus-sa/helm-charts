@@ -24,7 +24,6 @@ async function run() {
     await fs.ensureDir(repoDir)
     await fs.writeJSON(path.join(repoDir, 'meta.json'), repo)
 
-    console.log(repo.url)
     console.log(`Initialized ${repo.name}`)
     const data = await readRepository(repo.url)
     await fs.writeJSON(path.join(repoDir, 'charts.json'), data)

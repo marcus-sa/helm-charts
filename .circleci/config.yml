@@ -36,17 +36,11 @@ jobs:
 
       # Build repository
       - run:
-          name: Build
+          name: Build scripts
           command: yarn build
       - run:
-          name: Refresh repos
-          command: yarn refresh-repos
-      - run:
-          name: Prepare charts
-          command: yarn prepare-charts
-      - run:
-          name: Build charts
-          command: make all
+          name: Sync charts with remote repositories
+          command: ./sync.sh
       - run:
           name: Compile chart TypeScript
           command: yarn build-charts
