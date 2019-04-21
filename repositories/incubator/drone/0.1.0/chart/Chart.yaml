@@ -1,0 +1,18 @@
+appVersion: 0.8.1
+description: Drone CI
+home: https://drone.io/
+keywords:
+- continuous-delivery
+- continuous-deployment
+- continuous-integration
+- docker
+- drone
+- drone.io
+- go
+maintainers:
+- email: christian.roggia@gmail.com
+  name: christian-roggia
+name: drone
+sources:
+- https://github.com/drone/drone
+version: 0.1.0
