@@ -1,0 +1,12 @@
+dependencies:
+- name: spark-shuffle
+  repository: https://kubernetes-charts.banzaicloud.com
+  version: 0.0.4
+- name: spark-rss
+  repository: https://kubernetes-charts.banzaicloud.com
+  version: 0.0.5
+- name: spark-hs
+  repository: https://kubernetes-charts.banzaicloud.com
+  version: 0.2.2
+digest: sha256:eccdd08b76502868c3d639d86f99a3d2e2990da0447c7ce418d82dc809754261
+generated: 2019-03-29T13:21:52.492143146Z

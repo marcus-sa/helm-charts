@@ -1,0 +1,21 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  labels:
+    app: {{ template "rss.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "rss.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  resource-staging-server.properties: |-
+    spark.kubernetes.resourceStagingServer.port=10000
+    spark.ssl.kubernetes.resourceStagingServer.enabled={{ .Values.tls.enabled }}
+    {{- if .Values.tls.enabled }}
+    spark.ssl.kubernetes.resourceStagingServer.keyPem=/mnt/secrets/resource-staging-server/serverKey
+    spark.ssl.kubernetes.resourceStagingServer.serverCertPem=/mnt/secrets/resource-staging-server/serverCert
+    spark.ssl.kubernetes.resourceStagingServer.clientCertPem=/mnt/secrets/resource-staging-server/caCert
+    {{- end }}
+

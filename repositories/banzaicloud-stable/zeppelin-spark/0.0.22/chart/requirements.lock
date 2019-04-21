@@ -1,0 +1,9 @@
+dependencies:
+- name: spark
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.0.16
+- name: zeppelin
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.0.16
+digest: sha256:391ae48a12832d9c0eaa94d38a28199f8b64df46da42d76aa03c1f561d852594
+generated: 2019-03-26T10:02:57.72664402Z

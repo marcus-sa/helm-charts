@@ -1,0 +1,13 @@
+description: A Helm chart for Spark in Kubernetes
+home: https://banzaicloud.com
+icon: https://spark.apache.org/images/spark-logo-trademark.png
+keywords:
+- spark
+- spotguide
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: spark
+sources:
+- https://github.com/banzaicloud/spark
+version: 0.0.17

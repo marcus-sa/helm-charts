@@ -1,0 +1,13 @@
+description: An umbrella Helm chart for Zeppelin and Spark
+home: https://banzaicloud.com
+keywords:
+- spark
+- zeppelin
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: zeppelin-spark
+sources:
+- https://github.com/banzaicloud/zeppelin
+- https://github.com/banzaicloud/spark
+version: 0.0.23
