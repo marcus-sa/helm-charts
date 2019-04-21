@@ -1,0 +1,12 @@
+*.log
+*.tgz
+*.tsbuildinfo
+node_modules
+repositories/**/*.d.ts
+repositories/**/*.js
+repositories/**/*.map
+repositories/*/*/*/chart.json
+repositories/*/charts.json
+repositories/*/meta.json
+scripts/**/*.js
+tmp

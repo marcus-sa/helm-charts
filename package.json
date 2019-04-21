@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "build-charts": "tsc --project tsconfig.charts.json",
+    "clean": "rm -f scripts/**/*.{js,map,d.ts}",
+    "generate-package": "node ./scripts/generate-package",
+    "prepare-charts": "node ./scripts/prepare-charts",
+    "refresh-repos": "node ./scripts/refresh-repos"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": false
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "execa": "^1.0.0",
+    "fast-glob": "^2.2.6",
+    "fs-extra": "^7.0.1",
+    "js-yaml": "^3.13.1",
+    "tar": "^4.4.8",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/execa": "^0.9.0",
+    "@types/fs-extra": "^5.0.5",
+    "@types/js-yaml": "^3.12.1",
+    "@types/prettier": "^1.16.3",
+    "@types/tar": "^4.0.0",
+    "prettier": "^1.17.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.4"
+  }
+}

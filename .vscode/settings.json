@@ -1,0 +1,6 @@
+{
+  "cSpell.words": ["execa", "interop", "kube", "repo", "repos", "tslib", "workspaces"],
+  "files.exclude": {
+    "scripts/**/*.js": true
+  }
+}
