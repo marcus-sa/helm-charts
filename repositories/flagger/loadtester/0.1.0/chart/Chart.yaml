@@ -1,0 +1,21 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: Flagger's load testing services based on rakyll/hey that generates traffic
+  during canary analysis when configured as a webhook.
+engine: gotpl
+home: https://docs.flagger.app
+icon: https://raw.githubusercontent.com/stefanprodan/flagger/master/docs/logo/flagger-icon.png
+keywords:
+- canary
+- istio
+- gitops
+- load testing
+kubeVersion: '>=1.11.0-0'
+maintainers:
+- email: stefanprodan@users.noreply.github.com
+  name: stefanprodan
+  url: https://github.com/stefanprodan
+name: loadtester
+sources:
+- https://github.com/stefanprodan/flagger
+version: 0.1.0

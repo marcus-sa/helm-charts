@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/flagger-loadtester",
+  "version": "0.3.0-0.1.0",
+  "description": "Flagger's load testing services based on rakyll/hey that generates traffic during canary analysis when configured as a webhook.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
