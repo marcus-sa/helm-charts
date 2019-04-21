@@ -1,0 +1,25 @@
+dependencies:
+  - name: mysql-operator
+    repository: https://presslabs.github.io/charts/
+    version: ~0.2.1
+    condition: mysql-operator.enabled
+
+  - name: wordpress-operator
+    repository: https://presslabs.github.io/charts/
+    version: ~0.2.2
+    condition: wordpress-operator.enabled
+
+  - name: nginx-ingress
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    version: ~0.31.0
+    condition: nginx-ingress.enabled
+
+  - name: cert-manager
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    version: ~0.5.2
+    condition: cert-manager.enabled
+
+  - name: prometheus-operator
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    version: ~0.1.28
+    condition: prometheus-operator.enabled
