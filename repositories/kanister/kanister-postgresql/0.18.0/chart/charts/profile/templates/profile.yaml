@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ template "profile.profileName" . }}-creds
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "profile.helmLabels" . | indent 4 }}
+type: Opaque
+data:
+  {{- if .Values.aws.accessKey }}
+  access_key_id: {{ .Values.aws.accessKey | b64enc | quote }}
+  secret_access_key: {{ .Values.aws.secretKey | b64enc | quote }}
+  {{- else if .Values.gcp.projectID }}
+  project_id: {{ .Values.gcp.projectID | b64enc | quote }}
+  service_key: {{ .Values.gcp.serviceKey | b64enc | quote }}
+  {{- end }}
+
+---
+apiVersion: cr.kanister.io/v1alpha1
+kind: Profile
+metadata:
+  name: {{ template "profile.profileName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "profile.helmLabels" . | indent 4 }}
+location:
+  type: {{ .Values.location.type | quote }}
+  bucket: {{ .Values.location.bucket | quote }}
+  endpoint: {{ .Values.location.endpoint | quote }}
+  prefix: {{ .Values.location.prefix | quote }}
+  region: {{ .Values.location.region | quote }}
+credential:
+  type: keyPair
+  keyPair:
+    {{- if .Values.aws.accessKey }}
+    idField: access_key_id
+    secretField: secret_access_key
+    {{- else if .Values.gcp.projectID }}
+    idField: project_id
+    secretField: service_key
+    {{- end }}
+    secret:
+      apiVersion: v1
+      name: {{ template "profile.profileName" . }}-creds
+      namespace: {{ .Release.Namespace }}
+skipSSLVerify: {{ not .Values.verifySSL }}
