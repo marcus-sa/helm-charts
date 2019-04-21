@@ -1,0 +1,19 @@
+apiVersion: v1
+description: NGINX is a free and open-source web server which can also be used as
+  a reverse proxy, load balancer and HTTP cache.
+engine: gotpl
+home: https://www.nginx.com/
+icon: https://university.nginx.com/static/images/nginx_logo_n.png
+keywords:
+- NGINX
+- webserver
+- load balancer
+- proxy
+- http
+maintainers:
+- name: IBM Cloud Private
+name: ibm-nginx-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.7.2'
+version: 1.0.0
