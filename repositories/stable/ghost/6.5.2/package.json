@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-ghost",
+  "version": "6.5.2-0.1.0",
+  "description": "A simple, powerful publishing platform that allows you to share your stories with the world",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
