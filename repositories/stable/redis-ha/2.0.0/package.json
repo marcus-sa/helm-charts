@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-redis-ha",
+  "version": "2.0.0-0.1.0",
+  "description": "Highly available Redis cluster with multiple sentinels and standbys.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
