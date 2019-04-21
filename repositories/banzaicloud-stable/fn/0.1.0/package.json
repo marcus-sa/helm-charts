@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-fn",
+  "version": "0.1.0-0.1.0",
+  "description": "Open source container native Functions as a Service (FaaS) platform",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

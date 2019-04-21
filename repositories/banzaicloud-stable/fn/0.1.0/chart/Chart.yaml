@@ -1,0 +1,23 @@
+appVersion: 0.0.161
+description: Open source container native Functions as a Service (FaaS) platform
+engine: gotpl
+home: http://fnproject.io/
+icon: http://fnproject.io/images/fn-300x125.png
+keywords:
+- faas
+- fn
+- containers
+- functions
+- serverless
+maintainers:
+- email: derek.schultz@oracle.com
+  name: Derek Schultz
+- email: owen.cliffe@oracle.com
+  name: Owen Cliffe
+name: fn
+sources:
+- https://github.com/fnproject/fn
+- https://github.com/fnproject/ui
+- https://github.com/fnproject/flow
+- https://github.com/fnproject/flowui
+version: 0.1.0
