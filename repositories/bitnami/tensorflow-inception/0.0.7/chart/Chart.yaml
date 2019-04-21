@@ -1,0 +1,19 @@
+appVersion: 1.5.0
+description: Open-source software library for serving machine learning models
+engine: gotpl
+home: https://tensorflow.github.io/serving/
+keywords:
+- tensorflow
+- serving
+- inception
+- machine
+- learning
+- library
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: tensorflow-inception
+sources:
+- https://github.com/bitnami/tensorflow-serving
+- https://github.com/bitnami/tensorflow-inception
+version: 0.0.7

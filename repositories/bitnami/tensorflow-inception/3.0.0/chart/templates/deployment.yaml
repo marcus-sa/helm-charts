@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+      release: "{{ .Release.Name }}"
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      {{- if .Values.server.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.server.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end}}
+      {{- end }}
+      initContainers:
+      - name: seed
+        image: "{{ template "tensorflow-inception.client.image" . }}"
+        imagePullPolicy: {{ .Values.client.image.pullPolicy | quote }}
+        command:
+          - "/bin/sh"
+          - "-c"
+          - |
+            if [ -f /seed/.initialized ];then
+              echo "Already initialized. Skipping"
+            else
+              curl -o /seed/inception-v3-2016-03-01.tar.gz http://download.tensorflow.org/models/image/imagenet/inception-v3-2016-03-01.tar.gz
+              cd /seed/ && tar -xzf inception-v3-2016-03-01.tar.gz
+              rm inception-v3-2016-03-01.tar.gz
+              inception_saved_model --checkpoint_dir=/seed/inception-v3 --output_dir=/seed/
+              rm -rf inception-v3
+              touch /seed/.initialized
+            fi
+        volumeMounts:
+        - name: seed
+          mountPath: /seed
+      containers:
+      - name: {{ template "fullname" . }}
+        image: "{{ template "tensorflow-inception.server.image" . }}"
+        imagePullPolicy: {{ .Values.server.image.pullPolicy | quote }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.server.port }}
+          timeoutSeconds: 5
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.server.port }}
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 6
+        volumeMounts:
+        - name: seed
+          mountPath: "/bitnami/model-data"
+      volumes:
+      - name: seed
+        emptyDir: {}
