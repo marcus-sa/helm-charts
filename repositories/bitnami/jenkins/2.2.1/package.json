@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-jenkins",
+  "version": "2.2.1-0.1.0",
+  "description": "The leading open source automation server",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
