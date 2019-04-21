@@ -1,0 +1,25 @@
+apiVersion: v1
+description: IBM Data Server Manager Developer-C Edition. Note that there can only
+  be one DSM deployed per namespace, subsequent DSM will be deleted silently(execpt
+  ICp3.1+).
+home: https://www.ibm.com/us-en/marketplace/data-server-manager
+icon: https://github.com/IBMDSM/ci.docker.dsm-enterprise/blob/master/dsmcharticon.png
+keywords:
+- DB2
+- database
+- DSM
+- sql
+- amd64
+- ppc64le
+- s390x
+- Limited
+- ICP
+kubeVersion: '>=1.8.3'
+maintainers:
+- email: dsmdev@cn.ibm.com
+  name: IBM Analytics
+name: ibm-dsm-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.4.0'
+version: 1.1.7
