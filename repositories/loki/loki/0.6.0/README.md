@@ -1,0 +1,153 @@
+# `@helm-charts/loki-loki`
+
+Loki: like Prometheus, but for logs.
+
+| Field               | Value |
+| ------------------- | ----- |
+| Repository Name     | loki  |
+| Chart Name          | loki  |
+| Chart Version       | 0.6.0 |
+| NPM Package Version | 0.1.0 |
+
+<details>
+
+<summary>Helm chart `values.yaml` (default values)</summary>
+
+```yaml
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+affinity: {}
+# podAntiAffinity:
+#   requiredDuringSchedulingIgnoredDuringExecution:
+#   - labelSelector:
+#       matchExpressions:
+#       - key: app
+#         operator: In
+#         values:
+#         - loki
+#     topologyKey: "kubernetes.io/hostname"
+
+## Deployment annotations
+annotations: {}
+
+config:
+  auth_enabled: false
+  ingester:
+    lifecycler:
+      ring:
+        store: inmemory
+        replication_factor: 1
+      ## Different ring configs can be used. E.g. Consul
+      # ring:
+      #   store: consul
+      #   replication_factor: 1
+      #   consul:
+      #     host: "consul:8500"
+      #     prefix: ""
+      #     httpclienttimeout: "20s"
+      #     consistentreads: true
+  schema_configs:
+    - from: 0
+      store: boltdb
+      object_store: filesystem
+      schema: v9
+      index:
+        prefix: index_
+        period: 168h
+  storage_config:
+    boltdb:
+      directory: /data/loki/index
+    filesystem:
+      directory: /data/loki/chunks
+
+deploymentStrategy: RollingUpdate
+
+image:
+  repository: grafana/loki
+  tag: latest
+  pullPolicy: Always # Always pull while in BETA
+
+livenessProbe:
+  httpGet:
+    path: /ready
+    port: http-metrics
+  initialDelaySeconds: 45
+
+minReadySeconds: 0
+
+## Enable persistence using Persistent Volume Claims
+networkPolicy:
+  enabled: false
+
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+nodeSelector: {}
+
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+## If you set enabled as "True", you need :
+## - create a pv which above 10Gi and has same namespace with loki
+## - keep storageClassName same with below setting
+persistence:
+  enabled: false
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  storageClassName: default
+  annotations: {}
+  # subPath: ""
+  # existingClaim:
+
+## Pod Annotations
+podAnnotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "http-metrics"
+
+port: 3100
+
+## Assign a PriorityClassName to pods if set
+# priorityClassName:
+
+rbac:
+  create: true
+  pspEnabled: true
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: http-metrics
+  initialDelaySeconds: 45
+
+replicas: 1
+
+resources: {}
+# limits:
+#   cpu: 200m
+#   memory: 256Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+securityContext:
+  fsGroup: 10001
+  runAsGroup: 10001
+  runAsNonRoot: true
+  runAsUser: 10001
+
+service:
+  type: ClusterIP
+  nodePort:
+  port: 3100
+  annotations: {}
+  labels: {}
+
+serviceAccount:
+  create: true
+  name:
+
+terminationGracePeriodSeconds: 30
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+tolerations: []
+```
+
+</details>
