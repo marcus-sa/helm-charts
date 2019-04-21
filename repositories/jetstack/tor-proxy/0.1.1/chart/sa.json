@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jetstack-gke",
+  "private_key_id": "caa0f70d7064221d73ed1c91dbe88edba74cf29a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpS/NFLB5NwymD\nPKi5CUv8EG9ZpjR9i4iPx2mBGjU78PUPMHZtwe4Ccr5xBqaiFfqMyLDaly2xFegb\n9ne1AaPPRylA397H3utUXukdQcgdWZvvxIh3JsR0gph7y524QjXvu4cw3L/rvj8w\ntmr5LvZ11X36p9WgdIUH8YPcbbQ4Z4sj3eQcJNbCQo0SAOX57QWs+wwdgCRe7qKa\nCllNZkMru6tmsqbbD6QqpHvuFZXiX+njdpX0yzIg8UIATZSZeIaDUkNo6gVWhUDn\nhaJVHzi7xD6QK9UG70YhC/Pj3kHVo4cA9ev0m168gximv6wpPdwrcKH7/gGnMYbe\njuxXHOiJAgMBAAECggEAVhfSIY/Daxz/X8/tz8MPiGikPugn7MCmV7DWTW9Xf9RP\nCxjuS1jKtZqUju9OZPhJatTQ9wndMcGM02zkBichxWdUYP18oDOykoMn8cUJzVL5\nScU0OwxSaVCcZurgPFQqxVpl7HE6XgvqE9btqSFckGWFxQ9UtY7qXOESsTDG1h0j\ngiAGCrDdB6KyY6Qpaxjp8OuXclWl4hrysVtlbjenh3bEqrKR0lapHrDq7FOc3oQD\nFQWXW2AxohtwQKhzuRoRh9rY3ZxkR5k6aN9Dpu6kIrG25t0TqQv3trYms336pWLl\nJE/2LZ15rxPOiIahE2qlBesgCvEzVc27M/Ee3sUAkQKBgQD5VuvCBFpRkyu/hiDL\nF92kAg6gQxlNLwuGP8JTAHyibbmdzhMa3Bw91mKVVusmPRVAyd9PlCUdsFfTtzaG\nl0ME9FBorRZgTETOIvWeuH+QxOc1HgpJ5opOM2w/mhL8+sZzTmIwjF/ArbSsIS4T\nys8nKGWr3HJ1zhu636XlUCQzLQKBgQDvh1J6DB3kKJUHl2LZ6LxaDwrGgSW6v2FU\nTVhvCILOo0nD/kTpdoviKQGkkZ0PTz8wyidFLoh+lXH59xHHgZTW0nuroBHoQV+Z\nn+ODot2hiR50+TUWqxLJ2tOA09Dw7AmU4t12ZZ89r3uJTI5JSY0SLP1ptiWeou5j\neLr+tWIUTQKBgQDn0NNiT++09hJvf4GPsQGlETCN+bRVWU7qou7Fgqdd0IwJVmXW\nzBwJtf9z/xqjM5lF4ioXb5HOd3xAX493NLzfp1H28C3knCRATqpzxe78JsUbUnGY\nYZnmuNKEk3fh8jl9TLvnjSsdFaLrgfG3/w/3xQw567wTIOwRIwu3FnqBhQKBgQCy\nwW2m0ZYZKMQXdz35W7v9Bc7H16fdl2e+bz55FoPwTGIHl6G8DZFVRb8JHvZ0b3K8\nKZFnCtQoi8UUg/NLzYPTUh+jNIFIsEj1MCKtoYT/QYJuT3D0KtWJuPow4WLD+ZMo\n/qnB6xMNCQILtAtX3EEgeFziYGHw4q0/pOEAp0K73QKBgAPSMAwxaXhaAJJjGLZ+\nRkrBnoZCOB/F42Su1/KbqXAbBB8lBBzLzCOtqST1WHfa5zXN32m1558rSRzq2Nby\nwyd8EvDuOYjeLpvYLGv+LldChgQvQpvDcT7f+d6gp2V3pZfWsHpNR3cmMGKXSWgs\niZ9VfFxkewPx/WICYkRWi6EA\n-----END PRIVATE KEY-----\n",
+  "client_email": "gitlab-ci-charts@jetstack-gke.iam.gserviceaccount.com",
+  "client_id": "105802909570967023976",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gitlab-ci-charts%40jetstack-gke.iam.gserviceaccount.com"
+}

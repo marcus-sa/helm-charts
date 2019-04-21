@@ -1,0 +1,34 @@
+stages:
+- test
+- deploy
+
+test:helm:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: test
+  tags:
+  - docker
+  script:
+  - make test
+
+deploy:helm:app_registry_quay.io:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: deploy
+  tags:
+  - docker
+  script:
+  - helm registry login -u jetstack-gitlab quay.io -p ${QUAY_IO_PASSWORD}
+  - helm registry push --namespace jetstack quay.io -f -v ${CI_COMMIT_REF_NAME}
+  only:
+  - tags
+
+deploy:helm:repo_jetstack:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: deploy
+  tags:
+  - docker
+  script:
+  - echo "${GOOGLE_CLOUD}" > sa.json && chmod 600 sa.json
+  - gcloud auth activate-service-account --key-file sa.json
+  - make clean package publish VERSION=${CI_COMMIT_REF_NAME}
+  only:
+  - tags

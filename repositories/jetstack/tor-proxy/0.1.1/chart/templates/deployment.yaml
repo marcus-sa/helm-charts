@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      annotations:
+        server-auth-hash: {{ include "torrc" . | sha256sum }}
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: p
+        image: "{{ .Values.privoxy.image.repository }}:{{ .Values.privoxy.image.tag }}"
+        imagePullPolicy: {{ .Values.privoxy.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.internalPort }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.service.internalPort }}
+        resources:
+{{ toYaml .Values.privoxy.resources | indent 12 }}
+      - name: tor
+        image: "{{ .Values.tor.image.repository }}:{{ .Values.tor.image.tag }}"
+        imagePullPolicy: {{ .Values.tor.image.pullPolicy }}
+        volumeMounts:
+        - name: torrc
+          mountPath: /etc/tor/torrc
+          subPath: torrc
+        resources:
+{{ toYaml .Values.tor.resources | indent 12 }}
+      volumes:
+      - name: torrc
+        secret:
+          secretName: {{ template "fullname" . }}
