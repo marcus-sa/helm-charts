@@ -1,0 +1,7 @@
+appVersion: 0.0.4
+home: https://github.com/coreos/zetcd
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: zetcd
+version: 0.1.1
