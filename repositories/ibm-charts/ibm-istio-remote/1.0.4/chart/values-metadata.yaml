@@ -1,0 +1,424 @@
+## Metadata for <ibm-istio-remote-chart> configuration
+## This metadata is used to augment the value.yaml to drive ICP UI for configuration of the Helm chart installation
+
+global:
+  __metadata:
+    label: "Global Settings"
+    description: "Specify global settings."
+    type: "string"
+  proxy:
+    repository:
+      __metadata:
+        label: "Proxy Image Repository"
+        description: "Docker registry to pull proxy image from."
+        type: "string"
+        immutable: false
+        required: false
+    tag:
+      __metadata:
+        label: "Proxy Image Tag"
+        description: "Proxy image version."
+        type: "string"
+        immutable: false
+        required: false
+    resources:
+      requests:
+        cpu:
+          __metadata:
+            label: "CPU Resources Requests"
+            type: "string"
+            description: "Specify the minimum requested CPU."
+            immutable: false
+            required: false
+        memory:
+          __metadata:
+            label: "Memory Resources Requests"
+            type: "string"
+            description: "Specify the minimum requested memory."
+            immutable: false
+            required: false
+    concurrency:
+      __metadata:
+        label: "Number of Proxy Worker Threads"
+        description: "Controls number of proxy worker threads. If set to 0 (default), then start worker thread for each CPU thread/core."
+        type: "number"
+        immutable: false
+        required: false
+    accessLogFile:
+      __metadata:
+        label: "Configures the access log for each sidecar"
+        description: "Configures the access log for each sidecar. Setting it to an empty string will disable access log for sidecar."
+        type: "string"
+        immutable: false
+        required: false
+    enableCoreDump:
+      __metadata:
+        label: "Enable Core Dump"
+        description: "Specify whether to enable debug information for envoy sidecar."
+        type: "boolean"
+        immutable: false
+        required: false
+    includeIPRanges:
+      __metadata:
+        label: "Include IP Ranges"
+        description: "Specify istio egress capture whitelist. For example: includeIPRanges: '172.30.0.0/16,172.20.0.0/16'."
+        type: "string"
+        immutable: false
+        required: false
+    excludeIPRanges:
+      __metadata:
+        label: "Exclude IP Ranges"
+        description: "Specify istio egress capture blacklist. For example: excludeIPRanges: '172.40.0.0/16,172.50.0.0/16'."
+        type: "string"
+        immutable: false
+        required: false
+    excludeInboundPorts:
+      __metadata:
+        label: "Exclude Port List"
+        description: "Specify istio egress capture port blacklist. For example: excludeInboundPorts: '81:8081'."
+        type: "string"
+        immutable: false
+        required: false
+    autoInject:
+      __metadata:
+        label: "Enable Sidecar Auto Inject"
+        description: "Specify whether auto-injection policy is enabled."
+        type: "string"
+        immutable: false
+        required: false
+    envoyStatsd:
+      enabled:
+        __metadata:
+          label: "Enable The Destination Enovy Statsd"
+          description: "Enable the destination statsd in Enovy."
+          type: "boolean"
+          immutable: false
+          required: false
+      host:
+        __metadata:
+          label: "Remote Statsd Prometheus Bridge Address"
+          description: "Specifies the statsd prometheus bridge Pod IP address for the Istio control plane."
+          type: "string"
+          immutable: false
+          required: true
+      port:
+        __metadata:
+          label: "Statsd Port"
+          description: "The port for statsd prometheus bridge."
+          type: "number"
+          immutable: false
+          required: false
+    privileged:
+      __metadata:
+        label: "Enable Privileged Security Context for Proxy"
+        description: "Configure privileged securityContext for proxy. If set to true, istio-proxy container will have privileged securityContext."
+        type: "boolean"
+        immutable: false
+        required: false
+  imagePullPolicy:
+    __metadata:
+      label: "Image Pull Policy"
+      description: "Image pull policy for all istio components, the value can be 'Always', 'Never', or 'IfNotPresent'. Defaults to 'IfNotPresent'."
+      type: "string"
+      immutable: false
+      required: false
+      options:
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
+  proxy_init:
+    repository:
+      __metadata:
+        label: "Proxy_init Image Repository"
+        description: "Docker registry to pull proxy_init image from."
+        type: "string"
+        immutable: false
+        required: false
+    tag:
+      __metadata:
+        label: "Proxy_init Image Tag"
+        description: "Proxy_init image version."
+        type: "string"
+        immutable: false
+        required: false
+  kubectl:
+    repository:
+      __metadata:
+        label: "Kubectl Image Repository"
+        description: "Docker registry to pull kubectl image from."
+        type: "string"
+        immutable: false
+        required: false
+    tag:
+      __metadata:
+        label: "Kubectl Image Tag"
+        description: "Kubectl image version."
+        type: "string"
+        immutable: false
+        required: false
+  controlPlaneSecurityEnabled:
+    __metadata:
+      label: "Enable Control Plane Security"
+      description: "Specify whether to enable mutual TLS for istio control plane. Setting this field to 'true' will result in delays starting the pods while secrets are propagated, not recommended for tests."
+      type: "boolean"
+      immutable: false
+      required: false
+  disablePolicyChecks:
+    __metadata:
+      label: "Disable Policy Checks"
+      description: "Disables mixer policy checks. Will set the value with same name in istio config map - pilot needs to be restarted to take effect."
+      type: "boolean"
+      immutable: false
+      required: false
+  enableTracing:
+    __metadata:
+      label: "Enable Tracing"
+      description: "Sets the value with same name in istio config map, requires pilot restart to take effect."
+      type: "boolean"
+      immutable: false
+      required: false
+  mtls:
+    enabled:
+      __metadata:
+        label: "Mutual TLS Authentication Enabled"
+        description: "Specify whether to enable mutual TLS authentication for services, defaultls to 'false'."
+        type: "boolean"
+        immutable: false
+        required: false
+  imagePullSecrets:
+    __metadata:
+      label: "Image Pull Secrets"
+      description: "Add 'imagePullSecrets' if images are pulled from a private docker registry."
+      type: "string"
+      immutable: false
+      required: false
+  remotePilotCreateSvcEndpoint:
+    __metadata:
+      label: "Create Remote Pilot Service and Endpoint"
+      description: "Specifies whether to create a headless service and endpoint for `istio-pilot` with the `remotePilotAddress`."
+      type: "boolean"
+      immutable: false
+      required: false
+  remotePilotAddress:
+    __metadata:
+      label: "Remote Pilot EndPoint"
+      description: "Specifies the pilot Pod IP address for the Istio control plane."
+      type: "string"
+      immutable: false
+      required: true
+  remotePolicyAddress:
+    __metadata:
+      label: "Remote Policy EndPoint"
+      description: "Specifies the mixer policy Pod IP address for the Istio control plane."
+      type: "string"
+      immutable: false
+      required: true
+  remoteTelemetryAddress:
+    __metadata:
+      label: "Remote Telemetry EndPoint"
+      description: "Specifies the mixer telemetry Pod IP address for the Istio control plane."
+      type: "string"
+      immutable: false
+      required: true
+  remoteZipkinAddress:
+    __metadata:
+      label: "Remote Tracing EndPoint"
+      description: "Specifies the tracing Pod IP address for the Istio control plane."
+      type: "string"
+      immutable: false
+      required: true
+  defaultResources:
+    requests:
+      cpu:
+        __metadata:
+          label: "CPU Resources Requests"
+          type: "string"
+          description: "Specify the minimum requested CPU."
+          immutable: false
+          required: false
+  omitSidecarInjectorConfigMap:
+    __metadata:
+      label: "Omit Sidecar Injector ConfigMap"
+      description: "Specify whether to omit the istio-sidecar-injector configmap when generate a standalone gateway."
+      type: "boolean"
+      immutable: false
+      required: false
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "Specify priority class, it can be 'system-cluster-critical' or 'system-node-critical'. Configure this to make sure Istio pods will not be evicted because of low prioroty class."
+      type: "string"
+      immutable: false
+      required: false
+  arch:
+    amd64:
+      __metadata:
+        name: "amd64"
+        label: "AMD64 scheduling preference"
+        description: "Architecture preference for target worker node."
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "0 - Do not use"
+            value: "0 - Do not use"
+          - label: "1 - Least preferred"
+            value: "1 - Least preferred"
+          - label: "2 - No preference"
+            value: "2 - No preference"
+          - label: "3 - Most preferred"
+            value: "3 - Most preferred"
+    ppc64le:
+      __metadata:
+        name: "ppc64le"
+        label: "PPC64LE scheduling preference"
+        description: "Architecture preference for target worker node."
+        type: "string"
+        immutable: false
+        required: false
+        options:
+        - label: "0 - Do not use"
+          value: "0 - Do not use"
+        - label: "1 - Least preferred"
+          value: "1 - Least preferred"
+        - label: "2 - No preference"
+          value: "2 - No preference"
+        - label: "3 - Most preferred"
+          value: "3 - Most preferred"
+    s390x:
+      __metadata:
+        name: "s390x"
+        label: "S390X scheduling preference"
+        description: "Architecture preference for target worker node."
+        type: "string"
+        immutable: false
+        required: false
+        options:
+        - label: "0 - Do not use"
+          value: "0 - Do not use"
+        - label: "1 - Least preferred"
+          value: "1 - Least preferred"
+        - label: "2 - No preference"
+          value: "2 - No preference"
+        - label: "3 - Most preferred"
+          value: "3 - Most preferred"
+
+sidecarInjectorWebhook:
+  __metadata:
+    label: "Sidecar Injector Webhook Settings"
+    description: "Specify sidecarInjectorWebhook settings."
+    type: "string"
+  enabled:
+    __metadata:
+      label: "Enable Sidecar Injector Webhook"
+      description: "Specify whether to enable sidecar injector webhook to support automatical sidecar injection."
+      type: "boolean"
+      immutable: false
+      required: false
+  replicaCount:
+    __metadata:
+      label: "Replica Count"
+      description: "Specify number of desired pods for sidecar injector webhook deployment."
+      type: "number"
+      immutable: false
+      required: false
+  enableNamespacesByDefault:
+    __metadata:
+      label: "Enable Namespaces By Default"
+      description: "Specify whether to enable Namespaces for sidercar by default"
+      type: "boolean"
+      immutable: false
+      required: false
+  image:
+    repository:
+      __metadata:
+        label: "Sidecar Injector Image Repository"
+        description: "Docker registry to pull sidecar injector image from."
+        type: "string"
+        immutable: false
+        required: false
+    tag:
+      __metadata:
+        label: "Sidecar Injector Image Tag"
+        description: "Sidecar injector image version."
+        type: "string"
+        immutable: false
+        required: false
+  resources:
+    __metadata:
+      label: "Istio Sidecar Injector Resources"
+      description: "Specify the resource(CPU/Memory) requests & limits for Istio Sidecar Injector."
+      type: "string"
+  nodeRole:
+    __metadata:
+      label: "Node Role"
+      description: "Specify which node current component will be deployed to(effective only on IBM Cloud Private), values could be 'proxy' or 'management'."
+      type: "string"
+      immutable: false
+      required: false
+  nodeSelector:
+    __metadata:
+      label: "Node Selector"
+      description: "Specify the extra node selector for deployment."
+      type: "string"
+      minProperties: 0
+      immutable: false
+      required: false
+
+security:
+  __metadata:
+    label: "Security Settings"
+    description: "Specify security settings."
+    type: "string"
+  image:
+    repository:
+      __metadata:
+        label: "Citadel Image Repository"
+        description: "Docker registry to pull citadel image from."
+        type: "string"
+        immutable: false
+        required: false
+    tag:
+      __metadata:
+        label: "Citadel Image Tag"
+        description: "Citadel image version."
+        type: "string"
+        immutable: false
+        required: false
+  replicaCount:
+    __metadata:
+      label: "Replica Count"
+      description: "Specify number of desired pods for Citadel deployment."
+      type: "number"
+      immutable: false
+      required: false
+  selfSigned:
+    __metadata:
+      label: "Self Signed"
+      description: "Indicate if self-signed CA is used."
+      type: "boolean"
+      immutable: false
+      required: false
+  resources:
+    __metadata:
+      label: "Istio Citadel Resources"
+      description: "Specify the resource(CPU/Memory) requests & limits for Istio Citadel."
+      type: "string"
+  nodeRole:
+    __metadata:
+      label: "Node Role"
+      description: "Specify which node current component will be deployed to(effective only on IBM Cloud Private), values could be 'proxy' or 'management'."
+      type: "string"
+      immutable: false
+      required: false
+  nodeSelector:
+    __metadata:
+      label: "Node Selector"
+      description: "Specify the extra node selector for deployment."
+      type: "string"
+      minProperties: 0
+      immutable: false
+      required: false
