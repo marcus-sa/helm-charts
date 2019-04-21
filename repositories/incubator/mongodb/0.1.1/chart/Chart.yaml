@@ -1,0 +1,9 @@
+description: MongoDB Helm chart for Kubernetes.
+home: https://github.com/mongodb/mongo
+maintainers:
+- email: ramanathana@google.com
+  name: Anirudh Ramanathan
+name: mongodb
+sources:
+- https://github.com/mongodb/mongo
+version: 0.1.1
