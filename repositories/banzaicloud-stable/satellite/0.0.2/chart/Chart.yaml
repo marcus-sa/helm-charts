@@ -1,0 +1,12 @@
+description: A Helm chart for satellite
+home: https://banzaicloud.com
+keywords:
+- cloud
+- provider
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: satellite
+sources:
+- https://github.com/banzaicloud/satellite
+version: 0.0.2
