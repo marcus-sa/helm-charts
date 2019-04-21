@@ -5,7 +5,22 @@ jobs:
       - image: circleci/node:10
     working_directory: ~/charts
     steps:
+      # Cache repository source
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
       - checkout
+      - run:
+          name: Garbage collect git repo
+          command: git gc
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .git
+
+      # Cache node modules
       - restore_cache:
           keys:
             - v1-yarn-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
@@ -18,6 +33,8 @@ jobs:
           paths:
             - node_modules
           key: v1-yarn-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+
+      # Build repository
       - run:
           name: Build
           command: yarn build
@@ -30,7 +47,6 @@ jobs:
       - run:
           name: Build charts
           command: make all
-
       - run:
           name: Compile chart TypeScript
           command: yarn build-charts
