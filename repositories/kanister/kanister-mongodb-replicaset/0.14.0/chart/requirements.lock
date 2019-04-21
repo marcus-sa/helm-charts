@@ -1,0 +1,6 @@
+dependencies:
+- name: profile
+  repository: https://charts.kanister.io
+  version: 0.14.0
+digest: sha256:04ed0f82a47301be45f908576f5ebecd80f9eb5956199a40de66d60c6ef67010
+generated: 2018-12-03T16:48:33.388688-08:00

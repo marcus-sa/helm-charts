@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kanister-kanister-mongodb-replicaset",
+  "version": "0.18.0-3-gae6a06c-0.1.0",
+  "description": "Kanister-enabled NoSQL document-oriented database that stores JSON-like documents with dynamic schemas, simplifying the integration of data in content-driven applications.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
