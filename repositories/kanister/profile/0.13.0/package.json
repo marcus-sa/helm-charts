@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kanister-profile",
+  "version": "0.13.0-0.1.0",
+  "description": "A helm chart to create profile custom resource for kanister",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
