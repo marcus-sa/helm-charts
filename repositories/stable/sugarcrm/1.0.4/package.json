@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-sugarcrm",
+  "version": "1.0.4-0.1.0",
+  "description": "SugarCRM enables businesses to create extraordinary customer relationships with the most innovative and affordable CRM solution in the market.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
