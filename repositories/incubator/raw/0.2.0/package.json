@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-raw",
+  "version": "0.2.0-0.1.0",
+  "description": "A place for all the Kubernetes resources which don't already have a home.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
