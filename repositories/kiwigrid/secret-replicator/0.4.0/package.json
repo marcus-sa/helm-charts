@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kiwigrid-secret-replicator",
+  "version": "0.4.0-0.1.0",
+  "description": "A Helm chart to replicate secret across namespaces",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
