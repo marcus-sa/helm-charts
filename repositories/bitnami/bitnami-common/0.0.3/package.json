@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-bitnami-common",
+  "version": "0.0.3-0.1.0",
+  "description": "Chart with custom tempaltes used in Bitnami charts.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
