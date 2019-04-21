@@ -1,0 +1,14 @@
+apiVersion: v1
+appVersion: 0.3.1
+description: Metrics Server is a cluster-wide aggregator of resource usage data.
+engine: gotpl
+home: https://github.com/kubernetes-incubator/metrics-server
+keywords:
+- metrics-server
+maintainers:
+- email: szander@banzaicloud.com
+  name: szander
+name: metrics-server
+sources:
+- https://github.com/kubernetes-incubator/metrics-server
+version: 0.0.6
