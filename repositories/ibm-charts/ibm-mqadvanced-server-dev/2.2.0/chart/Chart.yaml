@@ -1,0 +1,17 @@
+apiVersion: v1
+description: IBM MQ queue manager
+icon: https://raw.githubusercontent.com/IBM/charts/master/logo/ibm-mq-icon.svg?sanitize=true
+keywords:
+- amd64
+- ppc64le
+- s390x
+- Limited
+- ICP
+- IKS
+- message queue
+- Integration
+- IBM-MQ-Advanced-For-Developers-Pak
+kubeVersion: '>=1.9.0'
+name: ibm-mqadvanced-server-dev
+tillerVersion: '>=2.9.1'
+version: 2.2.0
