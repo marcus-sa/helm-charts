@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-minio",
+  "version": "2.4.4-0.1.0",
+  "description": "Minio is a high performance distributed object storage server, designed for large-scale private cloud infrastructure.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
