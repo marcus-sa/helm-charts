@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 1.6.0
+description: IBM PowerAI
+keywords:
+- ppc64le
+- Limited
+- ICP
+- AI
+kubeVersion: '>=1.11.3'
+name: ibm-powerai
+tillerVersion: '>=2.7.2'
+version: 2.0.1
