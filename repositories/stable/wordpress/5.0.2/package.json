@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-wordpress",
+  "version": "5.0.2-0.1.0",
+  "description": "Web publishing platform for building blogs and websites.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
