@@ -1,0 +1,75 @@
+# Default values for gke-node-pool-shifter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: estafette/estafette-gke-node-pool-shifter
+  # tag: 1.0.21
+  pullPolicy: IfNotPresent
+  pullSecrets:
+
+# Set google-service-account.json file
+# The key must be encoded with base64 e.g. `cat google-service-account.json | base64`
+googleServiceAccount: ""
+
+# Specify an existing secret holding the google-service-account.json
+existingSecret: ""
+
+nodePool:
+  # Time in second to wait between each node pool check
+  interval: 300
+  # The name of the node pool to shift from
+  from: ""
+  # The name of the node pool to shift to
+  to: ""
+  # The minimum number of nodes to keep for the node pool to shift from
+  fromMinNode: 0
+
+# Set which user:group you want gke-node-pool-shifter to be run with
+securityContext:
+  enabled: true
+  userId: 1000
+  groupId: 1000
+
+annotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9001"
+
+livenessProbe:
+  httpGet:
+    path: /metrics
+    port: 9001
+  initialDelaySeconds: 30
+  timeoutSeconds: 1
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    cpu: 50m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 10
+      preference:
+        matchExpressions:
+        - key: cloud.google.com/gke-preemptible
+          operator: In
+          values:
+          - "true"
+
+# Enable and set Pod Disruption Budget
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1
+  minAvailable: null
+
+rbac:
+  enabled: true
