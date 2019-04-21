@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-mediawiki",
+  "version": "0.6.1-0.1.0",
+  "description": "Extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
