@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: Git API server by AppsCode - Sync git repositories as Kubernetes resources
+home: https://github.com/kube-ci/git-apiserver
+icon: https://cdn.appscode.com/images/icon/kubeci.png
+maintainers:
+- email: support@appscode.com
+  name: appscode
+name: git-apiserver
+sources:
+- https://github.com/kube-ci/git-apiserver
+version: 0.1.0
