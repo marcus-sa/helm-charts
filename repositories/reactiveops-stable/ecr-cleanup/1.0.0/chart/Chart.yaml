@@ -1,0 +1,7 @@
+apiVersion: v1
+appVersion: 0.1.5
+description: A Helm chart to run ecr cleanup controller
+maintainers:
+- name: sudermanjr
+name: ecr-cleanup
+version: 1.0.0
