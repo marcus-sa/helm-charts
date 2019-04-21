@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-influxdb",
+  "version": "0.12.1-0.1.0",
+  "description": "Scalable datastore for metrics, events, and real-time analytics.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
