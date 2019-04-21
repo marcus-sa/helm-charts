@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-chartmuseum",
+  "version": "0.1.0-0.1.0",
+  "description": "Helm Chart Repository with support for Amazon S3 and Google Cloud Storage",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
