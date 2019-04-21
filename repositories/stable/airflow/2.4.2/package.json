@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-airflow",
+  "version": "2.4.2-0.1.0",
+  "description": "Airflow is a platform to programmatically author, schedule and monitor workflows",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
