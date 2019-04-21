@@ -1,0 +1,14 @@
+description: Artifactory chart for Kubernetes
+home: https://www.jfrog.com/artifactory/
+icon: https://raw.githubusercontent.com/JFrogDev/artifactory-dcos/master/images/jfrog_med.png
+keywords:
+- artifactory
+- jfrog
+maintainers:
+- email: jainishs@jfrog.com
+  name: Jainish shah
+name: artifactory
+sources:
+- https://bintray.com/jfrog/product/JFrog-Artifactory-Pro/view
+- https://github.com/JFrogDev
+version: 4.14.1
