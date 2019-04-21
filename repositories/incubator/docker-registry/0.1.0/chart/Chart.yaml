@@ -1,0 +1,10 @@
+appVersion: "2"
+description: private docker registry
+keywords:
+- docker
+- registry
+maintainers:
+- email: sbezverk@cisco.com
+  name: sbezverk
+name: docker-registry
+version: 0.1.0
