@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: v0.3.0
+description: Install and configure aws-iam-authenticator on your cluster.
+maintainers:
+- name: sudermanjr
+- name: davekonopka
+name: aws-iam-authenticator
+version: v1.1.1
