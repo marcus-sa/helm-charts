@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-cosbench",
+  "version": "1.0.0-0.1.0",
+  "description": "A benchmark tool for cloud object storage services",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
