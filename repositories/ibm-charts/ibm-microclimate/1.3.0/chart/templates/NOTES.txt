@@ -1,0 +1,3 @@
+{{ .Chart.Name}}-{{.Chart.Version}}
+
+1. Access the Microclimate portal at the following URL: https://{{ .Values.hostName }}

@@ -1,0 +1,17 @@
+appVersion: "19.03"
+description: A cloud-native IDE for rapidly creating, developing and deploying applications.
+icon: https://raw.githubusercontent.com/IBM/charts/master/logo/microclimate-logo.png
+keywords:
+- Microclimate
+- Microservice
+- Development
+- IDE
+- Pipeline
+- amd64
+- ppc64le
+- Limited
+- ICP
+kubeVersion: '>=1.11.0'
+name: ibm-microclimate
+tillerVersion: '>=2.9.1'
+version: 1.12.0

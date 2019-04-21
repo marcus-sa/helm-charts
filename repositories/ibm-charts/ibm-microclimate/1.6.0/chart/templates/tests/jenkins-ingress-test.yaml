@@ -1,0 +1,44 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# "Restricted Materials of IBM"
+#
+# Copyright IBM Corp. 2018 All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-jenkins-ingress-test-{{ randAlphaNum 5 | lower }}"
+  labels:
+    app: {{ include "sch.names.fullName" (list .) }}-tests
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  restartPolicy: Never
+
+  containers:
+    - name: "{{ .Release.Name }}-jenkins-ingress-test"
+      image: "{{ .Values.utils.repository }}:{{ .Values.utils.tag }}"
+
+    # If security isn't enbled, wget will work fine. When security is enabled, curl command with CA certificate file is used
+    {{- if not .Values.jenkins.Master.UseSecurity }}
+      command: ["wget"]
+      args:  ['https://{{ .Values.jenkins.Master.HostName }}', '--no-check-certificate']
+    {{- else }}
+      command: ["/bin/sh"]
+      args:  ["/var/jenkinstest/jenkinstest.sh"]
+      volumeMounts:
+      - name: jenkinstest
+        mountPath: /var/jenkinstest
+        readOnly: false
+    {{- end }}
+  volumes:
+  - name: jenkinstest
+    configMap:
+      name: {{ include "sch.names.fullName" (list .) }}-jenkinstest

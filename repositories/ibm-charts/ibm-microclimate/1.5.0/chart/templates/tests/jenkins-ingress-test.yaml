@@ -1,0 +1,35 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# "Restricted Materials of IBM"
+#
+# Copyright IBM Corp. 2018 All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-jenkins-ingress-test-{{ randAlphaNum 5 | lower }}"
+  labels:
+    app: {{ include "sch.names.fullName" (list .) }}-tests
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  restartPolicy: Never
+
+  containers:
+    - name: "{{ .Release.Name }}-jenkins-ingress-test"
+      image: {{ .Values.portal.repository }}:{{ .Values.portal.tag }}
+
+      # If security isn't enbled, wget will work fine. When security is enabled, we expect to get a 403 Forbidden message back
+    {{- if not .Values.jenkins.Master.UseSecurity }}
+      command: ["wget"]
+      args:  ['https://{{ .Values.jenkins.Master.HostName }}', '--no-check-certificate']
+    {{- else }}
+      command: ['/bin/sh', '-c', 'wget https://{{ .Values.jenkins.Master.HostName }} --no-check-certificate 2>&1 | grep "ERROR 403: Forbidden"; exit $?']
+    {{- end }}

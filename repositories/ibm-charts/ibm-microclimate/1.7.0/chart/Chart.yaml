@@ -1,0 +1,15 @@
+appVersion: "18.1"
+description: End to end development environment for rapidly creating, developing and
+  deploying applications.
+keywords:
+- Microclimate
+- Microservice
+- Development
+- IDE
+- Pipeline
+- amd64
+- Limited
+- ICP
+name: ibm-microclimate
+tillerVersion: '>=2.9.1'
+version: 1.7.0

@@ -1,0 +1,6 @@
+appVersion: "18.03"
+description: End to end development environment for rapidly creating, developing and
+  deploying applications.
+name: ibm-microclimate
+tillerVersion: '>=2.6.0'
+version: 1.0.0

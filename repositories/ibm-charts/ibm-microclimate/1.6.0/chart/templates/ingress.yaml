@@ -1,0 +1,35 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# "Restricted Materials of IBM"
+#
+# Copyright IBM Corp. 2018 All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ include "sch.names.fullName" (list .) }}
+  labels:
+    app: {{ include "sch.names.fullName" (list .) }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  tls:
+  - secretName: {{ .Release.Name }}-mc-tls-secret
+    hosts:
+    - {{ .Values.hostName }}
+  rules:
+  - host: {{ .Values.hostName }}
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: {{ include "sch.names.fullName" (list .) }}
+          servicePort: {{ .Values.ports.portal }}
