@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for Kubeless
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: kubeless
+version: 0.0.3

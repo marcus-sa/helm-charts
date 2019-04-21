@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 0.6.1
+description: CoreOS etcd-operator Helm chart for Kubernetes
+home: https://github.com/coreos/etcd-operator
+keywords:
+- operator
+- etcd
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: etcd-operator
+version: 0.1.1

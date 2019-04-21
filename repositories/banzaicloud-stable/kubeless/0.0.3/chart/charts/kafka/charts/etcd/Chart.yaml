@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 3.2.9
+description: Etcd Helm chart for Kubernetes
+home: https://github.com/coreos/etcd
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: etcd
+version: 0.1.1
