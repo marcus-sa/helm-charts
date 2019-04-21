@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-aspera-cli",
+  "version": "1.0.0-0.1.0",
+  "description": "IBM Aspera Command-Line Interface (the Aspera CLI) is a collection of Aspera tools for performing high-speed, secure data transfers from the command line.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
