@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-couchdb",
+  "version": "0.1.7-0.1.0",
+  "description": "A database featuring seamless multi-master sync, that scales from big data to mobile, with an intuitive HTTP/JSON API and designed for reliability.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
