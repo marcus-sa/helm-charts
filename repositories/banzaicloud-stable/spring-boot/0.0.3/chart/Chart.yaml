@@ -1,0 +1,13 @@
+description: Run the simple spring-boot application
+home: https://banzaicloud.com
+keywords:
+- java
+- tomcat
+- spring-boot
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: spring-boot
+sources:
+- https://github.com/banzaicloud/banzai-charts
+version: 0.0.3
