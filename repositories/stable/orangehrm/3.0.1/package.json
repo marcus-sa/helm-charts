@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-orangehrm",
+  "version": "3.0.1-0.1.0",
+  "description": "OrangeHRM is a free HR management system that offers a wealth of modules to suit the needs of your business.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
