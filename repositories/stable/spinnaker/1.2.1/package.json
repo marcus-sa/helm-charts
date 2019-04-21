@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-spinnaker",
+  "version": "1.2.1-0.1.0",
+  "description": "Open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
