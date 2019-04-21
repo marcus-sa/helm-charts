@@ -1,0 +1,8 @@
+appVersion: "0.4"
+description: Installs the kubernetes-registry-proxy cluster addon.
+home: https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/registry
+maintainers:
+- email: engineering@deis.com
+  name: Deis Team
+name: kube-registry-proxy
+version: 0.2.2
