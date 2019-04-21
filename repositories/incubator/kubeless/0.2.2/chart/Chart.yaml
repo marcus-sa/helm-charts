@@ -1,0 +1,20 @@
+apiVersion: v1
+appVersion: v0.3.1
+description: Kubeless is a Kubernetes-native serverless framework. It runs on top
+  of your Kubernetes cluster and allows you to deploy small unit of code without having
+  to build container images.
+engine: gotpl
+home: http://kubeless.io/
+icon: https://cloud.githubusercontent.com/assets/4056725/25480209/1d5bf83c-2b48-11e7-8db8-bcd650f31297.png
+keywords:
+- kubeless
+- serverless
+- function-as-a-service
+- faas
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+name: kubeless
+sources:
+- https://github.com/kubeless/kubeless
+version: 0.2.2
