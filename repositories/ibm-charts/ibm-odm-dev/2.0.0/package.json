@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-odm-dev",
+  "version": "2.0.0-0.1.0",
+  "description": "IBM Operational Decision Manager for Developers",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
