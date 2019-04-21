@@ -1,0 +1,17 @@
+apiVersion: v1
+deprecated: true
+description: IBM Db2 Developer-C Edition 11.1.2.2 iFix002. This chart is now deprecated.
+engine: gotpl
+home: https://www.ibm.com/analytics/us/en/db2/
+icon: https://raw.githubusercontent.com/Dan23/db2logo/master/content/db2logoicp-01.png
+keywords:
+- db2
+- database
+- sql
+maintainers:
+- name: IBM Analytics
+name: ibm-db2oltp-dev
+sources:
+- https://github.com/IBM/charts/tree/master/stable
+tillerVersion: '>=2.4.0'
+version: 1.1.2
