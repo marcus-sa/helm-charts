@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 0.0.1
+description: Alibaba output helper chart for logging operator
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: oss-output
+version: 0.0.3
