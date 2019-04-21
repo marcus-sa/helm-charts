@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-common",
+  "version": "0.0.3-0.1.0",
+  "description": "Common chartbuilding components and helpers",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
