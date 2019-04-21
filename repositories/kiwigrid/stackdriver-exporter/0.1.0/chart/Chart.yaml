@@ -1,0 +1,11 @@
+apiVersion: v1
+appVersion: 0.6.0
+description: A Helm chart for exporting stackdriver metrics to prometheus
+home: https://github.com/frodenas/stackdriver_exporter
+maintainers:
+- email: rico.pahlisch@kiwigrid.com
+  name: rpahli
+name: stackdriver-exporter
+sources:
+- https://github.com/frodenas/stackdriver_exporter
+version: 0.1.0
