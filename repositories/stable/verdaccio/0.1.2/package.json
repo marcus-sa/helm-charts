@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-verdaccio",
+  "version": "0.1.2-0.1.0",
+  "description": "A lightweight private npm proxy registry (sinopia fork)",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
