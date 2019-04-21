@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-spot-scheduler",
+  "version": "0.1.0-0.1.0",
+  "description": "An extended Kubernetes scheduler that is able to schedule pods based on spot-instance related attributes",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
