@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-kibana",
+  "version": "0.8.0-0.1.0",
+  "description": "Kibana is an open source data visualization plugin for Elasticsearch",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
