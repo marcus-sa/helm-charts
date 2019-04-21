@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/kanister-kanister-elasticsearch",
+  "version": "0.16.0-0.1.0",
+  "description": "Elasticsearch w/ Kanister support based on incubator/elasticsearch",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
