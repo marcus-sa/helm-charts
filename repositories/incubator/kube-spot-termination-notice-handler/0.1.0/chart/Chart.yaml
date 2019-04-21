@@ -1,0 +1,10 @@
+apiVersion: v1
+description: Watch and action AWS spot termination events
+home: https://github.com/mumoshu/kube-spot-termination-notice-handler
+maintainers:
+- email: blueops@fairfaxmedia.com.au
+  name: FFX Blue Operations
+- email: egeland@gmail.com
+  name: Frode Egeland
+name: kube-spot-termination-notice-handler
+version: 0.1.0

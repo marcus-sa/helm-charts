@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 1.8.1-1
+description: Watch and action AWS spot termination events
+home: https://github.com/egeland/kube-spot-termination-notice-handler
+maintainers:
+- email: egeland@gmail.com
+  name: egeland
+name: kube-spot-termination-notice-handler
+version: 0.3.0
