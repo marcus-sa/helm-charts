@@ -1,0 +1,80 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "spot-config-webhook.fullname" . }}
+  labels:
+    app: {{ template "spot-config-webhook.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: mutating-webhook
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "spot-config-webhook.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "spot-config-webhook.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ template "spot-config-webhook.fullname" . }}
+      volumes:
+      - name: serving-cert
+        secret:
+          defaultMode: 420
+          secretName: {{ template "spot-config-webhook.fullname" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command:
+          - "/usr/local/bin/spot-config-webhook"
+          - "--tls-cert-file=/var/serving-cert/servingCert"
+          - "--tls-private-key-file=/var/serving-cert/servingKey"
+          - "--v={{ .Values.logVerbosity }}"
+          - "--secure-port={{ .Values.service.internalPort }}"
+          env:
+          - name: SPOT_ANNOTATION_KEY
+            value: {{ .Values.webhook.spotAnnotationKey }}
+          - name: SPOT_API_RESOURCE_GROUP
+            value: {{ .Values.apiService.group }}
+          - name: SPOT_API_RESOURCE_VERSION
+            value: {{ .Values.apiService.version }}
+          - name: SPOT_API_RESOURCE_NAME
+            value: {{ .Values.apiService.resource }}
+          - name: SPOT_CONFIGMAP_NAMESPACE
+            value: {{ .Values.webhook.configMapNamespace }}
+          - name: SPOT_CONFIGMAP_NAME
+            value: {{ .Values.webhook.configMapName }}
+          - name: SPOT_SCHEDULER_NAME
+            value: {{ .Values.webhook.schedulerName }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            runAsUser: 65534
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.service.internalPort }}
+              scheme: HTTPS
+          volumeMounts:
+          - mountPath: /var/serving-cert
+            name: serving-cert
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+  {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+  {{- end }}
+  {{- if .Values.affinity }}
+      affinity:
+{{ toYaml .Values.affinity | indent 8 }}
+  {{- end }}
