@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart for Argo workflow engine
+maintainers:
+- email: info@banzaicloud.com
+  name: Banzai Cloud
+name: argo
+version: 0.2.2
