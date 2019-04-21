@@ -1,0 +1,280 @@
+# © Copyright IBM Corporation 2018
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+charts:
+  - archive: file:../../ibm-blockchain-platform-dev-1.0.0.tgz
+    repository-keys: 
+      - ca.image.repository
+      - ca.image.initimage
+      - orderer.image.repository
+      - orderer.image.initimage
+      - orderer.image.grpcwebimage
+      - peer.app.image
+      - peer.app.dindimage
+      - peer.app.initimage
+      - peer.app.grpcwebimage
+      - peer.peerinfo.couchdbImage
+      
+images:
+- image: ibmcom/ibp-fabric-orderer:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-orderer:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-orderer:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-orderer-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-orderer-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-orderer:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-orderer-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-orderer-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-orderer:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-fabric-ca:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-ca:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-ca:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-ca-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-ca-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-ca:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-ca-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-ca-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-ca:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-fabric-peer:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-peer:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-peer:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-peer-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-peer-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-peer:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-peer-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-fabric-peer-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-peer:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-fabric-couchdb:0.4.10
+  references:
+  - repository: ibmcom/ibp-fabric-couchdb:0.4.10
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-couchdb:x86_64-0.4.10-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-couchdb-amd64:0.4.10
+  references:
+  - repository: ibmcom/ibp-fabric-couchdb-amd64:0.4.10
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-couchdb:x86_64-0.4.10-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-fabric-couchdb-s390x:0.4.10
+  references:
+  - repository: ibmcom/ibp-fabric-couchdb-s390x:0.4.10
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-couchdb:s390x-0.4.10-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-dind:1.4.0
+  references:
+  - repository: ibmcom/ibp-dind:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-dind:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-dind-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-dind-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-dind:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-dind-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-dind-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-dind:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-init:1.4.0
+  references:
+  - repository: ibmcom/ibp-init:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-init:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-init-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-init-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-init:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-init-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-init-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-init:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x
+- image: ibmcom/ibp-grpcweb:1.4.0
+  references:
+  - repository: ibmcom/ibp-grpcweb:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-grpcweb:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-grpcweb-amd64:1.4.0
+  references:
+  - repository: ibmcom/ibp-grpcweb-amd64:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-grpcweb:x86_64-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: amd64
+- image: ibmcom/ibp-grpcweb-s390x:1.4.0
+  references:
+  - repository: ibmcom/ibp-grpcweb-s390x:1.4.0
+    pull-repository: registry.ng.bluemix.net/ibp2/hlfabric-grpcweb:s390x-1.4.0-ee
+    pull-authorization:
+      username:
+        env: IMAGE_PULL_USERNAME
+      password:
+        env: IMAGE_PULL_PASSWORD
+    platform:
+      os: linux
+      architecture: s390x

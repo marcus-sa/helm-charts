@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart for IBM Blockchain orderer
+keywords:
+- Commercial
+- blockchain
+- amd64
+- s390x
+- ICP
+name: ibm-blockchain-platform-orderer
+tillerVersion: '>=2.9.0'
+version: 1.0.2
