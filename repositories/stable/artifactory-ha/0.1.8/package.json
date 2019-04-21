@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-artifactory-ha",
+  "version": "0.1.8-0.1.0",
+  "description": "Universal Repository Manager supporting all major packaging formats, build tools and CI servers.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
