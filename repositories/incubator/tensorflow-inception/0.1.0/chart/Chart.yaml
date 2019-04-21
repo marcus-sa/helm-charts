@@ -1,0 +1,10 @@
+description: A Helm chart for Kubernetes
+home: https://github.com/kubernetes/charts
+maintainers:
+- email: lachlan.evenson@gmail.com
+  name: Lachlan Evenson
+name: tensorflow-inception
+sources:
+- https://github.com/tensorflow/
+- https://tensorflow.github.io/serving/serving_inception.html
+version: 0.1.0
