@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/bitnami-external-dns",
+  "version": "1.2.1-0.1.0",
+  "description": "ExternalDNS is a Kubernetes addon that configures public DNS servers with information about exposed Kubernetes services to make them discoverable.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
