@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/zammad-zammad",
+  "version": "0.1.3-0.1.0",
+  "description": "Zammad is a web based open source helpdesk/customer support system with many features to manage customer communication via several channels like telephone, facebook, twitter, chat and e-mails.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

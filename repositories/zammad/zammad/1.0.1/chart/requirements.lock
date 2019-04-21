@@ -1,0 +1,12 @@
+dependencies:
+- name: elasticsearch
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 1.18.0
+- name: memcached
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 2.5.0
+- name: postgresql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 3.9.5
+digest: sha256:797b1edaedd4bbff90b2f48f33ab8bc3f8cd28f2e65cfe31851b185123596e89
+generated: 2019-02-18T11:30:35.382803231Z
