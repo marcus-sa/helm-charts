@@ -1,0 +1,19 @@
+appVersion: 18.1.0
+deprecated: true
+description: DEPRECATED GoCD is an open-source continuous delivery server to model
+  and visualize complex workflows with ease.
+home: https://www.gocd.org/
+icon: https://gocd.github.io/assets/images/go-icon-black-192x192.svg
+keywords:
+- gocd
+- ci
+- cd
+- ci/cd
+- continuous-integration
+- continuous-delivery
+- continuous-deployment
+- continuous-testing
+name: gocd
+sources:
+- https://github.com/gocd/gocd
+version: 0.2.4
