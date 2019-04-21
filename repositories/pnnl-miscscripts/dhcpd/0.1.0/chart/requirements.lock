@@ -1,0 +1,6 @@
+dependencies:
+- name: dhcpd
+  repository: https://pnnl-miscscripts.github.io/image-library-charts/
+  version: 2.0.0
+digest: sha256:d77ecf2a9fc57a77ecefb7565a889157a72247b80f6b516b029faedaf3b9140a
+generated: 2019-04-14T22:59:03.874272153Z
