@@ -1,0 +1,6 @@
+dependencies:
+- name: etcd
+  repository: http://kubernetes-charts.banzaicloud.com/branch/master/
+  version: 0.1.1
+digest: sha256:638316543b422589e181664a7972bd08ae5ef07896ef2f04d3eaeb6f1e0b2c67
+generated: 2019-03-26T10:06:11.120118332Z
