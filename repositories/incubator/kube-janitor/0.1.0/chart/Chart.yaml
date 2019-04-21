@@ -1,0 +1,13 @@
+apiVersion: v1
+appVersion: v0.1.0
+description: A Helm chart for running kube-janitor
+home: https://github.com/themagicalkarp/kube-janitor
+maintainers:
+- email: gameboy1092@gmail.com
+  name: theMagicalKarp
+- email: simkev2@gmail.com
+  name: SimKev2
+name: kube-janitor
+sources:
+- https://github.com/themagicalkarp/kube-janitor
+version: 0.1.0
