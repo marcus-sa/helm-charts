@@ -1,0 +1,17 @@
+apiVersion: v1
+description: Connect OpenFaaS functions to Kafka topics
+home: https://www.openfaas.com
+icon: https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_logo_stacked_opaque.png
+keywords:
+- functions
+- service
+- kafka
+maintainers:
+- email: alex@openfaas.com
+  name: alexellis
+- email: roesler.lucas@gmail.com
+  name: lucasroesler
+name: kafka-connector
+sources:
+- https://github.com/openfaas-incubator/kafka-connector
+version: 0.1.2
