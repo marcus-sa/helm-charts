@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/stable-envoy",
+  "version": "1.3.0-0.1.0",
+  "description": "Envoy is an open source edge and service proxy, designed for cloud-native applications.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
