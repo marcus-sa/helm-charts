@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/banzaicloud-stable-ht-k8s-action-plugin",
+  "version": "0.0.3-0.1.0",
+  "description": "Hollowtrees action plugin Helm chart for Kubernetes",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

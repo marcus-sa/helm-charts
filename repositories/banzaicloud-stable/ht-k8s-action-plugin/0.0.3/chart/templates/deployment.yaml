@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ template "ht-k8s-action-plugin.fullname" . }}"
+  labels:
+    app: "{{ template "ht-k8s-action-plugin.name" . }}"
+    chart: "{{ template "ht-k8s-action-plugin.chart" . }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  template:
+    metadata:
+      labels:
+        app: "{{ template "ht-k8s-action-plugin.name" . }}"
+        chart: "{{ template "ht-k8s-action-plugin.chart" . }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+
+    spec:
+      containers:
+      - name: ht-k8s-action-plugin
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.imagePullPolicy | quote }}
+        command:
+        - "/bin/sh"
+        - "-ecx"
+        - |
+          ht-k8s-action-plugin \
+          -bind.address=0.0.0.0:{{ .Values.port }} \
+          -log.level={{ .Values.logLevel }} \
+          -cluster.config.root={{ .Values.clusterConfigRoot }}
+
+
+        ports:
+        - name: grpc
+          containerPort: {{ .Values.port }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.port }}
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.port }}
+          initialDelaySeconds: 30
+          timeoutSeconds: 3
+          periodSeconds: 5
+
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+
+        volumeMounts:
+        - mountPath: /statestore
+          name: statestore
+
+      volumes:
+      - name: statestore
+        hostPath:
+          path: /opt/pipeline/statestore/
