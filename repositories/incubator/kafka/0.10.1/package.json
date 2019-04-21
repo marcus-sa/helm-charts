@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/incubator-kafka",
+  "version": "0.10.1-0.1.0",
+  "description": "Apache Kafka is publish-subscribe messaging rethought as a distributed commit log.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
