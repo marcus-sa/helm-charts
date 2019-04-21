@@ -1,0 +1,14 @@
+apiVersion: v1
+appVersion: 1.10.0
+description: Distribute locally developed Puppet modules and proxy to the official
+  Puppet Forge server
+home: https://github.com/unibet/puppet-forge-server
+keywords:
+- puppet
+- repository
+- forge
+maintainers:
+- email: hickey@kinetic-compute.com
+  name: Gerard Hickey
+name: puppet-forge
+version: 0.1.8
