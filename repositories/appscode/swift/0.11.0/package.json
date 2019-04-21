@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/appscode-swift",
+  "version": "0.11.0-0.1.0",
+  "description": "Swift by AppsCode - Ajax friendly Helm Tiller Proxy",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

@@ -1,0 +1,52 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "swift.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ template "swift.name" . }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: "{{ template "swift.name" . }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      serviceAccountName: {{ template "swift.serviceAccountName" . }}
+      containers:
+      - name: swift
+        image: {{ .Values.swift.registry }}/{{ .Values.swift.repository }}:{{ .Values.swift.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        args:
+        - run
+        - --v={{ .Values.logLevel }}
+        - --connector=incluster
+        - --tiller-insecure-skip-verify=true
+        {{- if .Values.imagePullSecrets }}
+        imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+        {{- end }}
+        ports:
+        - containerPort: 9855
+          name: pt
+          protocol: TCP
+        - containerPort: 50055
+          name: tls
+          protocol: TCP
+        - containerPort: 56790
+          name: ops
+          protocol: TCP
+        volumeMounts:
+            - mountPath: /tmp
+              name: chart-volume
+      volumes:
+        - name: chart-volume
+          emptyDir: {}
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end -}}
