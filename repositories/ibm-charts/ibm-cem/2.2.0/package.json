@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/ibm-charts-ibm-cem",
+  "version": "2.2.0-0.1.0",
+  "description": "A cloud based event management solution",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}

@@ -1,0 +1,20 @@
+{{- include "sch.config.init" (list . "zookeeper.sch.chart.config.values") -}}
+{{- $podName := include "sch.names.fullName" (list .) -}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ $podName }}-test"
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ $podName }}-test
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: "{{ $podName }}-test"
+      image: "{{ .Values.global.image.repository }}/hdm-zookeeper:{{ .Values.image.tag }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+      command: ["sh"]
+  restartPolicy: Never
