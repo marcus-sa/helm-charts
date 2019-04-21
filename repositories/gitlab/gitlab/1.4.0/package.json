@@ -1,0 +1,11 @@
+{
+  "name": "@helm-charts/gitlab-gitlab",
+  "version": "1.4.0-0.1.0",
+  "description": "Web-based Git-repository manager with wiki and issue-tracking features.",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "files": ["chart", "./*.js", "./*.ts", "./*.map"],
+  "dependencies": {"tslib": "^1.9.3"}
+}
