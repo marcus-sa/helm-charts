@@ -1,0 +1,6 @@
+dependencies:
+- name: ipmitool
+  repository: https://pnnl-miscscripts.github.io/image-library-charts/
+  version: 1.0.0
+digest: sha256:f7158c4b918c9ded95fd04e098fd30199efdc80fec807eac67ad1deebebc52cb
+generated: 2019-02-05T01:16:56.085746764Z
