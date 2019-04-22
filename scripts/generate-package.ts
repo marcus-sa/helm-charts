@@ -23,7 +23,7 @@ async function run() {
     sideEffects: false,
     main: './index.js',
     types: './index.d.ts',
-    files: ['chart', './*.js', './*.ts', './*.map'],
+    files: ['chart', '*.js', '*.ts', '*.map'],
     dependencies: {
       tslib: pkg.dependencies.tslib,
     },
@@ -47,7 +47,11 @@ export ${chart.detectedType}
     ? `
 <details>
 
-<summary>Helm chart \`values.yaml\` (default values)</summary>
+<summary>
+
+Chart \`values.yaml\` (default values)
+
+</summary>
 
 \`\`\`yaml
 ${chart.valuesYAML}

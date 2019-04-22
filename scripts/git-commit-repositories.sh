@@ -3,6 +3,6 @@
 for dir in ./repositories/*/* ; do
   if [ -d "$dir" ]; then
     git add "$dir"
-    git commit -m "Add $(echo $dir | sed s/.\\/repositories\\///) chart"
+    git commit -m "Update $(echo $dir | sed s/.\\/repositories\\///) package.json"
   fi
 done
