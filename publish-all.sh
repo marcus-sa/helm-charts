@@ -1,7 +1,12 @@
 #!/bin/bash
+set -eu
 
 base_dir="$(pwd)"
 
-cd repositories/agones/agones/0.2.0
-npm pack
-cd "$base_dir"
+for package in ./repositories/*/*/* ; do
+  if [ -d "$package" ]; then
+    cd "$package"
+    npm publish --access=public || true
+    cd "$base_dir"
+  fi
+done

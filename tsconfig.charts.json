@@ -5,7 +5,6 @@
     "lib": ["es2016"],
     "declaration": true,
     "sourceMap": true,
-    "incremental": true,
     "resolveJsonModule": true,
     "strict": true,
     "noUnusedLocals": true,
